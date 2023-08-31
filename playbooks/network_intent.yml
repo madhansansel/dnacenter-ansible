@@ -22,9 +22,9 @@
         - GlobalPoolDetails:
             settings:
               ippool:
-              - ipPoolName: Global_Pool1
+              - ipPoolName: Global_Pool2
                 gateway: "" #use this for updating
-                IpAddressSpace: IPv4 #required when we are creating
+                IpAddressSpace: IPv4 #required when w2 are creating
                 ipPoolCidr: 100.0.0.0/8  #required when we are creating
                 type: Generic
                 dhcpServerIps: [] #use this for updating
@@ -32,10 +32,11 @@
                 # prev_name: Global_Pool
           ReservePoolDetails:
             ipv6AddressSpace: false
-            ipv4GlobalPool: 100.0.0.0/8 
+            ipv4GlobalPool: 100.0.0.0/8
             ipv4Prefix: true
-            ipv4PrefixLength: 8
+            ipv4PrefixLength: 9
             ipv4DnsServers: []
+            ipv4Subnet: 100.128.0.0
             name: IP_Pool_3
             siteName: Global/Chennai/Trill
             slaacSupport: true
@@ -49,24 +50,24 @@
                 domainName: cisco.co
                 primaryIpAddress: 10.0.0.2
                 secondaryIpAddress: 10.0.0.3
-              # clientAndEndpoint_aaa:                    #works only if we system settigns is set
-              #   # ipAddress: string #Mandatory for ISE, sec ip for AAA
-              #   network: 10.0.0.9
-              #   protocol: RADIUS                                          
-              #   servers: AAA
-              #   # sharedSecret: string #ISE
+              clientAndEndpoint_aaa:                    #works only if we system settigns is set
+                # ipAddress: 10.197.156.42 #Mandatory for ISE, sec ip for AAA
+                network: 10.0.0.20
+                protocol: RADIUS                                     
+                servers: AAA
+                # sharedSecret: string #ISE
               messageOfTheday:
                 bannerMessage: hello
-                retainExistingBanner: "true"
+                retainExistingBanner: true
               netflowcollector:
                 ipAddress: 10.0.0.4
                 port: 443
-              # network_aaa:                              #works only if we system settigns is set
-              #   # ipAddress: string #Mandatory for ISE, sec ip for AAA
-              #   network: 10.0.0.8
-              #   protocol: RADIUS
-              #   servers: AAA
-              #   # sharedSecret: string #ISE
+              network_aaa:                              #works only if we system settigns is set
+                # ipAddress: string #Mandatory for ISE, sec ip for AAA
+                network: 10.0.0.20
+                protocol: TACACS
+                servers: AAA
+                # sharedSecret: string #ISE
               ntpServer:
               - 10.0.0.5
               snmpServer:
@@ -79,4 +80,50 @@
                 - 10.0.0.7
               timezone: GMT
             siteName: Global/Chennai
+          # DeviceCredentialsDetails:
+          #   cliCredential:
+          #     description: CLI 1 
+          #     username: user1 
+          #     password: 12345 
+          #     enablePassword: 12345
+          #     # credentialName: CLI #use this field for update
+          #   snmpV2cRead:
+          #     description: SNMP Read 1
+          #     readCommunity: user1
+          #     # credentialName: SNMP Read 1 #use this for update
+          #   snmpV2cWrite:
+          #     description: SNMP Write 1
+          #     writeCommunity: user1
+          #     # credentialName: SNMP Write 1 #use this for update
+          #   snmpV3:
+          #     authPassword: 12345678
+          #     authType: SHA
+          #     snmpMode: AUTHPRIV
+          #     privacyPassword: 12345678
+          #     privacyType: AES128
+          #     username: user1
+          #     description: SNMP v3 1
+          #     credentialName: SNMP v3 1 #use this for update
+          #   httpsRead:
+          #     name: HTTP Read 1
+          #     username: user1
+          #     password: 12345
+          #     port: 443
+          #     credentialName: HTTP Read 1 #use this field for update
+          #   httpsWrite:
+          #     name: HTTP Write 1
+          #     username: user1
+          #     password: 12345
+          #     port: 443
+          #     credentialName: HTTP Write 1 #use this field for update
+          #   AssignDeviceCredential:
+          #     cliName: CLI 1
+          #     snmpV2ReadName: SNMP Read 1
+          #     snmpV2WriteName: SNMP Write 1
+          #     snmpV3Name: SNMP v3 1
+          #     httpReadName: HTTP Read 1
+          #     httpWriteName: HTTP Write 1
+          #     siteName: Global/Chennai/Trill
+          #   delCredentialName: CLI 1 #use this for delete
+
 
