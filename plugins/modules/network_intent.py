@@ -25,7 +25,6 @@ from ansible_collections.cisco.dnac.plugins.module_utils.dnac import (
 )
 from ansible.module_utils.basic import AnsibleModule
 
-
 class DnacNetwork:
     def __init__(self, module):
         self.module = module
@@ -89,7 +88,7 @@ class DnacNetwork:
             "network": {"required": False, "type": 'string'},
             "protocol": {"required": False, "type": 'string', choices: ["RADIUS", "TACACS"]},
             "bannerMessage": {"required": False, "type": 'string'},
-            "retainExistingBanner": {"required": False, "type": 'string'},
+            "retainExistingBanner": {"required": False, "type": 'bool'},
             "sharedSecret": {"required": False, "type": 'string'},
             "configureDnacIP": {"required": False, "type": 'string'},
             "ipAddresses": {"required": False, "type": 'list'},
@@ -265,7 +264,7 @@ class DnacNetwork:
                                   .get("NetworkManagementDetails") \
                             .get("settings").get("timezone")})
 
-            temp = temp + temp1
+            temp = temp + temp1 + temp2
             valid_temp, invalid_params = validate_list_of_dicts(
                 temp, temp_spec
             )
@@ -462,7 +461,7 @@ class DnacNetwork:
         netflow_details = get_dict_result(response, "key", "netflow.collector")
         ntpserver_details = get_dict_result(response, "key", "ntp.server")
         timezone_details = get_dict_result(response, "key", "timezone.site")
-        messageoftheday_details = get_dict_result(response, "key", "device.banner")
+        messageoftheday_details = get_dict_result(response, "key", "banner.setting")
         network_aaa = get_dict_result(response, "key", "aaa.network.server.1")
         network_aaa_pan = get_dict_result(response, "key", "aaa.server.pan.network")
         log(str(syslog_details))
@@ -641,6 +640,7 @@ class DnacNetwork:
                     response = response.get("response")
 
             current_details = get_dict_result(response, "ipPoolName", name)
+            log(str(name))
             log(str(current_details))
             if current_details:
                 pool_exists = True
@@ -985,7 +985,7 @@ class DnacNetwork:
                     "ntpServer": {
 
                     },
-                    "timezone":"",
+                    "timezone": "",
                     "messageOfTheday": {
 
                     },
