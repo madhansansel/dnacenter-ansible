@@ -1,35 +1,21 @@
 
 # This module will work for global_pool, Reserve_ip_pool and network
 
-from ast import And
-import copy
-import ipaddress
-from random import choices
-from urllib import response
+from __future__ import absolute_import, division, print_function
 
-try:
-    from ansible_collections.ansible.utils.plugins.module_utils.common.argspec_validate import (
-        AnsibleArgSpecValidator,
-    )
-except ImportError:
-    ANSIBLE_UTILS_IS_INSTALLED = False
-else:
-    ANSIBLE_UTILS_IS_INSTALLED = True
+import copy
+from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.cisco.dnac.plugins.module_utils.dnac import (
-    DNACSDK,
-    dnac_argument_spec,
+    DnacBase,
     validate_list_of_dicts,
-    log,
     get_dict_result,
     dnac_compare_equality,
 )
-from ansible.module_utils.basic import AnsibleModule
 
-class DnacNetwork:
+class DnacNetwork(DnacBase):
+    """Class containing member attributes for network intent module"""
     def __init__(self, module):
-        self.module = module
-        self.params = module.params
-        self.config = copy.deepcopy(module.params.get("config"))
+        super().__init__(module)
         self.have = {}
         self.want = {}
         self.have_reserve = {}
@@ -39,96 +25,89 @@ class DnacNetwork:
         self.have_dev = {}
         self.want_dev = {}
         self.site_id = None
-        self.validated = []
-        dnac_params = self.get_dnac_params(self.params)
-        log(str(dnac_params))
-        self.dnac = DNACSDK(params=dnac_params)
-        self.log = dnac_params.get("dnac_log")
 
-        self.result = dict(changed=False, diff=[], response=[], warnings=[])
-
-    def get_state(self):
-        return self.params.get("state")
 
     def validate_input(self):
+        """Validate the fields provided in the playbook"""
+
         temp_spec = {
-            "IpAddressSpace": {"required": False, "type": 'string'},
-            "dhcpServerIps": {"required": False, "type": 'list'},
-            "dnsServerIps": {"required": False, "type": 'list'},
-            "gateway": {"required": False, "type": 'string'},
-            "ipPoolCidr": {"required": False, "type": 'string'},
-            "ipPoolName": {"required": False, "type": 'string'},
-            "name": {"required": False, "type": 'string'},
-            "prev_name": {"required": False, "type": 'string'},
-            "type": {"required": False, "type": "string", \
+            "IpAddressSpace": {"type": 'string'},
+            "dhcpServerIps": {"type": 'list'},
+            "dnsServerIps": {"type": 'list'},
+            "gateway": {"type": 'string'},
+            "ipPoolCidr": {"type": 'string'},
+            "ipPoolName": {"type": 'string'},
+            "name": {"type": 'string'},
+            "prev_name": {"type": 'string'},
+            "type": {"type": "string", \
                 "choices": ["Generic", "tunnel", "LAN", "WAN", "management", "service"]},
-            "ipv6AddressSpace": {"required": False, "type": 'string'},
-            "ipv4GlobalPool": {"required": False, "type": 'string'},
-            "ipv4Prefix": {"required": False, "type": 'string'},
-            "ipv4PrefixLength": {"required": False, "type": 'string'},
-            "ipv4GateWay": {"required": False, "type": 'string'},
-            "ipv4DhcpServers": {"required": False, "type": 'list'},
-            "ipv4DnsServers": {"required": False, "type": 'list'},
-            "ipv6GlobalPool": {"required": False, "type": 'string'},
-            "ipv6Prefix": {"required": False, "type": 'string'},
-            "ipv6PrefixLength": {"required": False, "type": 'integer'},
-            "ipv6GateWay": {"required": False, "type": 'string'},
-            "ipv6DhcpServers": {"required": False, "type": 'list'},
-            "ipv6DnsServers": {"required": False, "type": 'list'},
-            "ipv4TotalHost": {"required": False, "type": 'integer'},
-            "ipv6TotalHost": {"required": False, "type": 'integet'},
-            "slaacSupport": {"required": False, "type": 'string'},
-            "siteName": {"required": False, "type": 'string'},
-            "dhcpServer": {"required": False, "type": 'list'},
-            "domainName": {"required": False, "type": 'string'},
-            "primaryIpAddress": {"required": False, "type": 'string'},
-            "secondaryIpAddress": {"required": False, "type": 'string'},
-            "servers" : {"required": False, "type": 'string', "choices": ["ISE", "AAA"]},
-            "ipAddress" : {"required": False, "type": 'string'},
-            "network": {"required": False, "type": 'string'},
-            "protocol": {"required": False, "type": 'string', choices: ["RADIUS", "TACACS"]},
-            "bannerMessage": {"required": False, "type": 'string'},
-            "retainExistingBanner": {"required": False, "type": 'bool'},
-            "sharedSecret": {"required": False, "type": 'string'},
-            "configureDnacIP": {"required": False, "type": 'string'},
-            "ipAddresses": {"required": False, "type": 'list'},
-            "timezone": {"required": False, "type": 'string'},
-            "ntpServer": {"required": False, "type": 'list'}
+            "ipv6AddressSpace": {"type": 'bool'},
+            "ipv4GlobalPool": {"type": 'string'},
+            "ipv4Prefix": {"type": 'bool'},
+            "ipv4PrefixLength": {"type": 'string'},
+            "ipv4GateWay": {"type": 'string'},
+            "ipv4DhcpServers": {"type": 'list'},
+            "ipv4DnsServers": {"type": 'list'},
+            "ipv6GlobalPool": {"type": 'string'},
+            "ipv6Prefix": {"type": 'bool'},
+            "ipv6PrefixLength": {"type": 'integer'},
+            "ipv6GateWay": {"type": 'string'},
+            "ipv6DhcpServers": {"type": 'list'},
+            "ipv6DnsServers": {"type": 'list'},
+            "ipv4TotalHost": {"type": 'integer'},
+            "ipv6TotalHost": {"type": 'integer'},
+            "slaacSupport": {"type": 'bool'},
+            "siteName": {"type": 'string'},
+            "dhcpServer": {"type": 'list'},
+            "domainName": {"type": 'string'},
+            "primaryIpAddress": {"type": 'string'},
+            "secondaryIpAddress": {"type": 'string'},
+            "servers" : {"type": 'string', "choices": ["ISE", "AAA"]},
+            "ipAddress" : {"type": 'string'},
+            "network": {"type": 'string'},
+            "protocol": {"type": 'string', "choices": ["RADIUS", "TACACS"]},
+            "bannerMessage": {"type": 'string'},
+            "retainExistingBanner": {"type": 'bool'},
+            "sharedSecret": {"type": 'string'},
+            "configureDnacIP": {"type": 'bool'},
+            "ipAddresses": {"type": 'list'},
+            "timezone": {"type": 'string'},
+            "ntpServer": {"type": 'list'}
 
         }
         if self.config:
-            msg = None
-            temp = []
-            temp1 = []
-            temp2 = []
+            globalPool_details = []
+            ReservePool_details = []
+            network_details = []
             # Validate template params
             if self.config[0].get("GlobalPoolDetails") is not None:
-                temp = self.config[0].get("GlobalPoolDetails").get("settings").get("ippool")
+                globalPool_details = self.config[0].get("GlobalPoolDetails").get("settings").get("ippool")
 
             if self.config[0].get("ReservePoolDetails") is not None:
-                temp1 = [self.config[0].get("ReservePoolDetails")]
+                ReservePool_details = [self.config[0].get("ReservePoolDetails")]
 
             if self.config[0].get("NetworkManagementDetails") is not None:
                 if self.config[0].get("NetworkManagementDetails") \
                     .get("settings").get("dhcpServer"):
-                    temp2.append({"dhcpServer": self.config[0].get("NetworkManagementDetails") \
+                    network_details.append({"dhcpServer": self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("dhcpServer")})
 
                 if self.config[0].get("NetworkManagementDetails") \
                     .get("settings").get("dnsServer"):
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("dnsServer").get("domainName"):
-                        temp2.append({"domainName": self.config[0].get("NetworkManagementDetails") \
+                        network_details.append({"domainName": self.config[0].get("NetworkManagementDetails") \
                             .get("settings").get("dnsServer").get("domainName")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("dnsServer").get("primaryIpAddress"):
-                        temp2.append(self.config[0].get("NetworkManagementDetails") \
-                            .get("settings").get("dnsServer").get("primaryIpAddress"))
+                        network_details.append({"primaryIpAddress": self.config[0] \
+                                      .get("NetworkManagementDetails") \
+                            .get("settings").get("dnsServer").get("primaryIpAddress")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("dnsServer").get("secondaryIpAddress"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("dnsServer").get("secondaryIpAddress")})
 
@@ -136,31 +115,31 @@ class DnacNetwork:
                     .get("settings").get("clientAndEndpoint_aaa"):
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("clientAndEndpoint_aaa").get("ipAddress"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("ipAddress")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("clientAndEndpoint_aaa").get("network"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("network")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("clientAndEndpoint_aaa").get("protocol"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("protocol")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("clientAndEndpoint_aaa").get("servers"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("servers")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("clientAndEndpoint_aaa").get("sharedSecret"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("sharedSecret")})
 
@@ -168,13 +147,13 @@ class DnacNetwork:
                     .get("settings").get("messageOfTheday"):
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("messageOfTheday").get("bannerMessage"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("messageOfTheday").get("bannerMessage")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("messageOfTheday").get("retainExistingBanner"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("messageOfTheday").get("retainExistingBanner")})
 
@@ -182,13 +161,13 @@ class DnacNetwork:
                     .get("settings").get("netflowcollector"):
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("netflowcollector").get("ipAddress"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("netflowcollector").get("ipAddress")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("netflowcollector").get("port"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("netflowcollector").get("port")})
 
@@ -196,37 +175,37 @@ class DnacNetwork:
                     .get("settings").get("network_aaa"):
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("network_aaa").get("ipAddress"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("ipAddress")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("network_aaa").get("network"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("network")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("network_aaa").get("protocol"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("protocol")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("network_aaa").get("servers"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("servers")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("network_aaa").get("sharedSecret"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("sharedSecret")})
 
                 if self.config[0].get("NetworkManagementDetails") \
                     .get("settings").get("ntpServer"):
-                    temp2.append({"secondaryIpAddress": self.config[0] \
+                    network_details.append({"secondaryIpAddress": self.config[0] \
                                   .get("NetworkManagementDetails") \
                             .get("settings").get("ntpServer")})
 
@@ -234,13 +213,13 @@ class DnacNetwork:
                     .get("settings").get("snmpServer"):
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("snmpServer").get("configureDnacIP"):
-                        temp2.append({"secondaryIpAddress": self.config[0]
+                        network_details.append({"secondaryIpAddress": self.config[0]
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("snmpServer").get("configureDnacIP")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("snmpServer").get("ipAddresses"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("snmpServer").get("ipAddresses")})
 
@@ -248,46 +227,53 @@ class DnacNetwork:
                     .get("settings").get("syslogServer"):
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("syslogServer").get("configureDnacIP"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("syslogServer").get("configureDnacIP")})
 
                     if self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("syslogServer").get("ipAddresses"):
-                        temp2.append({"secondaryIpAddress": self.config[0] \
+                        network_details.append({"secondaryIpAddress": self.config[0] \
                                       .get("NetworkManagementDetails") \
                             .get("settings").get("syslogServer").get("ipAddresses")})
 
                 if self.config[0].get("NetworkManagementDetails") \
                     .get("settings").get("timezone"):
-                    temp2.append({"secondaryIpAddress": self.config[0] \
+                    network_details.append({"secondaryIpAddress": self.config[0] \
                                   .get("NetworkManagementDetails") \
                             .get("settings").get("timezone")})
 
-            temp = temp + temp1 + temp2
+            self.log(str(network_details))
+            self.log(str(ReservePool_details))
+            self.log(str(network_details))
+            playbook_details = globalPool_details + ReservePool_details + network_details
             valid_temp, invalid_params = validate_list_of_dicts(
-                temp, temp_spec
+                playbook_details, temp_spec
             )
             if invalid_params:
-                msg = "Invalid parameters in playbook: {0}".format(
+                self.msg = "Invalid parameters in playbook: {0}".format(
                     "\n".join(invalid_params)
                 )
-                self.module.fail_json(msg=msg)
-            log(str(invalid_params))
+                self.status = "failed"
+                return self
+            self.log(str(invalid_params))
             self.validated = valid_temp
 
-            if self.log:
-                log(str(valid_temp))
-                log(str(self.result))
+            self.log(str(valid_temp))
 
-            log(str(self.validated))
+            self.log(str(self.validated))
             if self.params.get("config")[0].get("GlobalPoolDetails") is not None:
                 for temp in self.validated:
-                    log(str(temp))
+                    self.log(str(temp))
                     if self.params.get("config")[0].get("GlobalPoolDetails") \
                             .get("ipPoolName") is not None:
-                        msg = "missing required arguments: ipPoolName"
-                        self.module.fail_json(msg=msg)
+                        self.msg = "missing required arguments: ipPoolName"
+                        self.status = "failed"
+                        return self
+
+        self.msg = "Successfully validated input"
+        self.status = "success"
+        return self    
 
     def get_dnac_params(self, params):
         dnac_params = dict(
@@ -305,8 +291,8 @@ class DnacNetwork:
     def requires_update(self, have, want, obj_params):
         current_obj = have
         requested_obj = want
-        log(str(current_obj))
-        log(str(requested_obj))
+        self.log(str(current_obj))
+        self.log(str(requested_obj))
 
         return any(not dnac_compare_equality(current_obj.get(dnac_param),
                                             requested_obj.get(ansible_param))
@@ -326,9 +312,9 @@ class DnacNetwork:
             if isinstance(response, dict):
                 if "response" in response:
                     response = response.get("response")
-            log(str(response))
+            self.log(str(response))
             current_details = get_dict_result(response, "ipPoolName", pool_name)
-            log(str(current_details))
+            self.log(str(current_details))
             if current_details:
                 pool_id = current_details.get("id")
 
@@ -351,19 +337,19 @@ class DnacNetwork:
             if isinstance(response, dict):
                 if "response" in response:
                     response = response.get("response")
-            log(str(response))
+            self.log(str(response))
             current_details = get_dict_result(response, "groupName", res_name)
-            log(str(current_details))
+            self.log(str(current_details))
 
             _id = current_details.get("id")
         except:
-            log("except")
+            self.log("except")
             result = None
         return _id
 
 
     def get_current_pool(self, pool):
-        log(str(pool))
+        self.log(str(pool))
         pool_values = {
             "settings": {
                     "ippool": [{
@@ -375,13 +361,13 @@ class DnacNetwork:
                         }]
                 }
         }
-        log(str(pool_values))
+        self.log(str(pool_values))
         if pool.get("ipv6") is False:
             pool_values.get("settings").get("ippool")[0].update({"IpAddressSpace": "IPv4"})
-            log("ipv6 - false")
+            self.log("ipv6 - false")
         else:
             pool_values.get("settings").get("ippool")[0].update({"IpAddressSpace": "IPv6"})
-            log("ipv6 - true")
+            self.log("ipv6 - true")
         if not pool["gateways"]:
             pool_values.get("settings").get("ippool")[0].update({"gateway": ""})
         else:
@@ -392,7 +378,7 @@ class DnacNetwork:
 
 
     def get_current_res(self, res):
-        log(str(res))
+        self.log(str(res))
         res_values = {
             "name": res.get("groupName"),
             "site_id": res.get("siteId"),
@@ -431,12 +417,12 @@ class DnacNetwork:
                     res_values.update({"ipv4GateWay": res.get("ipPools")[0].get("gateways")[0]})
                 else:
                     res_values.update({"ipv4GateWay": ""})
-        log(str(res_values))
+        self.log(str(res_values))
         return res_values
 
 
     def get_current_net(self, site_id):
-        log(str(site_id))
+        self.log(str(site_id))
         response = None
 
         try:
@@ -448,7 +434,7 @@ class DnacNetwork:
 
         except:
             result = None
-        log(str(response))
+        self.log(str(response))
 
         if isinstance(response, dict):
             if "response" in response:
@@ -464,22 +450,15 @@ class DnacNetwork:
         messageoftheday_details = get_dict_result(response, "key", "banner.setting")
         network_aaa = get_dict_result(response, "key", "aaa.network.server.1")
         network_aaa_pan = get_dict_result(response, "key", "aaa.server.pan.network")
-        log(str(syslog_details))
+        self.log(str(syslog_details))
         clientAndEndpoint_aaa = get_dict_result(response, "key", "aaa.endpoint.server.1")
         clientAndEndpoint_aaa_pan = get_dict_result(response, "key", "aaa.server.pan.endpoint")
 
-        log(str(network_aaa))
-        log(str(clientAndEndpoint_aaa))
+        self.log(str(network_aaa))
+        self.log(str(clientAndEndpoint_aaa))
 
         net_values = {
             "settings": {
-                # "dhcpServer":  dhcp_details.get("value"),
-
-                # "dnsServer": {
-                #     "domainName": dns_details.get("value")[0].get("domainName"),
-                #     "primaryIpAddress": dns_details.get("value")[0].get("primaryIpAddress"),
-                #     "secondaryIpAddress": dns_details.get("value")[0].get("secondaryIpAddress")
-                # },
 
                 "snmpServer": {
                     "configureDnacIP": snmp_details.get("value")[0].get("configureDnacIP"),
@@ -497,28 +476,7 @@ class DnacNetwork:
                     "configureDnacIP": netflow_details.get("value")[0].get("configureDnacIP"),
                 },
 
-                # "ntpServer": ntpserver_details.get("value"),
-
                 "timezone": timezone_details.get("value")[0],
-
-                # "messageOfTheday": {
-                #     "bannerMessage": messageoftheday_details.get("value")[0].get("bannerMessage"),
-                #     "retainExistingBanner": messageoftheday_details \
-                #       .get("value")[0].get("retainExistingBanner"),
-                # },
-
-                # "network_aaa": {
-                #     "network": network_aaa.get("value")[0].get("ipAddress"),
-                #     "protocol": network_aaa.get("value")[0].get("protocol"),
-                #     "ipAddress": network_aaa_pan.get("value")[0]
-                # },
-
-                # "clientAndEndpoint_aaa": {
-                #     "network": clientAndEndpoint_aaa.get("value")[0].get("ipAddress"),
-                #     "protocol": clientAndEndpoint_aaa.get("value")[0].get("protocol"),
-                #     "ipAddress": clientAndEndpoint_aaa_pan.get("value")[0],
-                # }
-
 
             }
         }
@@ -534,35 +492,8 @@ class DnacNetwork:
                         }
                     })
 
-        # if snmp_details != None:
-        #     net_values.get("settings").update({"snmpServer": {
-        #                     "configureDnacIP": snmp_details \
-        #                       .get("value")[0].get("configureDnacIP"),
-        #                     "ipAddresses": snmp_details.get("value")[0].get("ipAddresses"),
-        #                 }
-        #             })
-
-        # if syslog_details != None:
-        #     net_values.get("settings").update({"syslogServer": {
-        #                 "configureDnacIP": syslog_details \
-        #                   .get("value")[0].get("configureDnacIP"),
-        #                 "ipAddresses": syslog_details.get("value")[0].get("ipAddresses"),
-        #                 }
-        #             })
-
-        # if netflow_details != None:
-        #     net_values.get("settings").update({"netflowcollector": {
-        #                 "ipAddress": netflow_details.get("value")[0].get("ipAddress"),
-        #                 "port": netflow_details.get("value")[0].get("port"),
-        #                 "configureDnacIP": netflow_details.get("value")[0].get("configureDnacIP"),
-        #                 }
-        #             })
-
         if ntpserver_details != None:
             net_values.get("settings").update({"ntpServer": ntpserver_details.get("value")})
-
-        # if timezone_details != None:
-        #     net_values.get("settings").update({"timezone": timezone_details.get("value")[0]})
 
         if messageoftheday_details != None:
             net_values.get("settings").update({"messageOfTheday": {
@@ -588,7 +519,7 @@ class DnacNetwork:
                         "ipAddress": clientAndEndpoint_aaa_pan.get("value")[0],
                         }
                     })
-        log(str(net_values))
+        self.log(str(net_values))
         return net_values
 
     def get_site_id(self, site_name):
@@ -604,15 +535,15 @@ class DnacNetwork:
 
         except:
             result = None
-        log(str(response))
+        self.log(str(response))
         if not response:
-            log("Invalid site name or site not present")
-            self.result["response"] = []
-            self.result["msg"] = "Invalid site name or site not present"
-            self.module.fail_json(**self.result)
+            self.log("Invalid site name or site not present")
+            self.msg = "Invalid site name or site not present"
+            self.status = "failed"
+            return self
         else:
             _id = response.get("response")[0].get("id")
-        log(str(_id))
+        self.log(str(_id))
 
         return _id
 
@@ -634,14 +565,14 @@ class DnacNetwork:
                 family = "network_settings",
                 function = "get_global_pool",
             )
-            log(str(response))
+            self.log(str(response))
             if isinstance(response, dict):
                 if "response" in response:
                     response = response.get("response")
 
             current_details = get_dict_result(response, "ipPoolName", name)
-            log(str(name))
-            log(str(current_details))
+            self.log(str(name))
+            self.log(str(current_details))
             if current_details:
                 pool_exists = True
                 pool_id = current_details.get("id")
@@ -653,17 +584,18 @@ class DnacNetwork:
                     get("GlobalPoolDetails").get("settings").get("ippool")[0].get("prev_name"))
 
                 if pool_id is None:
-                    msg = "Prev name doesn't exist\n"
-                    self.module.fail_json(msg=msg)
+                    self.msg = "Prev name doesn't exist\n"
+                    self.status = "failed"
+                    return self
                 pool_exists = True
                 current_details = get_dict_result(response, "id", pool_id)
-                log(str(current_details))
+                self.log(str(current_details))
             pool_details = self.get_current_pool(current_details)
         except Exception:
             result = None
 
-        log(str(pool_details))
-        log(str(pool_id))
+        self.log(str(pool_details))
+        self.log(str(pool_id))
         return (pool_exists, pool_details, pool_id)
 
 
@@ -676,7 +608,7 @@ class DnacNetwork:
         site_name = None
         _id = ""
         site_name = self.params.get("config")[0].get("ReservePoolDetails").get("siteName")
-        log(str(site_name))
+        self.log(str(site_name))
 
         if site_name is not None:
             site_id = self.get_site_id(site_name)
@@ -687,11 +619,12 @@ class DnacNetwork:
 
         if prev_name:
             if not self.params.get("config")[0].get("ReservePoolDetails").get("siteName"):
-                msg = "Mandatory Parameter siteName required\n"
-                self.module.fail_json(msg=msg)
+                self.msg = "Mandatory Parameter siteName required\n"
+                self.status = "failed"
+                return self
             _id = self.get_res_id_from_name(prev_name)
 
-        log(str(_id))
+        self.log(str(_id))
         try:
             response = self.dnac._exec(
                 family="network_settings",
@@ -701,14 +634,14 @@ class DnacNetwork:
             if isinstance(response, dict):
                 if "response" in response:
                     response = response.get("response")
-            log(str(response))
+            self.log(str(response))
 
             if _id:
                 current_details = get_dict_result(response, "id", _id)
             elif name:
                 current_details = get_dict_result(response, "groupName", name)
 
-            log(str(current_details))
+            self.log(str(current_details))
 
             if current_details:
                 res_exists = True
@@ -717,8 +650,8 @@ class DnacNetwork:
         except Exception:
             result = None
 
-        log(str(res_details))
-        log(str(res_id))
+        self.log(str(res_details))
+        self.log(str(res_id))
         return (res_exists, res_details, res_id)
 
 
@@ -737,24 +670,22 @@ class DnacNetwork:
             have = {}
             (pool_exists, pool_details, pool_id) = self.pool_exists()
 
-            if self.log:
-                log("pool Exists: " + str(pool_exists) + "\n Current Site: " + str(pool_details))
+            self.log("pool Exists: " + str(pool_exists) + "\n Current Site: " + str(pool_details))
 
             if pool_exists:
                 have["pool_id"] = pool_id
                 have["pool_exists"] = pool_exists
                 have["pool_details"] = pool_details
-                log(str(pool_details))
+                self.log(str(pool_details))
 
             self.have = have
 
         if self.params.get("config")[0].get("ReservePoolDetails") is not None:
             have_reserve = {}
             (res_exists, res_details, res_id) = self.res_exists()
-            log(str(res_exists))
-            if self.log:
-                log("Reservation Exists: " + str(res_exists)  \
-                    + "\n Reserved Pool: " + str(res_details))
+            self.log(str(res_exists))
+            self.log("Reservation Exists: " + str(res_exists)  \
+                + "\n Reserved Pool: " + str(res_details))
 
             if res_exists:
                 have_reserve["res_exists"] = res_exists
@@ -774,17 +705,23 @@ class DnacNetwork:
             site_name = self.params.get("config")[0].get("NetworkManagementDetails").get("siteName")
 
             if site_name is None:
-                self.module.fail_json(msg="Mandatory Parameter siteName missing", response=[])
+                self.msg = "Mandatory Parameter siteName missing"
+                self.status = "failed"
+                return self
 
             site_id = self.get_site_id(site_name)
 
             if site_id is None:
-                self.module.fail_json(msg="Invalid siteName", response=[])
+                self.msg = "Invalid siteName"
+                self.status = "failed"
+                return self
 
             have_net["site_id"] = site_id
             have_net["net_details"] = self.get_current_net(site_id)
-            log(str(have_net))
+            self.log(str(have_net))
             self.have_net = have_net
+        self.status = "success"
+        return self
 
 
     def get_want(self):
@@ -818,7 +755,7 @@ class DnacNetwork:
                             }]
                     }
             }
-            log(str(self.have))
+            self.log(str(self.have))
             if not self.have.get("pool_exists"):
                 if want.get("settings").get("ippool")[0].get("dhcpServerIps") is None:
                     want.get("settings").get("ippool")[0].update({"dhcpServerIps": []})
@@ -836,13 +773,13 @@ class DnacNetwork:
                     .get("ippool")[0].get("IpAddressSpace") == "IPv4":
 
                     want.get("settings").get("ippool")[0].update({"IpAddressSpace": "IPv4"})
-                    log("true")
+                    self.log("true")
 
                 elif self.have.get("pool_details").get("settings") \
                     .get("ippool")[0].get("IpAddressSpace") == "Ipv6":
 
                     want.get("settings").get("ippool")[0].update({"IpAddressSpace": "IPv6"})
-                    log("false")
+                    self.log("false")
 
                 want.get("settings").get("ippool")[0].update({"type": self.have. \
                     get("pool_details").get("settings").get("ippool")[0].get("ipPoolType")})
@@ -873,7 +810,7 @@ class DnacNetwork:
                         self.have.get("pool_details").get("settings") \
                             .get("ippool")[0].get("gateway")})
 
-            log(str(want))
+            self.log(str(want))
             self.want = want
 
         if self.params.get("config")[0].get("ReservePoolDetails") is not None:
@@ -917,7 +854,7 @@ class DnacNetwork:
                     .get("ReservePoolDetails").get("ipv6TotalHost")
             }
 
-            log(str(self.have_reserve))
+            self.log(str(self.have_reserve))
             if not self.have_reserve:
                 if want_reserve.get("type") is None:
                     want_reserve.update({"type": "Generic"})
@@ -964,7 +901,7 @@ class DnacNetwork:
             self.want_reserve = want_reserve
 
         if self.params.get("config")[0].get("NetworkManagementDetails") is not None:
-            log(str(self.params))
+            self.log(str(self.params))
             want_net = {
                 "settings": {
                     "dhcpServer": {
@@ -1145,9 +1082,9 @@ class DnacNetwork:
                 else:
                     if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("servers") == "ISE":
-                        self.module.fail_json(
-                            msg="missing parameter ipAddress", response=[]
-                        )
+                        self.msg = "missing parameter ipAddress"
+                        self.status = "failed"
+                        return self
                 if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("network"):
                     want_net.get("settings").get("network_aaa").update({
@@ -1155,9 +1092,10 @@ class DnacNetwork:
                             .get("settings").get("network_aaa").get("network")
                         })
                 else:
-                    self.module.fail_json(
-                            msg="missing parameter network", response=[]
-                        )
+                    self.msg="missing parameter network"
+                    self.status = "failed"
+                    return self
+
                 if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("protocol"):
                     want_net.get("settings").get("network_aaa").update({
@@ -1165,9 +1103,10 @@ class DnacNetwork:
                             .get("settings").get("network_aaa").get("protocol")
                         })
                 else:
-                    self.module.fail_json(
-                            msg="missing parameter protocol", response=[]
-                        )
+                    self.msg="missing parameter protocol"
+                    self.status = "failed"
+                    return self
+
                 if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("servers"):
                     want_net.get("settings").get("network_aaa").update({
@@ -1175,9 +1114,10 @@ class DnacNetwork:
                             .get("settings").get("network_aaa").get("servers")
                         })
                 else:
-                    self.module.fail_json(
-                            msg="missing parameter servers", response=[]
-                        )
+                    self.msg="missing parameter servers"
+                    self.status = "failed"
+                    return self
+
                 if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("sharedSecret"):
                     want_net.get("settings").get("network_aaa").update({
@@ -1199,9 +1139,9 @@ class DnacNetwork:
                 else:
                     if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("servers") == "ISE":
-                        self.module.fail_json(
-                            msg="missing parameter ipAddress", response=[]
-                        )
+                        self. msg="missing parameter ipAddress"
+                        self.status = "failed"
+                        return self
                 if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("network"):
                     want_net.get("settings").get("clientAndEndpoint_aaa").update({
@@ -1209,9 +1149,10 @@ class DnacNetwork:
                             .get("settings").get("clientAndEndpoint_aaa").get("network")
                         })
                 else:
-                    self.module.fail_json(
-                            msg="missing parameter network", response=[]
-                        )
+                    self.msg="missing parameter network"
+                    self.status = "failed"
+                    return self
+
                 if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("protocol"):
                     want_net.get("settings").get("clientAndEndpoint_aaa").update({
@@ -1219,9 +1160,9 @@ class DnacNetwork:
                             .get("settings").get("clientAndEndpoint_aaa").get("protocol")
                         })
                 else:
-                    self.module.fail_json(
-                            msg="missing parameter protocol", response=[]
-                        )
+                    self.msg="missing parameter protocol"
+                    self.status = "failed"
+                    return self
                 if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("servers"):
                     want_net.get("settings").get("clientAndEndpoint_aaa").update({
@@ -1229,9 +1170,10 @@ class DnacNetwork:
                             .get("settings").get("clientAndEndpoint_aaa").get("servers")
                         })
                 else:
-                    self.module.fail_json(
-                            msg="missing parameter servers", response=[]
-                        )
+                    self.msg="missing parameter servers"
+                    self.status = "failed"
+                    return self
+
                 if self.params.get("config")[0].get("NetworkManagementDetails") \
                             .get("settings").get("clientAndEndpoint_aaa").get("sharedSecret"):
                     want_net.get("settings").get("clientAndEndpoint_aaa").update({
@@ -1241,50 +1183,51 @@ class DnacNetwork:
                         })
             else:
                 del want_net.get("settings")["clientAndEndpoint_aaa"]
-            log(str(want_net))
+            self.log(str(want_net))
             self.want_net = want_net
-
+        self.status = "success"
+        return self
 
     def get_execution_details(self, execid):
         response = None
-        log(str(execid))
+        self.log(str(execid))
         response = self.dnac._exec(
             family="task",
             function='get_business_api_execution_details',
             params={"execution_id": execid}
         )
 
-        if self.log:
-            log(str(response))
+        self.log(str(response))
 
         return response
 
 
-    def get_diff_merge(self):
+    def get_diff_merged(self):
         if self.params.get("config")[0].get("GlobalPoolDetails") is not None:
 
             if not self.params.get("config")[0].get("GlobalPoolDetails") \
                 .get("settings").get("ippool")[0].get("ipPoolName"):
 
-                msg = "Mandatory Parameter ipPoolName required\n"
-                self.module.fail_json(msg=msg)
+                self.msg = "Mandatory Parameter ipPoolName required\n"
+                self.status = "failed"
+                return self
 
             pool_updated = False
             pool_created = False
 
             if self.have.get("pool_exists"):
-                log("entered")
+                self.log("entered")
                 obj_params = [
                     ("settings", "settings"),
                 ]
                 if self.requires_update(self.have.get("pool_details"), self.want, obj_params):
-                    log("Pool requires update")
+                    self.log("Pool requires update")
                     #Pool Exists
                     pool_params = copy.deepcopy(self.want)
                     pool_params.get("settings").get("ippool")[0] \
                         .update({"id": self.have.get("pool_id")})
-                    log(str(self.want))
-                    log(str(pool_params))
+                    self.log(str(self.want))
+                    self.log(str(pool_params))
                     del pool_params["settings"]["ippool"][0]["IpAddressSpace"]
                     del pool_params["settings"]["ippool"][0]["ipPoolCidr"]
                     del pool_params["settings"]["ippool"][0]["type"]
@@ -1302,8 +1245,8 @@ class DnacNetwork:
                             self.have.get("pool_details").get("settings") \
                                 .get("ippool")[0].get("gateway")})
 
-                    log(str(pool_params))
-                    log(str(self.have))
+                    self.log(str(pool_params))
+                    self.log(str(self.have))
                     response = self.dnac._exec(
                         family = "network_settings",
                         function = "update_global_pool",
@@ -1311,33 +1254,32 @@ class DnacNetwork:
                     )
 
                     pool_updated = True
-                    log(str(pool_updated))
+                    self.log(str(pool_updated))
 
                 else:
-                    log("Pool doesn't requires an update")
-                    log(str(self.have))
-                    log(str(self.result))
+                    self.log("Pool doesn't requires an update")
+                    self.log(str(self.have))
+                    self.log(str(self.result))
                     self.result['response'] = self.have.get("settings")
                     self.result['msg'] = "Pool doesn't requires an update"
-                    # self.module.exit_json(**self.result)
 
             else:
                 #creating New Pool
                 pool_params = self.want
-                log(str(pool_params))
+                self.log(str(pool_params))
                 response = self.dnac._exec(
                     family="network_settings",
                     function="create_global_pool",
                     params = pool_params,
                 )
-                log("PoolCreated")
-                log(str(response))
+                self.log("PoolCreated")
+                self.log(str(response))
                 pool_created = True
 
             if pool_created or pool_updated:
                 if response and isinstance(response, dict):
                     executionid = response.get("executionId")
-                    log(str(executionid))
+                    self.log(str(executionid))
                     while True:
                         execution_details = self.get_execution_details(executionid)
                         if execution_details.get("status") == "SUCCESS":
@@ -1346,26 +1288,26 @@ class DnacNetwork:
                             break
 
                         elif execution_details.get("bapiError"):
-
-                            self.module.fail_json(msg=execution_details.get("bapiError"),
-                                                response=execution_details)
-                            break
+                            
+                            self.msg=execution_details.get("bapiError")
+                            self.status = "failed"
+                            return self
 
                     if pool_updated:
-                        log("Pool Updated Successfully")
+                        self.log("Pool Updated Successfully")
                         self.result['msg'] = "Pool Updated Successfully"
                         self.result['response'].update({"Id": \
                             self.have.get("pool_details").get("id")})
 
                     elif pool_created:
-                        log("Pool Created Successfully")
+                        self.log("Pool Created Successfully")
                         (pool_exists, pool_details, pool_id) = self.pool_exists()
                         self.result['response'].update({"Id": pool_id})
                         self.result['response'].update({"Pool Exists": pool_exists})
                         self.result['response'].update({"Pool Details": pool_details})
                         self.result['msg'] = "Pool Created Successfully"
                     else:
-                        log("Pool doesn't need a update")
+                        self.log("Pool doesn't need a update")
                         self.result['msg'] = "Pool doesn't requires an update"
                         self.result['response'].update({"Id": \
                             self.have.get("pool_details").get("id")})
@@ -1374,10 +1316,10 @@ class DnacNetwork:
 
             res_updated = False
             res_created = False
-            log(str(self.have_reserve.get("res_details")))
-            log(str(self.want_reserve))
+            self.log(str(self.have_reserve.get("res_details")))
+            self.log(str(self.want_reserve))
             if self.have_reserve:
-                log("entered")
+                self.log("entered")
                 obj_params = [
                     ("name", "name"),
                     ("type", "type"),
@@ -1398,10 +1340,10 @@ class DnacNetwork:
                 if self.requires_update(self.have_reserve.get("res_details"), \
                     self.want_reserve, obj_params):
 
-                    log("Network requires update")
+                    self.log("Network requires update")
                     #Pool Exists
-                    log(str(self.have_reserve))
-                    log(str(self.want_reserve))
+                    self.log(str(self.have_reserve))
+                    self.log(str(self.want_reserve))
 
                     res_params = copy.deepcopy(self.want_reserve)
                     res_params.update({"site_id": self.site_id})
@@ -1412,36 +1354,37 @@ class DnacNetwork:
                         params=res_params,
                     )
 
-                    log("Reservation Updated")
-                    log(str(response))
+                    self.log("Reservation Updated")
+                    self.log(str(response))
                     res_updated = True
 
                 else:
-                    log("Reserved ip subpool doesn't requires an update")
+                    self.log("Reserved ip subpool doesn't requires an update")
                     self.result["response"] = self.have_reserve
                     self.result["msg"] = "Reserved ip subpool doesn't requires an update"
-                    # self.module.exit_json(**self.result)
 
             else:
                 #creating New Reservation
                 res_params = self.want_reserve
-                log(str(res_params))
+                self.log(str(res_params))
                 if not self.want_reserve.get("name") or \
                     not self.want_reserve.get("ipv4GlobalPool") or \
                         not self.want_reserve.get("ipv4PrefixLength") or not self.site_id:
 
-                    self.module.fail_json(msg="missing parameter name or \
-                        ipv4GlobalPool or ipv4PrefixLength or siteName", response=[])
+                    self.msg="missing parameter name or \
+                        ipv4GlobalPool or ipv4PrefixLength or siteName"
+                    self.status = "failed"
+                    return self  
 
                 res_params.update({"site_id": self.site_id})
-                log(str(res_params))
+                self.log(str(res_params))
                 response = self.dnac._exec(
                     family="network_settings",
                     function="reserve_ip_subpool",
                     params=res_params,
                 )
-                log("Reservation Created")
-                log(str(response))
+                self.log("Reservation Created")
+                self.log(str(response))
                 res_created = True
 
             if res_created or res_updated:
@@ -1457,25 +1400,25 @@ class DnacNetwork:
 
                         elif execution_details.get("bapiError"):
 
-                            self.module.fail_json(msg=execution_details.get("bapiError"),
-                                                response=execution_details)
-                            break
+                            self.msg = execution_details.get("bapiError")
+                            self.status = "failed"
+                            return self  
 
                     if res_updated:
-                        log("Reserved Ip Subpool Updated Successfully")
+                        self.log("Reserved Ip Subpool Updated Successfully")
                         self.result['msg'] = "Reserved Ip Subpool Updated Successfully"
                         self.result['response'].update({"Reservation details": \
                             self.have.get("res_details")})
 
                     elif res_created:
-                        log("Ip Subpool Reservation Created Successfully")
+                        self.log("Ip Subpool Reservation Created Successfully")
                         (res_exists, res_details, res_id) = self.res_exists()
                         self.result['response'].update({"Reservation Id": res_id})
                         self.result['response'].update({"Reservation Exists": res_exists})
                         self.result['response'].update({"Reservation details": res_details})
                         self.result['msg'] = "Ip Subpool Reservation Created Successfully"
                     else:
-                        log("Ip Subpool Reservation doesn't need a update")
+                        self.log("Ip Subpool Reservation doesn't need a update")
                         self.result['msg'] = "Ip Subpool Reservation doesn't requires an update"
                         self.result['response'].update({"Reservation details": \
                             self.have.get("res_details")})
@@ -1485,18 +1428,20 @@ class DnacNetwork:
             net_updated = False
             net_created = False
             if self.have_net:
-                log("entered")
+                self.log("entered")
                 obj_params = [
                     ("settings", "settings"),
                     ("siteName", "siteName")
                 ]
             if self.want_net.get("settings").get("timezone") is None:
-                self.module.fail_json(msg="Missing required parameter timezone", response=[])
-            # if len(self.have_net) == 10:
+                self.msg = "Missing required parameter timezone"
+                self.status = "failed"
+                return self 
+
             if self.requires_update(self.have_net.get("net_details"), self.want_net, obj_params):
-                log("Network update requires")
-                log(str(self.have_net))
-                log(str(self.want_net))
+                self.log("Network update requires")
+                self.log(str(self.have_net))
+                self.log(str(self.want_net))
 
                 net_params = copy.deepcopy(self.want_net)
                 net_params.update({"site_id": self.have_net.get("site_id")})
@@ -1506,40 +1451,21 @@ class DnacNetwork:
                     params=net_params,
                 )
 
-                log("Network Updated")
-                log(str(response))
+                self.log("Network Updated")
+                self.log(str(response))
                 net_updated = True
 
             else:
-                log("Network doesn't need an update")
+                self.log("Network doesn't need an update")
                 self.result["response"] = self.have_net
                 self.result["msg"] = "Network doesn't need an update"
                 self.module.exit_json(**self.result)
 
-            # else:
-            #     #creating New Pool
-            #     net_params = self.want_reserve
-            #     log(str(res_params))
-            #     if self.want_net.get("settings").get("timezone") is None:
-            #         self.module.fail_json(msg="Missing required parameter timezone", response=[])
-
-            #     net_params = copy.deepcopy(self.want_net)
-            #     net_params.update({"site_id": self.have_net.get("site_id")})
-            #     response = self.dnac._exec(
-            #             family="network_settings",
-            #             function='create_network',
-            #             params=net_params,
-            #         )
-
-            #     log("Network Updated")
-            #     log(str(response))
-            #     net_updated = True
-
             if net_updated:
                 if response and isinstance(response, dict):
                     executionid = response.get("executionId")
-                    log(str(response))
-                    log(str(executionid))
+                    self.log(str(response))
+                    self.log(str(executionid))
 
                     while True:
                         execution_details = self.get_execution_details(executionid)
@@ -1550,20 +1476,17 @@ class DnacNetwork:
 
                         elif execution_details.get("bapiError"):
 
-                            self.module.fail_json(msg=execution_details.get("bapiError"),
-                                                response=execution_details)
-                            break
+                            self.msg = execution_details.get("bapiError")
+                            self.status = "failed"
+                            return self
 
                     if net_updated:
-                        log("Network has been changed Successfully")
+                        self.log("Network has been changed Successfully")
                         self.result['msg'] = "Network Updated successfully"
                         self.result['response'] = self.want_net
-                    # elif net_created:
-                    #     log("Network Created Successfully")
-                    #     self.result['msg'] = "Network Created successfully"
-                    #     self.result['response'] = self.want_net
+
                     else:
-                        log("Pool doesn't need a update")
+                        self.log("Pool doesn't need a update")
                         self.result['msg'] = "Network doesn't requires an update"
                         self.result['response'] = self.have_net
 
@@ -1576,12 +1499,12 @@ class DnacNetwork:
                 params={"siteId":self.site_id},
             )
 
-            log(str(response))
+            self.log(str(response))
 
             if isinstance(response, dict):
                 if "response" in response:
                     response = response.get("response")
-            log(str(response))
+            self.log(str(response))
 
             current_details = get_dict_result(response, "groupName", name)
             if current_details:
@@ -1593,21 +1516,23 @@ class DnacNetwork:
         return _id
 
 
-    def get_diff_delete(self):
+    def get_diff_deleted(self):
 
         if self.params.get("config")[0].get("ReservePoolDetails") is not None:
             res_exists = self.have_reserve.get("res_exists")
-            log(str(res_exists))
+            self.log(str(res_exists))
             _id = None
             if self.want_reserve.get("name"):
-                log(str(self.want_reserve.get("name")))
+                self.log(str(self.want_reserve.get("name")))
                 _id = self.get_res_id_by_name(self.want_reserve.get("name"))
-            log(str(_id))
+            self.log(str(_id))
             if res_exists:
                 if not _id:
-                    self.module.fail_json(msg="missing or \
-                        incorrect parameter reserved pool name", response=[])
-                log(str(self.have_reserve.get("res_id")))
+                    self.msg = "missing or \
+                        incorrect parameter reserved pool name"
+                    self.status = "failed"
+                    return self
+                self.log(str(self.have_reserve.get("res_id")))
                 response = self.dnac._exec(
                     family="network_settings",
                     function="release_reserve_ip_subpool",
@@ -1621,15 +1546,18 @@ class DnacNetwork:
                         if task_details.get("status") == "SUCCESS":
                             self.result['changed'] = True
                             self.result['response'] = task_details
-                            log(str(response))
+                            self.log(str(response))
                             self.result['msg'] = "Ip subpool reservation released successfully"
 
                         elif task_details.get("bapiError"):
-                            self.module.fail_json(msg=task_details.get("bapiError"),
-                                                response=task_details)
+                            self.msg = task_details.get("bapiError")
+                            self.status = "failed"
+                            return self
 
             else:
-                self.module.fail_json(msg="Reserved Ip Subpool Not Found", response=[])
+                self.msg = "Reserved Ip Subpool Not Found"
+                self.status = "failed"
+                return self
 
         if self.params.get("config")[0].get("GlobalPoolDetails") is not None:
             pool_exists = self.have.get("pool_exists")
@@ -1648,19 +1576,23 @@ class DnacNetwork:
                         if task_details.get("status") == "SUCCESS":
                             self.result['changed'] = True
                             self.result['response'] = task_details
-                            log(str(response))
+                            self.log(str(response))
                             self.result['msg'] = "Pool deleted successfully"
 
                         elif task_details.get("bapiError"):
-                            self.module.fail_json(msg=task_details.get("bapiError"),
-                                                response=task_details)
+                            self.msg = task_details.get("bapiError")
+                            self.status = "failed"
+                            return self
 
             else:
-                self.module.fail_json(msg="Pool Not Found", response=[])
+                self.msg = "Pool Not Found"
+                self.status = "failed"
+                return self
 
         if self.params.get("config")[0].get("NetworkManagementDetails") is not None:
-
-            self.module.fail_json(msg="No operation available for Delete Network", response=[])
+            self.msg = "No operation available for Delete Network"
+            self.status = "failed"
+            return self
 
 
 def main():
@@ -1684,18 +1616,17 @@ def main():
 
     dnac_network = DnacNetwork(module)
 
-    state = dnac_network.get_state()
-    dnac_network.validate_input()
+    dnac_network.validate_input().check_return_status()
+    state = dnac_network.params.get("state")
+    if state not in dnac_network.supported_states:
+        dnac_network.status = "invalid"
+        dnac_network.msg = "State {0} is invalid".format(state)
+        dnac_network.check_return_status()
 
-    dnac_network.get_have()
-    dnac_network.get_want()
+    dnac_network.get_have().check_return_status()
+    dnac_network.get_want().check_return_status()
 
-    if state == "merged":
-        dnac_network.get_diff_merge()
-
-    elif state == "deleted":
-        dnac_network.get_diff_delete()
-    log(str(dnac_network.result))
+    dnac_network.get_diff_state_apply[state]().check_return_status()
 
     module.exit_json(**dnac_network.result)
 
