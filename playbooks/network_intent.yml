@@ -9,7 +9,7 @@
 #
 
     - name: Create, update, delete global pool and reserve an ip pool
-      cisco.dnac.network_intent:
+      cisco.dnac.network_intent_sample:
         dnac_host: "{{ dnac_host }}"
         dnac_port: "{{ dnac_port }}"
         dnac_username: "{{ dnac_username }}"
@@ -33,13 +33,13 @@
           ReservePoolDetails:
             ipv6AddressSpace: false
             ipv4GlobalPool: 100.0.0.0/8
-            ipv4Prefix: true
+            ipv4Prefix: True
             ipv4PrefixLength: 9
             ipv4DnsServers: []
             ipv4Subnet: 100.128.0.0
             name: IP_Pool_3
             siteName: Global/Chennai/Trill
-            slaacSupport: true
+            slaacSupport: True
             # prev_name: IP_Pool_4
             type: LAN
           NetworkManagementDetails:
@@ -58,7 +58,7 @@
                 # sharedSecret: string #ISE
               messageOfTheday:
                 bannerMessage: hello
-                retainExistingBanner: true
+                retainExistingBanner: True
               netflowcollector:
                 ipAddress: 10.0.0.4
                 port: 443
@@ -71,59 +71,12 @@
               ntpServer:
               - 10.0.0.5
               snmpServer:
-                configureDnacIP: true
+                configureDnacIP: True
                 ipAddresses:
                 - 10.0.0.6
               syslogServer:
-                configureDnacIP: true
+                configureDnacIP: True
                 ipAddresses:
                 - 10.0.0.7
               timezone: GMT
             siteName: Global/Chennai
-          # DeviceCredentialsDetails:
-          #   cliCredential:
-          #     description: CLI 1 
-          #     username: user1 
-          #     password: 12345 
-          #     enablePassword: 12345
-          #     # credentialName: CLI #use this field for update
-          #   snmpV2cRead:
-          #     description: SNMP Read 1
-          #     readCommunity: user1
-          #     # credentialName: SNMP Read 1 #use this for update
-          #   snmpV2cWrite:
-          #     description: SNMP Write 1
-          #     writeCommunity: user1
-          #     # credentialName: SNMP Write 1 #use this for update
-          #   snmpV3:
-          #     authPassword: 12345678
-          #     authType: SHA
-          #     snmpMode: AUTHPRIV
-          #     privacyPassword: 12345678
-          #     privacyType: AES128
-          #     username: user1
-          #     description: SNMP v3 1
-          #     credentialName: SNMP v3 1 #use this for update
-          #   httpsRead:
-          #     name: HTTP Read 1
-          #     username: user1
-          #     password: 12345
-          #     port: 443
-          #     credentialName: HTTP Read 1 #use this field for update
-          #   httpsWrite:
-          #     name: HTTP Write 1
-          #     username: user1
-          #     password: 12345
-          #     port: 443
-          #     credentialName: HTTP Write 1 #use this field for update
-          #   AssignDeviceCredential:
-          #     cliName: CLI 1
-          #     snmpV2ReadName: SNMP Read 1
-          #     snmpV2WriteName: SNMP Write 1
-          #     snmpV3Name: SNMP v3 1
-          #     httpReadName: HTTP Read 1
-          #     httpWriteName: HTTP Write 1
-          #     siteName: Global/Chennai/Trill
-          #   delCredentialName: CLI 1 #use this for delete
-
-
