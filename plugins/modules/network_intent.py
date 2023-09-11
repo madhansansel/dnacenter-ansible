@@ -167,7 +167,6 @@ class DnacNetwork(DnacBase):
             if isinstance(response, dict):
                 if "response" in response:
                     response = response.get("response")
-            self.log(str(response))
 
             current_details = get_dict_result(response, "groupName", name)
             if current_details:
@@ -308,12 +307,8 @@ class DnacNetwork(DnacBase):
         messageoftheday_details = get_dict_result(response, "key", "banner.setting")
         network_aaa = get_dict_result(response, "key", "aaa.network.server.1")
         network_aaa_pan = get_dict_result(response, "key", "aaa.server.pan.network")
-        self.log(str(syslog_details))
         clientAndEndpoint_aaa = get_dict_result(response, "key", "aaa.endpoint.server.1")
         clientAndEndpoint_aaa_pan = get_dict_result(response, "key", "aaa.server.pan.endpoint")
-
-        self.log(str(network_aaa))
-        self.log(str(clientAndEndpoint_aaa))
 
         net_values = {
             "settings": {
@@ -509,14 +504,12 @@ class DnacNetwork(DnacBase):
                 have_global["pool_id"] = pool_id
                 have_global["pool_exists"] = pool_exists
                 have_global["pool_details"] = pool_details
-                self.log(str(pool_details))
 
             self.have_global = have_global
 
         if config.get("ReservePoolDetails") is not None:
             have_reserve = {}
             (res_exists, res_details, res_id) = self.res_exists(config)
-            self.log(str(res_exists))
             self.log("Reservation Exists: " + str(res_exists)  \
                 + "\n Reserved Pool: " + str(res_details))
 
@@ -699,7 +692,6 @@ class DnacNetwork(DnacBase):
             self.want_reserve = want_reserve
 
         if config.get("NetworkManagementDetails") is not None:
-            self.log(str(self.params))
             want_network = {
                 "settings": {
                     "dhcpServer": {
@@ -965,7 +957,6 @@ class DnacNetwork(DnacBase):
             pool_created = False
 
             if self.have_global.get("pool_exists"):
-                self.log("entered")
                 obj_params = [
                     ("settings", "settings"),
                 ]
@@ -975,7 +966,6 @@ class DnacNetwork(DnacBase):
                     pool_params = copy.deepcopy(self.want_global)
                     pool_params.get("settings").get("ippool")[0] \
                         .update({"id": self.have_global.get("pool_id")})
-                    self.log(str(self.want_global))
                     self.log(str(pool_params))
                     del pool_params["settings"]["ippool"][0]["IpAddressSpace"]
                     del pool_params["settings"]["ippool"][0]["ipPoolCidr"]
@@ -1068,7 +1058,6 @@ class DnacNetwork(DnacBase):
             self.log(str(self.have_reserve.get("res_details")))
             self.log(str(self.want_reserve))
             if self.have_reserve:
-                self.log("entered")
                 obj_params = [
                     ("name", "name"),
                     ("type", "type"),
@@ -1177,7 +1166,6 @@ class DnacNetwork(DnacBase):
             net_updated = False
             net_created = False
             if self.have_network:
-                self.log("entered")
                 obj_params = [
                     ("settings", "settings"),
                     ("siteName", "siteName")
