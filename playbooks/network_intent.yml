@@ -9,7 +9,7 @@
 #
 
     - name: Create, update, delete global pool and reserve an ip pool
-      cisco.dnac.network_intent_sample:
+      cisco.dnac.network_intent:
         dnac_host: "{{ dnac_host }}"
         dnac_port: "{{ dnac_port }}"
         dnac_username: "{{ dnac_username }}"
@@ -22,7 +22,7 @@
         - GlobalPoolDetails:
             settings:
               ippool:
-              - ipPoolName: Global_Pool2
+              - ipPoolName: Global_Pool1
                 gateway: "" #use this for updating
                 IpAddressSpace: IPv4 #required when w2 are creating
                 ipPoolCidr: 100.0.0.0/8  #required when we are creating
