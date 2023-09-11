@@ -16,14 +16,12 @@ class DnacNetwork(DnacBase):
     """Class containing member attributes for network intent module"""
     def __init__(self, module):
         super().__init__(module)
-        self.have = {}
-        self.want = {}
+        self.have_global = {}
+        self.want_global = {}
         self.have_reserve = {}
         self.want_reserve = {}
-        self.have_net = {}
-        self.want_net = {}
-        self.have_dev = {}
-        self.want_dev = {}
+        self.have_network = {}
+        self.want_network = {}
         self.site_id = None
 
 
@@ -87,163 +85,99 @@ class DnacNetwork(DnacBase):
                 ReservePool_details = [self.config[0].get("ReservePoolDetails")]
 
             if self.config[0].get("NetworkManagementDetails") is not None:
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("dhcpServer"):
+                network_management_details = self.config[0] \
+                    .get("NetworkManagementDetails").get("settings")
+                if network_management_details.get("dhcpServer"):
                     network_details.append({"dhcpServer": self.config[0].get("NetworkManagementDetails") \
                         .get("settings").get("dhcpServer")})
 
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("dnsServer"):
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("dnsServer").get("domainName"):
-                        network_details.append({"domainName": self.config[0].get("NetworkManagementDetails") \
-                            .get("settings").get("dnsServer").get("domainName")})
+                if network_management_details.get("dnsServer"):
+                    if network_management_details.get("dnsServer").get("domainName"):
+                        network_details.append({"domainName": network_management_details \
+                                                .get("dnsServer").get("domainName")})
+                    if network_management_details.get("dnsServer").get("primaryIpAddress"):
+                        network_details.append({"primaryIpAddress": network_management_details \
+                                                .get("dnsServer").get("primaryIpAddress")})
+                    if network_management_details.get("dnsServer").get("secondaryIpAddress"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("dnsServer").get("secondaryIpAddress")})
 
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("dnsServer").get("primaryIpAddress"):
-                        network_details.append({"primaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("dnsServer").get("primaryIpAddress")})
+                if network_management_details.get("clientAndEndpoint_aaa"):
+                    if network_management_details.get("clientAndEndpoint_aaa").get("ipAddress"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("clientAndEndpoint_aaa").get("ipAddress")})
+                    if network_management_details.get("clientAndEndpoint_aaa").get("network"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("clientAndEndpoint_aaa").get("network")})
+                    if network_management_details.get("clientAndEndpoint_aaa").get("protocol"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("clientAndEndpoint_aaa").get("protocol")})
+                    if network_management_details.get("clientAndEndpoint_aaa").get("servers"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("clientAndEndpoint_aaa").get("servers")})
+                    if network_management_details.get("clientAndEndpoint_aaa").get("sharedSecret"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("clientAndEndpoint_aaa").get("sharedSecret")})
 
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("dnsServer").get("secondaryIpAddress"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("dnsServer").get("secondaryIpAddress")})
+                if network_management_details.get("messageOfTheday"):
+                    if network_management_details.get("messageOfTheday").get("bannerMessage"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("messageOfTheday").get("bannerMessage")})
 
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("clientAndEndpoint_aaa"):
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("clientAndEndpoint_aaa").get("ipAddress"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("ipAddress")})
+                    if network_management_details.get("messageOfTheday").get("retainExistingBanner"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("messageOfTheday").get("retainExistingBanner")})
 
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("clientAndEndpoint_aaa").get("network"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("network")})
+                if network_management_details.get("netflowcollector"):
+                    if network_management_details.get("netflowcollector").get("ipAddress"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("netflowcollector").get("ipAddress")})
+                    if network_management_details.get("netflowcollector").get("port"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("netflowcollector").get("port")})
 
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("clientAndEndpoint_aaa").get("protocol"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("protocol")})
+                if network_management_details.get("network_aaa"):
+                    if network_management_details.get("network_aaa").get("ipAddress"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("network_aaa").get("ipAddress")})
+                    if network_management_details.get("network_aaa").get("network"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("network_aaa").get("network")})
+                    if network_management_details.get("network_aaa").get("protocol"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("network_aaa").get("protocol")})
+                    if network_management_details.get("network_aaa").get("servers"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("network_aaa").get("servers")})
+                    if network_management_details.get("network_aaa").get("sharedSecret"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("network_aaa").get("sharedSecret")})
 
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("clientAndEndpoint_aaa").get("servers"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("servers")})
+                if network_management_details.get("ntpServer"):
+                    network_details.append({"secondaryIpAddress": network_management_details \
+                                            .get("ntpServer")})
 
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("clientAndEndpoint_aaa").get("sharedSecret"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("sharedSecret")})
+                if network_management_details.get("snmpServer"):
+                    if network_management_details.get("snmpServer").get("configureDnacIP"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("snmpServer").get("configureDnacIP")})
+                    if network_management_details.get("snmpServer").get("ipAddresses"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("snmpServer").get("ipAddresses")})
 
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("messageOfTheday"):
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("messageOfTheday").get("bannerMessage"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("messageOfTheday").get("bannerMessage")})
+                if network_management_details.get("syslogServer"):
+                    if network_management_details.get("syslogServer").get("configureDnacIP"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("syslogServer").get("configureDnacIP")})
+                    if network_management_details.get("syslogServer").get("ipAddresses"):
+                        network_details.append({"secondaryIpAddress": network_management_details \
+                                                .get("syslogServer").get("ipAddresses")})
 
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("messageOfTheday").get("retainExistingBanner"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("messageOfTheday").get("retainExistingBanner")})
+                if network_management_details.get("timezone"):
+                    network_details.append({"secondaryIpAddress": network_management_details \
+                                            .get("timezone")})
 
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("netflowcollector"):
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("netflowcollector").get("ipAddress"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector").get("ipAddress")})
-
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("netflowcollector").get("port"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector").get("port")})
-
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("network_aaa"):
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("network_aaa").get("ipAddress"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("ipAddress")})
-
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("network_aaa").get("network"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("network")})
-
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("network_aaa").get("protocol"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("protocol")})
-
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("network_aaa").get("servers"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("servers")})
-
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("network_aaa").get("sharedSecret"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("sharedSecret")})
-
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("ntpServer"):
-                    network_details.append({"secondaryIpAddress": self.config[0] \
-                                  .get("NetworkManagementDetails") \
-                            .get("settings").get("ntpServer")})
-
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("snmpServer"):
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("snmpServer").get("configureDnacIP"):
-                        network_details.append({"secondaryIpAddress": self.config[0]
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("snmpServer").get("configureDnacIP")})
-
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("snmpServer").get("ipAddresses"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("snmpServer").get("ipAddresses")})
-
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("syslogServer"):
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("syslogServer").get("configureDnacIP"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("syslogServer").get("configureDnacIP")})
-
-                    if self.config[0].get("NetworkManagementDetails") \
-                        .get("settings").get("syslogServer").get("ipAddresses"):
-                        network_details.append({"secondaryIpAddress": self.config[0] \
-                                      .get("NetworkManagementDetails") \
-                            .get("settings").get("syslogServer").get("ipAddresses")})
-
-                if self.config[0].get("NetworkManagementDetails") \
-                    .get("settings").get("timezone"):
-                    network_details.append({"secondaryIpAddress": self.config[0] \
-                                  .get("NetworkManagementDetails") \
-                            .get("settings").get("timezone")})
-
-            self.log(str(network_details))
+            self.log(str(globalPool_details))
             self.log(str(ReservePool_details))
             self.log(str(network_details))
             playbook_details = globalPool_details + ReservePool_details + network_details
@@ -257,13 +191,13 @@ class DnacNetwork(DnacBase):
                 self.status = "failed"
                 return self
             self.log(str(invalid_params))
-            self.validated = valid_temp
+            self.validated_config = valid_temp
 
-            self.log(str(valid_temp))
+            self.log(str(self.validated_config))
 
-            self.log(str(self.validated))
+            self.log(str(self.validated_config))
             if self.params.get("config")[0].get("GlobalPoolDetails") is not None:
-                for temp in self.validated:
+                for temp in self.validated_config:
                     self.log(str(temp))
                     if self.params.get("config")[0].get("GlobalPoolDetails") \
                             .get("ipPoolName") is not None:
@@ -288,9 +222,9 @@ class DnacNetwork(DnacBase):
         return dnac_params
 
 
-    def requires_update(self, have, want, obj_params):
-        current_obj = have
-        requested_obj = want
+    def requires_update(self, have_global, want_global, obj_params):
+        current_obj = have_global
+        requested_obj = want_global
         self.log(str(current_obj))
         self.log(str(requested_obj))
 
@@ -362,17 +296,17 @@ class DnacNetwork(DnacBase):
                 }
         }
         self.log(str(pool_values))
+        pool_ippool = pool_values.get("settings").get("ippool")[0]
         if pool.get("ipv6") is False:
-            pool_values.get("settings").get("ippool")[0].update({"IpAddressSpace": "IPv4"})
+            pool_ippool.update({"IpAddressSpace": "IPv4"})
             self.log("ipv6 - false")
         else:
-            pool_values.get("settings").get("ippool")[0].update({"IpAddressSpace": "IPv6"})
+            pool_ippool.update({"IpAddressSpace": "IPv6"})
             self.log("ipv6 - true")
         if not pool["gateways"]:
-            pool_values.get("settings").get("ippool")[0].update({"gateway": ""})
+            pool_ippool.update({"gateway": ""})
         else:
-            pool_values.get("settings").get("ippool")[0] \
-                .update({"gateway": pool.get("gateways")[0]})
+            pool_ippool.update({"gateway": pool.get("gateways")[0]})
 
         return pool_values
 
@@ -548,7 +482,7 @@ class DnacNetwork(DnacBase):
         return _id
 
 
-    def pool_exists(self):
+    def pool_exists(self, config):
         pool_exists = False
         pool_details = {}
         pool_id = None
@@ -557,7 +491,7 @@ class DnacNetwork(DnacBase):
 
       #get it from validated
 
-        name = self.params.get("config")[0].get("GlobalPoolDetails") \
+        name = config.get("GlobalPoolDetails") \
             .get("settings").get("ippool")[0].get("ipPoolName")
         try:
 
@@ -576,11 +510,11 @@ class DnacNetwork(DnacBase):
             if current_details:
                 pool_exists = True
                 pool_id = current_details.get("id")
-            elif self.config[0].get("GlobalPoolDetails").get("settings") \
+            elif config.get("GlobalPoolDetails").get("settings") \
                 .get("ippool")[0].get("prev_name") is not None:
 
                 pool_id = None
-                (pool_id, current_details) = self.get_pool_id_from_name(self.config[0]. \
+                (pool_id, current_details) = self.get_pool_id_from_name(config. \
                     get("GlobalPoolDetails").get("settings").get("ippool")[0].get("prev_name"))
 
                 if pool_id is None:
@@ -599,7 +533,7 @@ class DnacNetwork(DnacBase):
         return (pool_exists, pool_details, pool_id)
 
 
-    def res_exists(self):
+    def res_exists(self, config):
         current_details = None
         res_exists = False
         res_details = None
@@ -607,18 +541,18 @@ class DnacNetwork(DnacBase):
         response = None
         site_name = None
         _id = ""
-        site_name = self.params.get("config")[0].get("ReservePoolDetails").get("siteName")
+        site_name = config.get("ReservePoolDetails").get("siteName")
         self.log(str(site_name))
 
         if site_name is not None:
             site_id = self.get_site_id(site_name)
             self.site_id = site_id
 
-        name = self.config[0].get("ReservePoolDetails").get("name")
-        prev_name =  self.config[0].get("ReservePoolDetails").get("prev_name")
+        name = config.get("ReservePoolDetails").get("name")
+        prev_name =  config.get("ReservePoolDetails").get("prev_name")
 
         if prev_name:
-            if not self.params.get("config")[0].get("ReservePoolDetails").get("siteName"):
+            if not config.get("ReservePoolDetails").get("siteName"):
                 self.msg = "Mandatory Parameter siteName required\n"
                 self.status = "failed"
                 return self
@@ -655,7 +589,7 @@ class DnacNetwork(DnacBase):
         return (res_exists, res_details, res_id)
 
 
-    def get_have(self):
+    def get_have(self, config):
         pool_exists = False
         pool_details = None
         pool_id = None
@@ -666,23 +600,23 @@ class DnacNetwork(DnacBase):
 
         #checking if the pool is already exists or not
 
-        if self.params.get("config")[0].get("GlobalPoolDetails") is not None:
-            have = {}
-            (pool_exists, pool_details, pool_id) = self.pool_exists()
+        if config.get("GlobalPoolDetails") is not None:
+            have_global = {}
+            (pool_exists, pool_details, pool_id) = self.pool_exists(config)
 
             self.log("pool Exists: " + str(pool_exists) + "\n Current Site: " + str(pool_details))
 
             if pool_exists:
-                have["pool_id"] = pool_id
-                have["pool_exists"] = pool_exists
-                have["pool_details"] = pool_details
+                have_global["pool_id"] = pool_id
+                have_global["pool_exists"] = pool_exists
+                have_global["pool_details"] = pool_details
                 self.log(str(pool_details))
 
-            self.have = have
+            self.have_global = have_global
 
-        if self.params.get("config")[0].get("ReservePoolDetails") is not None:
+        if config.get("ReservePoolDetails") is not None:
             have_reserve = {}
-            (res_exists, res_details, res_id) = self.res_exists()
+            (res_exists, res_details, res_id) = self.res_exists(config)
             self.log(str(res_exists))
             self.log("Reservation Exists: " + str(res_exists)  \
                 + "\n Reserved Pool: " + str(res_details))
@@ -699,10 +633,10 @@ class DnacNetwork(DnacBase):
 
             self.have_reserve = have_reserve
 
-        if self.params.get("config")[0].get("NetworkManagementDetails") is not None:
+        if config.get("NetworkManagementDetails") is not None:
 
-            have_net = {}
-            site_name = self.params.get("config")[0].get("NetworkManagementDetails").get("siteName")
+            have_network = {}
+            site_name = config.get("NetworkManagementDetails").get("siteName")
 
             if site_name is None:
                 self.msg = "Mandatory Parameter siteName missing"
@@ -716,142 +650,107 @@ class DnacNetwork(DnacBase):
                 self.status = "failed"
                 return self
 
-            have_net["site_id"] = site_id
-            have_net["net_details"] = self.get_current_net(site_id)
-            self.log(str(have_net))
-            self.have_net = have_net
+            have_network["site_id"] = site_id
+            have_network["net_details"] = self.get_current_net(site_id)
+            self.log(str(have_network))
+            self.have_network = have_network
         self.status = "success"
         return self
 
 
-    def get_want(self):
-        if self.params.get("config")[0].get("GlobalPoolDetails") is not None:
-            want = {}
-            IpAddressSpace = self.params.get("config")[0] \
-                .get("GlobalPoolDetails").get("settings").get("ippool")[0]
-            dhcpServerIps = self.params.get("config")[0] \
-                .get("GlobalPoolDetails").get("settings").get("ippool")[0]
-            dnsServerIps = self.params.get("config")[0] \
-                .get("GlobalPoolDetails").get("settings").get("ippool")[0]
-            gateway = self.params.get("config")[0] \
-                .get("GlobalPoolDetails").get("settings").get("ippool")[0]
-            ipPoolCidr = self.params.get("config")[0] \
-                .get("GlobalPoolDetails").get("settings").get("ippool")[0]
-            ipPoolName = self.params.get("config")[0] \
-                .get("GlobalPoolDetails").get("settings").get("ippool")[0]
-            _type = self.params.get("config")[0] \
+    def get_want(self, config):
+        if config.get("GlobalPoolDetails") is not None:
+            want_global = {}
+            global_ippool = config \
                 .get("GlobalPoolDetails").get("settings").get("ippool")[0]
 
-            want = {
+            want_global = {
                 "settings": {
                         "ippool": [{
-                                "IpAddressSpace": IpAddressSpace.get("IpAddressSpace"),
-                                "dhcpServerIps": dhcpServerIps.get("dhcpServerIps"),
-                                "dnsServerIps": dnsServerIps.get("dnsServerIps"),
-                                "gateway": gateway.get("gateway"),
-                                "ipPoolCidr": ipPoolCidr.get("ipPoolCidr"),
-                                "ipPoolName": ipPoolName.get("ipPoolName"),
-                                "type": _type.get("type"),
+                                "IpAddressSpace": global_ippool.get("IpAddressSpace"),
+                                "dhcpServerIps": global_ippool.get("dhcpServerIps"),
+                                "dnsServerIps": global_ippool.get("dnsServerIps"),
+                                "gateway": global_ippool.get("gateway"),
+                                "ipPoolCidr": global_ippool.get("ipPoolCidr"),
+                                "ipPoolName": global_ippool.get("ipPoolName"),
+                                "type": global_ippool.get("type"),
                             }]
                     }
             }
-            self.log(str(self.have))
-            if not self.have.get("pool_exists"):
-                if want.get("settings").get("ippool")[0].get("dhcpServerIps") is None:
-                    want.get("settings").get("ippool")[0].update({"dhcpServerIps": []})
-                if want.get("settings").get("ippool")[0].get("dnsServerIps") is None:
-                    want.get("settings").get("ippool")[0].update({"dnsServerIps": []})
-                if want.get("settings").get("ippool")[0].get("IpAddressSpace") is None:
-                    want.get("settings").get("ippool")[0].update({"IpAddressSpace": ""})
-                if want.get("settings").get("ippool")[0].get("gateway") is None:
-                    want.get("settings").get("ippool")[0].update({"gateway": ""})
-                if want.get("settings").get("ippool")[0].get("type") is None:
-                    want.get("settings").get("ippool")[0].update({"type": "Generic"})
+            self.log(str(self.have_global))
+            if not self.have_global.get("pool_exists"):
+                want_ippool = want_global.get("settings").get("ippool")[0]
+
+                if want_ippool.get("dhcpServerIps") is None:
+                    want_ippool.update({"dhcpServerIps": []})
+                if want_ippool.get("dnsServerIps") is None:
+                    want_ippool.update({"dnsServerIps": []})
+                if want_ippool.get("IpAddressSpace") is None:
+                    want_ippool.update({"IpAddressSpace": ""})
+                if want_ippool.get("gateway") is None:
+                    want_ippool.update({"gateway": ""})
+                if want_ippool.get("type") is None:
+                    want_ippool.update({"type": "Generic"})
 
             else:
-                if self.have.get("pool_details").get("settings") \
-                    .get("ippool")[0].get("IpAddressSpace") == "IPv4":
+                have_ippool = self.have_global.get("pool_details") \
+                    .get("settings").get("ippool")[0]
+                want_ippool = want_global.get("settings").get("ippool")[0]
 
-                    want.get("settings").get("ippool")[0].update({"IpAddressSpace": "IPv4"})
+                if have_ippool.get("IpAddressSpace") == "IPv4":
+
+                    want_ippool.update({"IpAddressSpace": "IPv4"})
                     self.log("true")
 
-                elif self.have.get("pool_details").get("settings") \
-                    .get("ippool")[0].get("IpAddressSpace") == "Ipv6":
+                elif have_ippool.get("IpAddressSpace") == "Ipv6":
 
-                    want.get("settings").get("ippool")[0].update({"IpAddressSpace": "IPv6"})
+                    want_ippool.update({"IpAddressSpace": "IPv6"})
                     self.log("false")
 
-                want.get("settings").get("ippool")[0].update({"type": self.have. \
-                    get("pool_details").get("settings").get("ippool")[0].get("ipPoolType")})
-                want.get("settings").get("ippool")[0].update({"ipPoolCidr": \
-                    self.have.get("pool_details").get("settings") \
-                        .get("ippool")[0].get("ipPoolCidr")})
+                want_ippool.update({"type": have_ippool.get("ipPoolType")})
+                want_ippool.update({"ipPoolCidr": have_ippool.get("ipPoolCidr")})
 
-                if want.get("settings").get("ippool")[0].get("dhcpServerIps") is None and \
-                    self.have.get("pool_details").get("settings") \
-                        .get("ippool")[0].get("dhcpServerIps") is not None:
-                    want.get("settings").get("ippool")[0].update({"dhcpServerIps": \
-                        self.have.get("pool_details").get("settings") \
-                            .get("ippool")[0].get("dhcpServerIps")})
+                if want_ippool.get("dhcpServerIps") is None and \
+                    have_ippool.get("dhcpServerIps") is not None:
 
-                if want.get("settings").get("ippool")[0].get("dnsServerIps") is None and \
-                    self.have.get("pool_details").get("settings") \
-                        .get("ippool")[0].get("dnsServerIps") is not None:
+                    want_ippool.update({"dhcpServerIps": have_ippool.get("dhcpServerIps")})
 
-                    want.get("settings").get("ippool")[0].update({"dnsServerIps": \
-                        self.have.get("pool_details").get("settings") \
-                            .get("ippool")[0].get("dnsServerIps")})
+                if want_ippool.get("dnsServerIps") is None and \
+                    have_ippool.get("dnsServerIps") is not None:
 
-                if want.get("settings").get("ippool")[0].get("gateway") is None and \
-                    self.have.get("pool_details").get("settings") \
-                        .get("ippool")[0].get("gateway") is not None:
+                    want_ippool.update({"dnsServerIps": have_ippool.get("dnsServerIps")})
 
-                    want.get("settings").get("ippool")[0].update({"gateway": \
-                        self.have.get("pool_details").get("settings") \
-                            .get("ippool")[0].get("gateway")})
+                if want_ippool.get("gateway") is None and \
+                    have_ippool.get("gateway") is not None:
 
-            self.log(str(want))
-            self.want = want
+                    want_ippool.update({"gateway": have_ippool.get("gateway")})
 
-        if self.params.get("config")[0].get("ReservePoolDetails") is not None:
+            self.log(str(want_global))
+            self.want_global = want_global
 
+        if config.get("ReservePoolDetails") is not None:
+
+            res_pool = config.get("ReservePoolDetails")
             want_reserve = {
-                "name": self.params.get("config")[0].get("ReservePoolDetails").get("name"),
-                "type": self.params.get("config")[0].get("ReservePoolDetails").get("type"),
-                "ipv6AddressSpace": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6AddressSpace"),
-                "ipv4GlobalPool": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv4GlobalPool"),
-                "ipv4Prefix": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv4Prefix"),
-                "ipv4PrefixLength": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv4PrefixLength"),
-                "ipv4GateWay": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv4GateWay"),
-                "ipv4DhcpServers": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv4DhcpServers"),
-                "ipv4DnsServers": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv4DnsServers"),
-                "ipv4Subnet": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv4Subnet"),
-                "ipv6GlobalPool": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6GlobalPool"),
-                "ipv6Prefix": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6Prefix"),
-                "ipv6PrefixLength": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6PrefixLength"),
-                "ipv6GateWay": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6GateWay"),
-                "ipv6DhcpServers": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6DhcpServers"),
-                "ipv6Subnet": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6Subnet"),
-                "ipv6DnsServers": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6DnsServers"),
-                "ipv4TotalHost": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv4TotalHost"),
-                "ipv6TotalHost": self.params.get("config")[0] \
-                    .get("ReservePoolDetails").get("ipv6TotalHost")
+                "name": res_pool.get("name"),
+                "type": res_pool.get("type"),
+                "ipv6AddressSpace": res_pool.get("ipv6AddressSpace"),
+                "ipv4GlobalPool": res_pool.get("ipv4GlobalPool"),
+                "ipv4Prefix": res_pool.get("ipv4Prefix"),
+                "ipv4PrefixLength": res_pool.get("ipv4PrefixLength"),
+                "ipv4GateWay": res_pool.get("ipv4GateWay"),
+                "ipv4DhcpServers": res_pool.get("ipv4DhcpServers"),
+                "ipv4DnsServers": res_pool.get("ipv4DnsServers"),
+                "ipv4Subnet": res_pool.get("ipv4Subnet"),
+                "ipv6GlobalPool": res_pool.get("ipv6GlobalPool"),
+                "ipv6Prefix": res_pool.get("ipv6Prefix"),
+                "ipv6PrefixLength": res_pool.get("ipv6PrefixLength"),
+                "ipv6GateWay": res_pool.get("ipv6GateWay"),
+                "ipv6DhcpServers": res_pool.get("ipv6DhcpServers"),
+                "ipv6Subnet": res_pool.get("ipv6Subnet"),
+                "ipv6DnsServers": res_pool.get("ipv6DnsServers"),
+                "ipv4TotalHost": res_pool.get("ipv4TotalHost"),
+                "ipv6TotalHost": res_pool.get("ipv6TotalHost")
             }
 
             self.log(str(self.have_reserve))
@@ -900,9 +799,9 @@ class DnacNetwork(DnacBase):
 
             self.want_reserve = want_reserve
 
-        if self.params.get("config")[0].get("NetworkManagementDetails") is not None:
+        if config.get("NetworkManagementDetails") is not None:
             self.log(str(self.params))
-            want_net = {
+            want_network = {
                 "settings": {
                     "dhcpServer": {
 
@@ -935,256 +834,207 @@ class DnacNetwork(DnacBase):
 
                 }
             }
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                                .get("settings").get("dhcpServer"):
-                want_net.get("settings").update({"dhcpServer":
-                                self.params.get("config")[0].get("NetworkManagementDetails") \
-                                    .get("settings").get("dhcpServer")
+            network_management_details = config.get("NetworkManagementDetails") \
+                                .get("settings")
+            if network_management_details.get("dhcpServer"):
+                want_network.get("settings").update({"dhcpServer":
+                                network_management_details.get("dhcpServer")
                             })
             else:
-                del want_net.get("settings")["dhcpServer"]
+                del want_network.get("settings")["dhcpServer"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                                .get("settings").get("ntpServer"):
-                want_net.get("settings").update({"ntpServer":
-                                self.params.get("config")[0].get("NetworkManagementDetails") \
-                                    .get("settings").get("ntpServer")
+            if network_management_details.get("ntpServer"):
+                want_network.get("settings").update({"ntpServer":
+                                network_management_details.get("ntpServer")
                             })
             else:
-                del want_net.get("settings")["ntpServer"]
+                del want_network.get("settings")["ntpServer"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                                .get("settings").get("timezone"):
-                want_net.get("settings")["timezone"] = \
-                    self.params.get("config")[0].get("NetworkManagementDetails") \
-                                    .get("settings").get("timezone")
+            if network_management_details.get("timezone"):
+                want_network.get("settings")["timezone"] = \
+                    network_management_details.get("timezone")
             else:
-                del want_net.get("settings")["timezone"]
+                del want_network.get("settings")["timezone"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                                .get("settings").get("dnsServer"):
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                                .get("settings").get("dnsServer").get("domainName"):
-                    want_net.get("settings").get("dnsServer").update({
-                                "domainName": self.params.get("config")[0] \
-                                    .get("NetworkManagementDetails") \
-                                    .get("settings").get("dnsServer").get("domainName")
+            if network_management_details.get("dnsServer"):
+                if network_management_details.get("dnsServer").get("domainName"):
+                    want_network.get("settings").get("dnsServer").update({
+                                "domainName": network_management_details \
+                                    .get("dnsServer").get("domainName")
                             })
 
-                if self.params.get("config")[0] \
-                                .get("NetworkManagementDetails").get("settings"):
-                    want_net.get("settings").get("dnsServer").update({
-                                "primaryIpAddress": self.params.get("config")[0] \
-                                    .get("NetworkManagementDetails").get("settings") \
+                if network_management_details.get("dnsServer").get("primaryIpAddress"):
+                    want_network.get("settings").get("dnsServer").update({
+                                "primaryIpAddress": network_management_details \
                                         .get("dnsServer").get("primaryIpAddress")
                             })
 
-                if self.params.get("config")[0] \
-                                .get("NetworkManagementDetails").get("settings") \
-                                    .get("dnsServer").get("secondaryIpAddress"):
-                    want_net.get("settings").get("dnsServer").update({
-                                "secondaryIpAddress": self.params.get("config")[0] \
-                                    .get("NetworkManagementDetails").get("settings") \
+                if network_management_details.get("dnsServer").get("secondaryIpAddress"):
+                    want_network.get("settings").get("dnsServer").update({
+                                "secondaryIpAddress": network_management_details \
                                         .get("dnsServer").get("secondaryIpAddress")
                         })
             else:
-                del want_net.get("settings")["dnsServer"]
+                del want_network.get("settings")["dnsServer"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("snmpServer"):
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("snmpServer").get("configureDnacIP"):
-                    want_net.get("settings").get("snmpServer").update({
-                            "configureDnacIP": self.params.get("config")[0] \
-                                .get("NetworkManagementDetails") \
-                                .get("settings").get("snmpServer").get("configureDnacIP")
+            if network_management_details.get("snmpServer"):
+                if network_management_details.get("snmpServer").get("configureDnacIP"):
+                    want_network.get("settings").get("snmpServer").update({
+                            "configureDnacIP": network_management_details \
+                                .get("snmpServer").get("configureDnacIP")
                         })
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("snmpServer").get("ipAddresses"):
-                    want_net.get("settings").get("snmpServer").update({
-                            "ipAddresses": self.params.get("config")[0] \
-                                .get("NetworkManagementDetails") \
-                                .get("settings").get("snmpServer").get("ipAddresses")
+                if network_management_details.get("snmpServer").get("ipAddresses"):
+                    want_network.get("settings").get("snmpServer").update({
+                            "ipAddresses": network_management_details \
+                                .get("snmpServer").get("ipAddresses")
                         })
             else:
-                del want_net.get("settings")["snmpServer"]
+                del want_network.get("settings")["snmpServer"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                        .get("settings").get("syslogServer"):
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                        .get("settings").get("syslogServer").get("configureDnacIP"):
-                    want_net.get("settings").get("syslogServer").update({
-                        "configureDnacIP": self.params.get("config")[0] \
-                            .get("NetworkManagementDetails") \
-                            .get("settings").get("syslogServer").get("configureDnacIP")
+            if network_management_details.get("syslogServer"):
+                if network_management_details.get("syslogServer").get("configureDnacIP"):
+                    want_network.get("settings").get("syslogServer").update({
+                        "configureDnacIP": network_management_details \
+                            .get("syslogServer").get("configureDnacIP")
                         })
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                        .get("settings").get("syslogServer").get("ipAddresses"):
-                    want_net.get("settings").get("syslogServer").update({
-                        "ipAddresses": self.params.get("config")[0] \
-                            .get("NetworkManagementDetails") \
-                            .get("settings").get("syslogServer").get("ipAddresses")
+                if network_management_details.get("syslogServer").get("ipAddresses"):
+                    want_network.get("settings").get("syslogServer").update({
+                        "ipAddresses": network_management_details \
+                            .get("syslogServer").get("ipAddresses")
                         })
             else:
-                del want_net.get("settings")["syslogServer"]
+                del want_network.get("settings")["syslogServer"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector"):
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector").get("ipAddress"):
-                    want_net.get("settings").get("netflowcollector").update({
-                        "ipAddress": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector").get("ipAddress")
+            if network_management_details.get("netflowcollector"):
+                if network_management_details.get("netflowcollector").get("ipAddress"):
+                    want_network.get("settings").get("netflowcollector").update({
+                        "ipAddress": network_management_details \
+                            .get("netflowcollector").get("ipAddress")
                         })
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector").get("port"):
-                    want_net.get("settings").get("netflowcollector").update({
-                        "port": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector").get("port")
+                if network_management_details.get("netflowcollector").get("port"):
+                    want_network.get("settings").get("netflowcollector").update({
+                        "port": network_management_details \
+                            .get("netflowcollector").get("port")
                         })
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector").get("configureDnacIP"):
-                    want_net.get("settings").get("netflowcollector").update({
-                        "configureDnacIP": self.params.get("config")[0] \
-                            .get("NetworkManagementDetails") \
-                            .get("settings").get("netflowcollector").get("configureDnacIP")
+                if network_management_details.get("netflowcollector").get("configureDnacIP"):
+                    want_network.get("settings").get("netflowcollector").update({
+                        "configureDnacIP": network_management_details \
+                            .get("netflowcollector").get("configureDnacIP")
                         })
             else:
-                del want_net.get("settings")["netflowcollector"]
+                del want_network.get("settings")["netflowcollector"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                        .get("settings").get("messageOfTheday"):
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                        .get("settings").get("messageOfTheday").get("bannerMessage"):
-                    want_net.get("settings").get("messageOfTheday").update({
-                        "bannerMessage": self.params.get("config")[0] \
-                            .get("NetworkManagementDetails") \
-                            .get("settings").get("messageOfTheday").get("bannerMessage")
+            if network_management_details.get("messageOfTheday"):
+                if network_management_details.get("messageOfTheday").get("bannerMessage"):
+                    want_network.get("settings").get("messageOfTheday").update({
+                        "bannerMessage": network_management_details.get("messageOfTheday").get("bannerMessage")
                         })
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                        .get("settings").get("messageOfTheday").get("retainExistingBanner"):
-                    want_net.get("settings").get("messageOfTheday").update({
-                        "retainExistingBanner": self.params.get("config")[0] \
-                            .get("NetworkManagementDetails") \
-                            .get("settings").get("messageOfTheday").get("retainExistingBanner")
+                if network_management_details.get("messageOfTheday").get("retainExistingBanner"):
+                    want_network.get("settings").get("messageOfTheday").update({
+                        "retainExistingBanner": network_management_details \
+                            .get("messageOfTheday").get("retainExistingBanner")
                         })
             else:
-                del want_net.get("settings")["messageOfTheday"]
+                del want_network.get("settings")["messageOfTheday"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                        .get("settings").get("network_aaa"):
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("ipAddress"):
-                    want_net.get("settings").get("network_aaa").update({
-                        "ipAddress": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("ipAddress")
+            if network_management_details.get("network_aaa"):
+                if network_management_details.get("network_aaa").get("ipAddress"):
+                    want_network.get("settings").get("network_aaa").update({
+                        "ipAddress": network_management_details \
+                            .get("network_aaa").get("ipAddress")
                         })
                 else:
-                    if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("servers") == "ISE":
+                    if network_management_details.get("network_aaa").get("servers") == "ISE":
                         self.msg = "missing parameter ipAddress"
                         self.status = "failed"
                         return self
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("network"):
-                    want_net.get("settings").get("network_aaa").update({
-                        "network": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("network")
+                if network_management_details.get("network_aaa").get("network"):
+                    want_network.get("settings").get("network_aaa").update({
+                        "network": network_management_details.get("network_aaa").get("network")
                         })
                 else:
                     self.msg="missing parameter network"
                     self.status = "failed"
                     return self
 
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("protocol"):
-                    want_net.get("settings").get("network_aaa").update({
-                        "protocol": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("protocol")
+                if network_management_details.get("network_aaa").get("protocol"):
+                    want_network.get("settings").get("network_aaa").update({
+                        "protocol": network_management_details \
+                            .get("network_aaa").get("protocol")
                         })
                 else:
                     self.msg="missing parameter protocol"
                     self.status = "failed"
                     return self
 
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("servers"):
-                    want_net.get("settings").get("network_aaa").update({
-                        "servers": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("servers")
+                if network_management_details.get("network_aaa").get("servers"):
+                    want_network.get("settings").get("network_aaa").update({
+                        "servers": network_management_details \
+                            .get("network_aaa").get("servers")
                         })
                 else:
                     self.msg="missing parameter servers"
                     self.status = "failed"
                     return self
 
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("network_aaa").get("sharedSecret"):
-                    want_net.get("settings").get("network_aaa").update({
-                        "sharedSecret": self.params.get("config")[0] \
+                if network_management_details.get("network_aaa").get("sharedSecret"):
+                    want_network.get("settings").get("network_aaa").update({
+                        "sharedSecret": config \
                             .get("NetworkManagementDetails") \
                             .get("settings").get("network_aaa").get("sharedSecret")
                         })
             else:
-                del want_net.get("settings")["network_aaa"]
+                del want_network.get("settings")["network_aaa"]
 
-            if self.params.get("config")[0].get("NetworkManagementDetails") \
-                        .get("settings").get("clientAndEndpoint_aaa"):
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("ipAddress"):
-                    want_net.get("settings").get("clientAndEndpoint_aaa").update({
-                        "ipAddress": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("ipAddress")
+            if network_management_details.get("clientAndEndpoint_aaa"):
+                if network_management_details.get("clientAndEndpoint_aaa").get("ipAddress"):
+                    want_network.get("settings").get("clientAndEndpoint_aaa").update({
+                        "ipAddress": network_management_details \
+                            .get("clientAndEndpoint_aaa").get("ipAddress")
                         })
                 else:
-                    if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("servers") == "ISE":
+                    if network_management_details.get("clientAndEndpoint_aaa").get("servers") == "ISE":
                         self. msg="missing parameter ipAddress"
                         self.status = "failed"
                         return self
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("network"):
-                    want_net.get("settings").get("clientAndEndpoint_aaa").update({
-                        "network": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("network")
+                if network_management_details.get("clientAndEndpoint_aaa").get("network"):
+                    want_network.get("settings").get("clientAndEndpoint_aaa").update({
+                        "network": network_management_details \
+                            .get("clientAndEndpoint_aaa").get("network")
                         })
                 else:
                     self.msg="missing parameter network"
                     self.status = "failed"
                     return self
 
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("protocol"):
-                    want_net.get("settings").get("clientAndEndpoint_aaa").update({
-                        "protocol": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("protocol")
+                if network_management_details.get("clientAndEndpoint_aaa").get("protocol"):
+                    want_network.get("settings").get("clientAndEndpoint_aaa").update({
+                        "protocol": network_management_details \
+                            .get("clientAndEndpoint_aaa").get("protocol")
                         })
                 else:
                     self.msg="missing parameter protocol"
                     self.status = "failed"
                     return self
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("servers"):
-                    want_net.get("settings").get("clientAndEndpoint_aaa").update({
-                        "servers": self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("servers")
+                if network_management_details.get("clientAndEndpoint_aaa").get("servers"):
+                    want_network.get("settings").get("clientAndEndpoint_aaa").update({
+                        "servers": network_management_details \
+                            .get("clientAndEndpoint_aaa").get("servers")
                         })
                 else:
                     self.msg="missing parameter servers"
                     self.status = "failed"
                     return self
 
-                if self.params.get("config")[0].get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("sharedSecret"):
-                    want_net.get("settings").get("clientAndEndpoint_aaa").update({
-                        "sharedSecret": self.params.get("config")[0] \
-                            .get("NetworkManagementDetails") \
-                            .get("settings").get("clientAndEndpoint_aaa").get("sharedSecret")
+                if network_management_details.get("clientAndEndpoint_aaa").get("sharedSecret"):
+                    want_network.get("settings").get("clientAndEndpoint_aaa").update({
+                        "sharedSecret": network_management_details \
+                            .get("clientAndEndpoint_aaa").get("sharedSecret")
                         })
             else:
-                del want_net.get("settings")["clientAndEndpoint_aaa"]
-            self.log(str(want_net))
-            self.want_net = want_net
+                del want_network.get("settings")["clientAndEndpoint_aaa"]
+            self.log(str(want_network))
+            self.want_network = want_network
         self.status = "success"
         return self
 
@@ -1202,10 +1052,10 @@ class DnacNetwork(DnacBase):
         return response
 
 
-    def get_diff_merged(self):
-        if self.params.get("config")[0].get("GlobalPoolDetails") is not None:
+    def get_diff_merged(self, config):
+        if config.get("GlobalPoolDetails") is not None:
 
-            if not self.params.get("config")[0].get("GlobalPoolDetails") \
+            if not config.get("GlobalPoolDetails") \
                 .get("settings").get("ippool")[0].get("ipPoolName"):
 
                 self.msg = "Mandatory Parameter ipPoolName required\n"
@@ -1215,18 +1065,18 @@ class DnacNetwork(DnacBase):
             pool_updated = False
             pool_created = False
 
-            if self.have.get("pool_exists"):
+            if self.have_global.get("pool_exists"):
                 self.log("entered")
                 obj_params = [
                     ("settings", "settings"),
                 ]
-                if self.requires_update(self.have.get("pool_details"), self.want, obj_params):
+                if self.requires_update(self.have_global.get("pool_details"), self.want_global, obj_params):
                     self.log("Pool requires update")
                     #Pool Exists
-                    pool_params = copy.deepcopy(self.want)
+                    pool_params = copy.deepcopy(self.want_global)
                     pool_params.get("settings").get("ippool")[0] \
-                        .update({"id": self.have.get("pool_id")})
-                    self.log(str(self.want))
+                        .update({"id": self.have_global.get("pool_id")})
+                    self.log(str(self.want_global))
                     self.log(str(pool_params))
                     del pool_params["settings"]["ippool"][0]["IpAddressSpace"]
                     del pool_params["settings"]["ippool"][0]["ipPoolCidr"]
@@ -1234,19 +1084,19 @@ class DnacNetwork(DnacBase):
 
                     if pool_params.get("settings").get("ippool")[0].get("dhcpServerIps") is None:
                         pool_params.get("settings").get("ippool")[0].update({"dhcpServerIps" : \
-                            self.have.get("pool_details").get("settings") \
+                            self.have_global.get("pool_details").get("settings") \
                                 .get("ippool")[0].get("dhcpServerIps")})
                     if pool_params.get("settings").get("ippool")[0].get("dnsServerIps") is None:
                         pool_params.get("settings").get("ippool")[0].update({"dnsServerIps" : \
-                            self.have.get("pool_details").get("settings") \
+                            self.have_global.get("pool_details").get("settings") \
                                 .get("ippool")[0].get("dnsServerIps")})
                     if pool_params.get("settings").get("ippool")[0].get("gateway") is None:
                         pool_params.get("settings").get("ippool")[0].update({"gateway" : \
-                            self.have.get("pool_details").get("settings") \
+                            self.have_global.get("pool_details").get("settings") \
                                 .get("ippool")[0].get("gateway")})
 
                     self.log(str(pool_params))
-                    self.log(str(self.have))
+                    self.log(str(self.have_global))
                     response = self.dnac._exec(
                         family = "network_settings",
                         function = "update_global_pool",
@@ -1258,14 +1108,14 @@ class DnacNetwork(DnacBase):
 
                 else:
                     self.log("Pool doesn't requires an update")
-                    self.log(str(self.have))
+                    self.log(str(self.have_global))
                     self.log(str(self.result))
-                    self.result['response'] = self.have.get("settings")
+                    self.result['response'] = self.have_global.get("settings")
                     self.result['msg'] = "Pool doesn't requires an update"
 
             else:
                 #creating New Pool
-                pool_params = self.want
+                pool_params = self.want_global
                 self.log(str(pool_params))
                 response = self.dnac._exec(
                     family="network_settings",
@@ -1297,11 +1147,11 @@ class DnacNetwork(DnacBase):
                         self.log("Pool Updated Successfully")
                         self.result['msg'] = "Pool Updated Successfully"
                         self.result['response'].update({"Id": \
-                            self.have.get("pool_details").get("id")})
+                            self.have_global.get("pool_details").get("id")})
 
                     elif pool_created:
                         self.log("Pool Created Successfully")
-                        (pool_exists, pool_details, pool_id) = self.pool_exists()
+                        (pool_exists, pool_details, pool_id) = self.pool_exists(config)
                         self.result['response'].update({"Id": pool_id})
                         self.result['response'].update({"Pool Exists": pool_exists})
                         self.result['response'].update({"Pool Details": pool_details})
@@ -1310,9 +1160,10 @@ class DnacNetwork(DnacBase):
                         self.log("Pool doesn't need a update")
                         self.result['msg'] = "Pool doesn't requires an update"
                         self.result['response'].update({"Id": \
-                            self.have.get("pool_details").get("id")})
+                            self.have_global.get("pool_details").get("id")})
+            return self
 
-        if self.params.get("config")[0].get("ReservePoolDetails") is not None:
+        if config.get("ReservePoolDetails") is not None:
 
             res_updated = False
             res_created = False
@@ -1408,11 +1259,11 @@ class DnacNetwork(DnacBase):
                         self.log("Reserved Ip Subpool Updated Successfully")
                         self.result['msg'] = "Reserved Ip Subpool Updated Successfully"
                         self.result['response'].update({"Reservation details": \
-                            self.have.get("res_details")})
+                            self.have_global.get("res_details")})
 
                     elif res_created:
                         self.log("Ip Subpool Reservation Created Successfully")
-                        (res_exists, res_details, res_id) = self.res_exists()
+                        (res_exists, res_details, res_id) = self.res_exists(config)
                         self.result['response'].update({"Reservation Id": res_id})
                         self.result['response'].update({"Reservation Exists": res_exists})
                         self.result['response'].update({"Reservation details": res_details})
@@ -1421,30 +1272,31 @@ class DnacNetwork(DnacBase):
                         self.log("Ip Subpool Reservation doesn't need a update")
                         self.result['msg'] = "Ip Subpool Reservation doesn't requires an update"
                         self.result['response'].update({"Reservation details": \
-                            self.have.get("res_details")})
+                        self.have_global.get("res_details")})
+            return self
 
-        if self.params.get("config")[0].get("NetworkManagementDetails") is not None:
+        if config.get("NetworkManagementDetails") is not None:
 
             net_updated = False
             net_created = False
-            if self.have_net:
+            if self.have_network:
                 self.log("entered")
                 obj_params = [
                     ("settings", "settings"),
                     ("siteName", "siteName")
                 ]
-            if self.want_net.get("settings").get("timezone") is None:
+            if self.want_network.get("settings").get("timezone") is None:
                 self.msg = "Missing required parameter timezone"
                 self.status = "failed"
                 return self 
 
-            if self.requires_update(self.have_net.get("net_details"), self.want_net, obj_params):
+            if self.requires_update(self.have_network.get("net_details"), self.want_network, obj_params):
                 self.log("Network update requires")
-                self.log(str(self.have_net))
-                self.log(str(self.want_net))
+                self.log(str(self.have_network))
+                self.log(str(self.want_network))
 
-                net_params = copy.deepcopy(self.want_net)
-                net_params.update({"site_id": self.have_net.get("site_id")})
+                net_params = copy.deepcopy(self.want_network)
+                net_params.update({"site_id": self.have_network.get("site_id")})
                 response = self.dnac._exec(
                     family="network_settings",
                     function='update_network',
@@ -1457,7 +1309,7 @@ class DnacNetwork(DnacBase):
 
             else:
                 self.log("Network doesn't need an update")
-                self.result["response"] = self.have_net
+                self.result["response"] = self.have_network
                 self.result["msg"] = "Network doesn't need an update"
                 self.module.exit_json(**self.result)
 
@@ -1483,12 +1335,13 @@ class DnacNetwork(DnacBase):
                     if net_updated:
                         self.log("Network has been changed Successfully")
                         self.result['msg'] = "Network Updated successfully"
-                        self.result['response'] = self.want_net
+                        self.result['response'] = self.want_network
 
                     else:
                         self.log("Pool doesn't need a update")
                         self.result['msg'] = "Network doesn't requires an update"
-                        self.result['response'] = self.have_net
+                        self.result['response'] = self.have_network
+            return self
 
     def get_res_id_by_name(self, name):
         _id = None
@@ -1516,9 +1369,9 @@ class DnacNetwork(DnacBase):
         return _id
 
 
-    def get_diff_deleted(self):
+    def get_diff_deleted(self,config):
 
-        if self.params.get("config")[0].get("ReservePoolDetails") is not None:
+        if config.get("ReservePoolDetails") is not None:
             res_exists = self.have_reserve.get("res_exists")
             self.log(str(res_exists))
             _id = None
@@ -1559,14 +1412,14 @@ class DnacNetwork(DnacBase):
                 self.status = "failed"
                 return self
 
-        if self.params.get("config")[0].get("GlobalPoolDetails") is not None:
-            pool_exists = self.have.get("pool_exists")
+        if config.get("GlobalPoolDetails") is not None:
+            pool_exists = self.have_global.get("pool_exists")
 
             if pool_exists:
                 response = self.dnac._exec(
                     family="network_settings",
                     function="delete_global_ip_pool",
-                    params={"id": self.have.get("pool_id")},
+                    params={"id": self.have_global.get("pool_id")},
                 )
 
                 if response and isinstance(response, dict):
@@ -1589,10 +1442,22 @@ class DnacNetwork(DnacBase):
                 self.status = "failed"
                 return self
 
-        if self.params.get("config")[0].get("NetworkManagementDetails") is not None:
+        if config.get("NetworkManagementDetails") is not None:
             self.msg = "No operation available for Delete Network"
             self.status = "failed"
             return self
+
+
+    def reset_values(self):
+        """Reset all neccessary attributes to default values"""
+
+        self.have_global.clear()
+        self.want_global.clear()
+        self.have_reserve.clear()
+        self.want_reserve.clear()
+        self.have_network.clear()
+        self.want_network.clear()
+        self.site_id = None
 
 
 def main():
@@ -1623,10 +1488,12 @@ def main():
         dnac_network.msg = "State {0} is invalid".format(state)
         dnac_network.check_return_status()
 
-    dnac_network.get_have().check_return_status()
-    dnac_network.get_want().check_return_status()
+    for config in dnac_network.config:
+        dnac_network.reset_values()
+        dnac_network.get_have(config).check_return_status()
+        dnac_network.get_want(config).check_return_status()
 
-    dnac_network.get_diff_state_apply[state]().check_return_status()
+    dnac_network.get_diff_state_apply[state](config).check_return_status()
 
     module.exit_json(**dnac_network.result)
 
