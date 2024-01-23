@@ -25,6 +25,10 @@ extends_documentation_fragment:
 author: Muthu Rakesh (@MUTHU-RAKESH-27)
         Madhan Sankaranarayanan (@madhansansel)
 options:
+  dnac_log_level:
+    description: Log levels are used to categorize the logs based on their severity.
+    type: str
+    default: INFO
   config_verify:
     description: Set to True to verify the Cisco DNA Center after applying the playbook config.
     type: bool
@@ -338,7 +342,9 @@ EXAMPLES = r"""
     dnac_verify: "{{ dnac_verify }}"
     dnac_debug: "{{ dnac_debug }}"
     dnac_log: True
+    dnac_log_level: "{{ dnac_log_level }}"
     state: merged
+    config_verify: True
     config:
     - global_credential_details:
         cli_credential:
@@ -395,7 +401,9 @@ EXAMPLES = r"""
     dnac_verify: "{{ dnac_verify }}"
     dnac_debug: "{{ dnac_debug }}"
     dnac_log: True
+    dnac_log_level: "{{ dnac_log_level }}"
     state: merged
+    config_verify: True
     config:
     - global_credential_details:
         cli_credential:
@@ -460,7 +468,9 @@ EXAMPLES = r"""
     dnac_verify: "{{ dnac_verify }}"
     dnac_debug: "{{ dnac_debug }}"
     dnac_log: True
+    dnac_log_level: "{{ dnac_log_level }}"
     state: merged
+    config_verify: True
     config:
     - global_credential_details:
         cli_credential:
@@ -508,7 +518,9 @@ EXAMPLES = r"""
     dnac_verify: "{{ dnac_verify }}"
     dnac_debug: "{{ dnac_debug }}"
     dnac_log: True
+    dnac_log_level: "{{ dnac_log_level }}"
     state: merged
+    config_verify: True
     config:
     - global_credential_details:
         cli_credential:
@@ -585,7 +597,9 @@ EXAMPLES = r"""
     dnac_verify: "{{ dnac_verify }}"
     dnac_debug: "{{ dnac_debug }}"
     dnac_log: True
+    dnac_log_level: "{{ dnac_log_level }}"
     state: merged
+    config_verify: True
     config:
     - global_credential_details:
         cli_credential:
@@ -635,7 +649,9 @@ EXAMPLES = r"""
     dnac_verify: "{{ dnac_verify }}"
     dnac_debug: "{{ dnac_debug }}"
     dnac_log: True
+    dnac_log_level: "{{ dnac_log_level }}"
     state: merged
+    config_verify: True
     config:
     - assign_credentials_to_site:
         cli_credential:
@@ -848,7 +864,7 @@ class DnacCredential(DnacBase):
             return self
 
         self.validated_config = valid_temp
-        self.log(str(valid_temp))
+        self.log("Validated playbook config params " + str(valid_temp), "INFO")
         self.msg = "Successfully validated input from the playbook"
         self.status = "success"
         return self
@@ -871,15 +887,15 @@ class DnacCredential(DnacBase):
                 function='get_site',
                 params={"name": site_name},
             )
-            self.log(str(response))
+            self.log("Response from API get_site" + str(response), "DEBUG")
             if not response:
-                self.log("Failed to get the site id from site name {0}".format(site_name))
+                self.log("Failed to get the site id from site name {0}".format(site_name), "ERROR")
                 return None
 
             _id = response.get("response")[0].get("id")
-            self.log("Site ID for the site name {0}".format(site_name) + str(_id))
+            self.log("Site ID for the site name {0}".format(site_name) + str(_id), "INFO")
         except Exception as exec:
-            self.log("Error while getting site_id from the site_name" + str(exec))
+            self.log("Error while getting site_id from the site_name" + str(exec), "CRITICAL")
             return None
 
         return _id
@@ -901,9 +917,9 @@ class DnacCredential(DnacBase):
                 function='get_all_global_credentials_v2',
             )
             global_credentials = global_credentials.get("response")
-            self.log("All Global Device Credentials Details " + str(global_credentials))
+            self.log("All Global Device Credentials Details " + str(global_credentials), "DEBUG")
         except Exception as exec:
-            self.log("Error while getting global device credentials: " + str(exec))
+            self.log("Error while getting global device credentials: " + str(exec), "CRITICAL")
             return None
 
         return global_credentials
@@ -1452,7 +1468,8 @@ class DnacCredential(DnacBase):
             snmpV3 = self.get_snmpV3_params(snmpV3Details)
             self.have.get("globalCredential").update({"snmpV3": snmpV3})
 
-        self.log("Global Device Credential Details " + str(self.have.get("globalCredential")))
+        self.log("Global Device Credential Details " +
+                 str(self.have.get("globalCredential")), "DEBUG")
         self.msg = "Collected the Global Device Credential Details from the Cisco DNA Center"
         self.status = "success"
         return self
@@ -1476,8 +1493,7 @@ class DnacCredential(DnacBase):
             CredentialDetails = config.get("global_credential_details")
             self.get_have_device_credentials(CredentialDetails).check_return_status()
 
-        self.log("Credentials and Credentials Assigned to Site Details in Cisco DNA Center " +
-                 str(self.have))
+        self.log("Current State (have): " + str(self.have), "INFO")
         self.msg = "Successfully retrieved the details from the Cisco DNA Center"
         self.status = "success"
         return self
@@ -1663,7 +1679,8 @@ class DnacCredential(DnacBase):
             values = ["password", "description", "username", "id", "port"]
             have_httpsRead = self.have.get("globalCredential").get("httpsRead")
             for item in httpsRead:
-                self.log(str(self.have.get("globalCredential")))
+                self.log("Global Credentials Details:" +
+                         str(self.have.get("globalCredential")), "DEBUG")
                 if not have_httpsRead or have_httpsRead[have_httpsread_ptr] is None:
                     if want.get("want_create").get("httpsRead") is None:
                         want.get("want_create").update({"httpsRead": []})
@@ -1812,7 +1829,8 @@ class DnacCredential(DnacBase):
                             self.msg = "auth_password length should be greater than 8"
                             self.status = "failed"
                             return self
-                        self.log(str(create_credential[create_snmpv3_ptr].get("snmpMode")))
+                        self.log("snmpMode: " + str(create_credential[create_snmpv3_ptr]
+                                                    .get("snmpMode")), "DEBUG")
                     if create_credential[create_snmpv3_ptr].get("snmpMode") == "AUTHPRIV":
                         privs = ["privacy_password", "privacy_type"]
                         key = {
@@ -2115,7 +2133,7 @@ class DnacCredential(DnacBase):
                     self.status = "failed"
                     return self
             want.get("assign_credentials").update({"snmpV3Id": snmpV3Detail.get("id")})
-        self.log("Assign Credentials to Site playbook values " + str(want))
+        self.log("Desired State (want): " + str(want), "INFO")
         self.want.update(want)
         self.msg = "Collected the Credentials needed to be assigned from the Cisco DNA Center"
         self.status = "success"
@@ -2144,7 +2162,7 @@ class DnacCredential(DnacBase):
             AssignCredentials = config.get("assign_credentials_to_site")
             self.get_want_assign_credentials(AssignCredentials).check_return_status()
 
-        self.log("User details from the playbook " + str(self.want))
+        self.log("Desired State (want): " + str(self.want), "INFO")
         self.msg = "Successfully retrieved details from the playbook"
         self.status = "success"
         return self
@@ -2174,16 +2192,16 @@ class DnacCredential(DnacBase):
             return self
 
         credential_params = want_create
-        self.log("Create Global Credential API input - " + str(credential_params))
+        self.log("Create Global Credential API input - " + str(credential_params), "DEBUG")
         response = self.dnac._exec(
             family="discovery",
             function='create_global_credentials_v2',
             params=credential_params,
         )
-        self.log(str(response))
+        self.log("Response from API create_global_credentials_v2: " + str(response), "DEBUG")
         validation_string = "global credential addition performed"
         self.check_task_response_status(response, validation_string).check_return_status()
-        self.log("Global Credential Created Successfully")
+        self.log("Global Credential Created Successfully", "INFO")
         result_global_credential.update({
             "Creation": {
                 "response": credential_params,
@@ -2226,7 +2244,7 @@ class DnacCredential(DnacBase):
         values = ["cliCredential", "snmpV2cRead", "snmpV2cWrite",
                   "httpsRead", "httpsWrite", "snmpV3"]
         final_response = []
-        self.log(str(want_update))
+        self.log("Desired State for Updation" + str(want_update), "DEBUG")
         while flag:
             flag = False
             credential_params = {}
@@ -2242,11 +2260,11 @@ class DnacCredential(DnacBase):
                     function='update_global_credentials_v2',
                     params=credential_params,
                 )
-                self.log(str(response))
+                self.log("Response for API update_global_credentials_v2: " + str(response), "DEBUG")
                 validation_string = "global credential update performed"
                 self.check_task_response_status(response, validation_string).check_return_status()
-        self.log("Update Device Credential API input - " + str(final_response))
-        self.log("Global Device Credential Updated Successfully")
+        self.log("Update Device Credential API input: " + str(final_response), "DEBUG")
+        self.log("Global Device Credential Updated Successfully", "INFO")
         result_global_credential.update({
             "Updation": {
                 "response": final_response,
@@ -2273,7 +2291,7 @@ class DnacCredential(DnacBase):
         result_assign_credential = self.result.get("response")[0].get("assignCredential")
         credential_params = self.want.get("assign_credentials")
         final_response = []
-        self.log("Assign Device Credential to site API input - " + str(credential_params))
+        self.log("Assign Device Credential to site API input: " + str(credential_params), "DEBUG")
         if not credential_params:
             result_assign_credential.update({
                 "No Assign Credentials": {
@@ -2294,11 +2312,12 @@ class DnacCredential(DnacBase):
                 function='assign_device_credential_to_site_v2',
                 params=credential_params,
             )
-            self.log(str(response))
+            self.log("Response for API assign_device_credential_to_site_v2: " +
+                     str(response), "DEBUG")
             validation_string = "desired common settings operation successful"
             self.check_task_response_status(response, validation_string).check_return_status()
-        self.log("Device Credential Assigned to site is Successfully")
-        self.log(str(final_response))
+        self.log("Device Credential Assigned to site is Successfully", "INFO")
+        self.log("Desired State for Assign Credentials to a Site: " + str(final_response), "DEBUG")
         result_assign_credential.update({
             "Assign Credentials": {
                 "response": final_response,
@@ -2349,7 +2368,7 @@ class DnacCredential(DnacBase):
         result_global_credential = self.result.get("response")[0].get("globalCredential")
         have_values = self.have.get("globalCredential")
         final_response = {}
-        self.log(str(have_values))
+        self.log("Global Devices to be Deleted: " + str(have_values), "DEBUG")
         credential_mapping = {
             "cliCredential": "cli_credential",
             "snmpV2cRead": "snmp_v2c_read",
@@ -2363,9 +2382,9 @@ class DnacCredential(DnacBase):
             final_response.update({item: []})
             for value in have_values.get(item):
                 if value is None:
-                    self.log(str(item))
+                    self.log("Credential Name: " + str(item), "DEBUG")
                     self.log(str(config.get("global_credential_details")
-                                 .get(credential_mapping.get(item))))
+                                 .get(credential_mapping.get(item))), "DEBUG")
                     final_response.get(item).append(
                         str(config.get("global_credential_details")
                             .get(credential_mapping.get(item))[config_itr]) + " is not found."
@@ -2377,14 +2396,14 @@ class DnacCredential(DnacBase):
                     function="delete_global_credential_v2",
                     params={"id": _id},
                 )
-                self.log(str(response))
+                self.log("Response for API delete_global_credential_v2: " + str(response), "DEBUG")
                 validation_string = "global credential deleted successfully"
                 self.check_task_response_status(response, validation_string).check_return_status()
                 final_response.get(item).append(_id)
                 config_itr = config_itr + 1
 
-        self.log("Delete Device Credential API input - " + str(final_response))
-        self.log("Global Device Credential Deleted Successfully")
+        self.log("Delete Device Credential API input: " + str(final_response), "DEBUG")
+        self.log("Global Device Credential Deleted Successfully", "INFO")
         result_global_credential.update({
             "Deletion": {
                 "response": final_response,
@@ -2425,11 +2444,11 @@ class DnacCredential(DnacBase):
             self
         """
 
-        self.log(str("Entered the verify function."))
+        self.log(str("Entered the verify function."), "DEBUG")
         self.get_have(config)
         self.get_want(config)
-        self.log("DNAC retrieved details: " + str(self.have))
-        self.log("Playbook details: " + str(self.want))
+        self.log("Current State (have): " + str(self.have), "INFO")
+        self.log("Desired State (want): " + str(self.want), "INFO")
 
         if config.get("global_credential_details") is not None:
             if self.want.get("want_create"):
@@ -2461,11 +2480,11 @@ class DnacCredential(DnacBase):
                                 self.status = "failed"
                                 return self
 
-            self.log("Successfully validated Global Device Credential")
+            self.log("Successfully validated Global Device Credential", "INFO")
             self.result.get("response")[0].get("globalCredential").update({"Validation": "Success"})
 
         if config.get("assign_credentials_to_site") is not None:
-            self.log("Successfully validated the Assign Device Credential to site")
+            self.log("Successfully validated the Assign Device Credential to Site", "INFO")
             self.result.get("response")[0].get("assignCredential").update({"Validation": "Success"})
 
         self.msg = "Successfully validated the Global Device Credential and \
@@ -2487,8 +2506,8 @@ class DnacCredential(DnacBase):
         """
 
         self.get_have(config)
-        self.log("DNAC retrieved details: " + str(self.have))
-        self.log("Playbook details: " + str(self.want))
+        self.log("Current State (have): " + str(self.have), "INFO")
+        self.log("Desired State (want): " + str(self.want), "INFO")
 
         if config.get("global_credential_details") is not None:
             have_global_credential = self.have.get("globalCredential")
@@ -2502,7 +2521,7 @@ class DnacCredential(DnacBase):
                         self.status = "failed"
                         return self
 
-            self.log("Successfully validated absence of Global Device Credential.")
+            self.log("Successfully validated absence of Global Device Credential.", "INFO")
             self.result.get("response")[0].get("globalCredential").update({"Validation": "Success"})
 
         self.msg = "Successfully validated the absence of Global Device Credential."
@@ -2538,6 +2557,7 @@ def main():
         "dnac_version": {"type": 'str', "default": '2.2.3.3'},
         "dnac_debug": {"type": 'bool', "default": False},
         "dnac_log": {"type": 'bool', "default": False},
+        "dnac_log_level": {"type": "str", "default": "INFO"},
         "config_verify": {"type": 'bool', "default": False},
         "config": {"type": 'list', "required": True, "elements": 'dict'},
         "state": {"default": 'merged', "choices": ['merged', 'deleted']},
