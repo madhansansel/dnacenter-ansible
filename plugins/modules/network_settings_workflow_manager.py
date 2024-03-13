@@ -1057,7 +1057,7 @@ class NetworkSettings(DnacBase):
         response = self.dnac._exec(
             family="network_settings",
             function="get_reserve_ip_subpool",
-            params={"siteId": site_id}
+            params={"site_id": site_id}
         )
         if not isinstance(response, dict):
             reserve_pool.update({"success": False})
