@@ -329,7 +329,8 @@ class DnacBase():
 
         task_id = response.get("taskId")
         start_time = time.time()
-        while ((current_time := time.time()) - start_time) <= 5:
+        while (time.time() - start_time) <= 5:
+            current_time = time.time()
             task_details = self.get_task_details(task_id)
             self.log('Getting task details from task ID {0}: {1}'.format(task_id, task_details), "DEBUG")
             if task_details.get("isError") is True:
@@ -403,7 +404,8 @@ class DnacBase():
 
         executionid = response.get("executionId")
         start_time = time.time()
-        while ((current_time := time.time()) - start_time) <= 5:
+        while (time.time() - start_time) <= 5:
+            current_time = time.time()
             execution_details = self.get_execution_details(executionid)
             if execution_details.get("status") == "SUCCESS":
                 self.result['changed'] = True
