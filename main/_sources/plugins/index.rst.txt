@@ -189,6 +189,7 @@ Modules
 * :ref:`event_syslog_config_info module <ansible_collections.cisco.dnac.event_syslog_config_info_module>` -- Information module for Event Syslog Config
 * :ref:`event_webhook_create module <ansible_collections.cisco.dnac.event_webhook_create_module>` -- Resource module for Event Webhook Create
 * :ref:`event_webhook_update module <ansible_collections.cisco.dnac.event_webhook_update_module>` -- Resource module for Event Webhook Update
+* :ref:`events_and_notifications_workflow_manager module <ansible_collections.cisco.dnac.events_and_notifications_workflow_manager_module>` -- Configure various types of destinations to deliver event notifications from Cisco Catalyst Center Platform.
 * :ref:`execute_suggested_actions_commands module <ansible_collections.cisco.dnac.execute_suggested_actions_commands_module>` -- Resource module for Execute Suggested Actions Commands
 * :ref:`file_import module <ansible_collections.cisco.dnac.file_import_module>` -- Resource module for File Import
 * :ref:`file_info module <ansible_collections.cisco.dnac.file_info_module>` -- Information module for File
@@ -596,6 +597,7 @@ Modules
     event_syslog_config_info_module
     event_webhook_create_module
     event_webhook_update_module
+    events_and_notifications_workflow_manager_module
     execute_suggested_actions_commands_module
     file_import_module
     file_info_module
