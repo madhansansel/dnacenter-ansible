@@ -239,6 +239,7 @@ Modules
 * :ref:`license_virtual_account_change module <ansible_collections.cisco.dnac.license_virtual_account_change_module>` -- Resource module for License Virtual Account Change
 * :ref:`license_virtual_account_details_info module <ansible_collections.cisco.dnac.license_virtual_account_details_info_module>` -- Information module for License Virtual Account Details
 * :ref:`netconf_credential module <ansible_collections.cisco.dnac.netconf_credential_module>` -- Resource module for Netconf Credential
+* :ref:`network_compliance_workflow_manager module <ansible_collections.cisco.dnac.network_compliance_workflow_manager_module>` -- Network Compliance module for managing network compliance tasks on reachable device(s) in Cisco Catalyst Center.
 * :ref:`network_create module <ansible_collections.cisco.dnac.network_create_module>` -- Resource module for Network Create
 * :ref:`network_device module <ansible_collections.cisco.dnac.network_device_module>` -- Resource module for Network Device
 * :ref:`network_device_by_ip_info module <ansible_collections.cisco.dnac.network_device_by_ip_info_module>` -- Information module for Network Device By Ip
@@ -647,6 +648,7 @@ Modules
     license_virtual_account_change_module
     license_virtual_account_details_info_module
     netconf_credential_module
+    network_compliance_workflow_manager_module
     network_create_module
     network_device_module
     network_device_by_ip_info_module
