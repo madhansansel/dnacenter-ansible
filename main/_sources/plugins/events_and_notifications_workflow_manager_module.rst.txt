@@ -42,7 +42,7 @@ cisco.dnac.events_and_notifications_workflow_manager module -- Configure various
 .. Collection note
 
 .. note::
-    This module is part of the `cisco.dnac collection <https://galaxy.ansible.com/cisco/dnac>`_ (version 6.13.3).
+    This module is part of the `cisco.dnac collection <https://galaxy.ansible.com/cisco/dnac>`_ (version 6.15.0).
 
     To install it, use: :code:`ansible-galaxy collection install cisco.dnac`.
     You need further requirements to be able to use this module,
@@ -52,6 +52,9 @@ cisco.dnac.events_and_notifications_workflow_manager module -- Configure various
 
 .. version_added
 
+.. rst-class:: ansible-version-added
+
+New in cisco.dnac 6.14.0
 
 .. contents::
    :local:
@@ -86,7 +89,7 @@ Requirements
 ------------
 The below requirements are needed on the host that executes this module.
 
-- dnacentersdk \>= 2.5.5
+- dnacentersdk \>= 2.7.1
 - python \>= 3.5
 
 
@@ -170,7 +173,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Configure settings to send out emails from Cisco Catalyst Center. Also we can create or configure email destination in Cisco Catalyst Center only once then later we can just modify it.
+      Configure settings to send out emails from Cisco Catalyst Center. Also we can create or configure email destination in Cisco Catalyst Center only once then later we can just modify it. This one is just used to configure the Primary and Secondary SMTP server while configuring the email destination. It's not related to email event subscription notification.
 
 
       .. raw:: html
@@ -1570,7 +1573,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Port number that the syslog server listens on, which must fall within the range of 1 to 65535.
+      Hostname or IP address of the Syslog server.
 
 
       .. raw:: html
@@ -2681,6 +2684,8 @@ Notes
 -----
 
 .. note::
+   - Configuring the webhook destination with headers now supports starting from dnacentersdk version 2.9.1 onwards. This enhancement is in alignment with Catalyst Center Release 2.3.7.5.
+   - Configuring the SNMP destination now supports starting from dnacentersdk version 2.9.1 onwards. This enhancement is in alignment with Catalyst Center Release 2.3.7.5.
    - SDK Method used are events.Events.get\_syslog\_destination, events.Events.create\_syslog\_destination, events.Events.update\_syslog\_destination, events.Events.get\_snmp\_destination, events.Events.create\_snmp\_destination, events.Events.update\_snmp\_destination, events.Events.get\_webhook\_destination, events.Events.create\_webhook\_destination, events.Events.update\_webhook\_destination, events.Events.get\_email\_destination, events.Events.create\_email\_destination, events.Events.get\_status\_api\_for\_events, events.Events.get\_all\_itsm\_integration\_settings, events.Events.get\_itsm\_integration\_setting\_by\_id, events.Events.create\_itsm\_integration\_setting, events.Events.update\_itsm\_integration\_setting, events.Events.delete\_itsm\_integration\_setting
    - Does not support \ :literal:`check\_mode`\ 
    - The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK
