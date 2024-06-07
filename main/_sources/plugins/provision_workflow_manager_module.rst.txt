@@ -1201,8 +1201,8 @@ Notes
 .. note::
    - SDK Methods used are sites.Sites.get\_site, devices.Devices.get\_network\_device\_by\_ip, task.Task.get\_task\_by\_id, sda.Sda.get\_provisioned\_wired\_device, sda.Sda.re\_provision\_wired\_device, sda.Sda.provision\_wired\_device, wireless.Wireless.provision
    - Paths used are get /dna/intent/api/v1/site get /dna/intent/api/v1/network-device/ip-address/{ipAddress} get /dna/intent/api/v1/task/{taskId} get /dna/intent/api/v1/business/sda/provision-device put /dna/intent/api/v1/business/sda/provision-device post /dna/intent/api/v1/business/sda/provision-device post /dna/intent/api/v1/wireless/provision
-   - Added 'provisioning' option in v6.15.1
-   - Added provisioning and reprovisioning of wireless devices in v6.15.1
+   - Added 'provisioning' option in v6.16.0
+   - Added provisioning and reprovisioning of wireless devices in v6.16.0
    - Does not support \ :literal:`check\_mode`\ 
    - The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK
    - The parameters starting with dnac\_ are used by the Cisco Catalyst Center Python SDK to establish the connection

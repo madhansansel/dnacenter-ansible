@@ -887,8 +887,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-provisio
 <ul class="simple">
 <li><p>SDK Methods used are sites.Sites.get_site, devices.Devices.get_network_device_by_ip, task.Task.get_task_by_id, sda.Sda.get_provisioned_wired_device, sda.Sda.re_provision_wired_device, sda.Sda.provision_wired_device, wireless.Wireless.provision</p></li>
 <li><p>Paths used are get /dna/intent/api/v1/site get /dna/intent/api/v1/network-device/ip-address/{ipAddress} get /dna/intent/api/v1/task/{taskId} get /dna/intent/api/v1/business/sda/provision-device put /dna/intent/api/v1/business/sda/provision-device post /dna/intent/api/v1/business/sda/provision-device post /dna/intent/api/v1/wireless/provision</p></li>
-<li><p>Added 'provisioning' option in v6.15.1</p></li>
-<li><p>Added provisioning and reprovisioning of wireless devices in v6.15.1</p></li>
+<li><p>Added 'provisioning' option in v6.16.0</p></li>
+<li><p>Added provisioning and reprovisioning of wireless devices in v6.16.0</p></li>
 <li><p>Does not support <code class="docutils literal notranslate"><span class="pre">check_mode</span></code></p></li>
 <li><p>The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK</p></li>
 <li><p>The parameters starting with dnac_ are used by the Cisco Catalyst Center Python SDK to establish the connection</p></li>
