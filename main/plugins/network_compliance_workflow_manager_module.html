@@ -844,8 +844,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-network-
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>SDK Methods used are compliance.Compliance.run_compliance compliance.Compliance.commit_device_configuration task.Task.get_task_by_id task.Task.get_task_tree compliance.Compliance.get_compliance_detail</p></li>
-<li><p>Paths used are post /dna/intent/api/v1/compliance/ post /dna/intent/api/v1/network-device-config/write-memory get /dna/intent/api/v1/task/{taskId} get /dna/intent/api/v1/task/{taskId}/tree get /dna/intent/api/v1/compliance/detail</p></li>
+<li><p>SDK Methods used are compliance.Compliance.run_compliance compliance.Compliance.commit_device_configuration task.Task.get_task_by_id task.Task.get_task_tree compliance.Compliance.get_compliance_detail compliance.Compliance.compliance_details_of_device</p></li>
+<li><p>Paths used are post /dna/intent/api/v1/compliance/ post /dna/intent/api/v1/network-device-config/write-memory get /dna/intent/api/v1/task/{taskId} get /dna/intent/api/v1/task/{taskId}/tree get /dna/intent/api/v1/compliance/detail get /dna/intent/api/v1/compliance/${deviceUuid}/detail</p></li>
 <li><p>Does not support <code class="docutils literal notranslate"><span class="pre">check_mode</span></code></p></li>
 <li><p>The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK</p></li>
 <li><p>The parameters starting with dnac_ are used by the Cisco Catalyst Center Python SDK to establish the connection</p></li>

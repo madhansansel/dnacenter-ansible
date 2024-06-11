@@ -995,8 +995,8 @@ Notes
 -----
 
 .. note::
-   - SDK Methods used are compliance.Compliance.run\_compliance compliance.Compliance.commit\_device\_configuration task.Task.get\_task\_by\_id task.Task.get\_task\_tree compliance.Compliance.get\_compliance\_detail
-   - Paths used are post /dna/intent/api/v1/compliance/ post /dna/intent/api/v1/network-device-config/write-memory get /dna/intent/api/v1/task/{taskId} get /dna/intent/api/v1/task/{taskId}/tree get /dna/intent/api/v1/compliance/detail
+   - SDK Methods used are compliance.Compliance.run\_compliance compliance.Compliance.commit\_device\_configuration task.Task.get\_task\_by\_id task.Task.get\_task\_tree compliance.Compliance.get\_compliance\_detail compliance.Compliance.compliance\_details\_of\_device
+   - Paths used are post /dna/intent/api/v1/compliance/ post /dna/intent/api/v1/network-device-config/write-memory get /dna/intent/api/v1/task/{taskId} get /dna/intent/api/v1/task/{taskId}/tree get /dna/intent/api/v1/compliance/detail get /dna/intent/api/v1/compliance/${deviceUuid}/detail
    - Does not support \ :literal:`check\_mode`\ 
    - The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK
    - The parameters starting with dnac\_ are used by the Cisco Catalyst Center Python SDK to establish the connection
