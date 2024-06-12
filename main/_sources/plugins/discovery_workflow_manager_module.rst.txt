@@ -897,17 +897,17 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-config/discovery_specific_credentials/snmp_v2_read_credential/desc"></div>
+        <div class="ansibleOptionAnchor" id="parameter-config/discovery_specific_credentials/snmp_v2_read_credential/description"></div>
 
-      .. _ansible_collections.cisco.dnac.discovery_workflow_manager_module__parameter-config/discovery_specific_credentials/snmp_v2_read_credential/desc:
+      .. _ansible_collections.cisco.dnac.discovery_workflow_manager_module__parameter-config/discovery_specific_credentials/snmp_v2_read_credential/description:
 
       .. rst-class:: ansible-option-title
 
-      **desc**
+      **description**
 
       .. raw:: html
 
-        <a class="ansibleOptionLink" href="#parameter-config/discovery_specific_credentials/snmp_v2_read_credential/desc" title="Permalink to this option"></a>
+        <a class="ansibleOptionLink" href="#parameter-config/discovery_specific_credentials/snmp_v2_read_credential/description" title="Permalink to this option"></a>
 
       .. rst-class:: ansible-option-type-line
 
@@ -1002,17 +1002,17 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-config/discovery_specific_credentials/snmp_v2_write_credential/desc"></div>
+        <div class="ansibleOptionAnchor" id="parameter-config/discovery_specific_credentials/snmp_v2_write_credential/description"></div>
 
-      .. _ansible_collections.cisco.dnac.discovery_workflow_manager_module__parameter-config/discovery_specific_credentials/snmp_v2_write_credential/desc:
+      .. _ansible_collections.cisco.dnac.discovery_workflow_manager_module__parameter-config/discovery_specific_credentials/snmp_v2_write_credential/description:
 
       .. rst-class:: ansible-option-title
 
-      **desc**
+      **description**
 
       .. raw:: html
 
-        <a class="ansibleOptionLink" href="#parameter-config/discovery_specific_credentials/snmp_v2_write_credential/desc" title="Permalink to this option"></a>
+        <a class="ansibleOptionLink" href="#parameter-config/discovery_specific_credentials/snmp_v2_write_credential/description" title="Permalink to this option"></a>
 
       .. rst-class:: ansible-option-type-line
 
@@ -3137,10 +3137,10 @@ Examples
                     port: 443
                     secure: True
                 snmp_v2_read_credential:
-                    desc: snmp_v2-new
+                    description: snmp_v2-new
                     community: Cisco123
                 snmp_v2_write_credential:
-                    desc: snmp_v2-new
+                    description: snmp_v2-new
                     community: Cisco123
                 snmp_v3_credential:
                     username: v3Public2
@@ -3211,10 +3211,10 @@ Examples
                     port: 443
                     secure: True
                 snmp_v2_read_credential:
-                    desc: snmp_v2-new
+                    description: snmp_v2-new
                     community: Cisco123
                 snmp_v2_write_credential:
-                    desc: snmp_v2-new
+                    description: snmp_v2-new
                     community: Cisco123
                 snmp_v3_credential:
                     username: v3Public2
