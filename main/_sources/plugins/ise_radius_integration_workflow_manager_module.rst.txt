@@ -771,7 +771,7 @@ Parameters
 
       Indicates the sleep time after initiating the Cisco ISE integration process.
 
-      Maximum sleep time should be less or equal to 60 seconds.
+      Maximum sleep time should be less or equal to 120 seconds.
 
 
       .. rst-class:: ansible-option-line
