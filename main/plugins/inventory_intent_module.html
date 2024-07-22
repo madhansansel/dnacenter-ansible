@@ -689,7 +689,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-inventor
 <div class="ansibleOptionAnchor" id="parameter-config/credential_update"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-inventory-intent-module-parameter-config-credential-update"><strong>credential_update</strong></p>
 <a class="ansibleOptionLink" href="#parameter-config/credential_update" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Make this as true needed for the updation of device credentials and other device details.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Set this to 'True' to update device credentials and other device details. When this parameter is 'True', ensure that the devices are present in Cisco Catalyst Center; only then can update operations be performed on the respective devices. If the parameter is 'True' and any device is not present, the module will attempt to add it.  If required parameters are missing during this addition, the module will fail and stop execution, preventing update operations for devices that are already present.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><a href="#id9"><span class="problematic" id="id10">:ansible-option-choices-entry-default:`false`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
