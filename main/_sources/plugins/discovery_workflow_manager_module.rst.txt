@@ -2068,7 +2068,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      List of IP addresses to be discovered. For CDP/LLDP/SINGLE based discovery, we should pass a list with single element like - 10.197.156.22. For CIDR based discovery, we should pass a list with single element like - 10.197.156.22/22. For RANGE based discovery, we should pass a list with single element and range like - 10.197.156.1-10.197.156.100. For MULTI RANGE based discovery, we should pass a list with multiple elementd like - 10.197.156.1-10.197.156.100 and in next line - 10.197.157.1-10.197.157.100. Maximum of 8 IP address ranges are allowed.
+      List of IP addresses to be discovered. For CDP/LLDP/SINGLE based discovery, we should pass a list with single element like - 10.197.156.22. For CIDR based discovery, we should pass a list with single element like - 10.197.156.22/22. For RANGE based discovery, we should pass a list with single element and range like - 10.197.156.1-10.197.156.100. For MULTI RANGE based discovery, we should pass a list with multiple elements like - 10.197.156.1-10.197.156.100 and in next line - 10.197.157.1-10.197.157.100. Maximum of 8 IP address ranges are allowed.
 
 
       .. raw:: html
