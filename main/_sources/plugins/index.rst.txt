@@ -522,6 +522,7 @@ Modules
 * :ref:`user module <ansible_collections.cisco.dnac.user_module>` -- Resource module for User
 * :ref:`user_enrichment_details_info module <ansible_collections.cisco.dnac.user_enrichment_details_info_module>` -- Information module for User Enrichment Details
 * :ref:`user_info module <ansible_collections.cisco.dnac.user_info_module>` -- Information module for User
+* :ref:`user_role_workflow_manager module <ansible_collections.cisco.dnac.user_role_workflow_manager_module>` -- Resource module for managing users and roles in Cisco Catalyst Center.
 * :ref:`users_external_authentication module <ansible_collections.cisco.dnac.users_external_authentication_module>` -- Resource module for Users External Authentication
 * :ref:`users_external_authentication_info module <ansible_collections.cisco.dnac.users_external_authentication_info_module>` -- Information module for Users External Authentication
 * :ref:`users_external_servers_aaa_attribute module <ansible_collections.cisco.dnac.users_external_servers_aaa_attribute_module>` -- Resource module for Users External Servers Aaa Attribute
@@ -1013,6 +1014,7 @@ Modules
     user_module
     user_enrichment_details_info_module
     user_info_module
+    user_role_workflow_manager_module
     users_external_authentication_module
     users_external_authentication_info_module
     users_external_servers_aaa_attribute_module
