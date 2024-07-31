@@ -380,6 +380,7 @@ Modules
 * :ref:`reserve_ip_subpool_delete module <ansible_collections.cisco.dnac.reserve_ip_subpool_delete_module>` -- Resource module for Reserve Ip Subpool Delete
 * :ref:`reserve_ip_subpool_info module <ansible_collections.cisco.dnac.reserve_ip_subpool_info_module>` -- Information module for Reserve Ip Subpool
 * :ref:`reserve_ip_subpool_update module <ansible_collections.cisco.dnac.reserve_ip_subpool_update_module>` -- Resource module for Reserve Ip Subpool Update
+* :ref:`rma_workflow_manager module <ansible_collections.cisco.dnac.rma_workflow_manager_module>` -- Manage device replacement workflows in Cisco Catalyst Center.
 * :ref:`role_permissions_info module <ansible_collections.cisco.dnac.role_permissions_info_module>` -- Information module for Role Permissions
 * :ref:`roles module <ansible_collections.cisco.dnac.roles_module>` -- Resource module for Roles
 * :ref:`roles_info module <ansible_collections.cisco.dnac.roles_info_module>` -- Information module for Roles
@@ -872,6 +873,7 @@ Modules
     reserve_ip_subpool_delete_module
     reserve_ip_subpool_info_module
     reserve_ip_subpool_update_module
+    rma_workflow_manager_module
     role_permissions_info_module
     roles_module
     roles_info_module

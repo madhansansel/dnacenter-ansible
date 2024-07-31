@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cisco.dnac.event_subscription_details_email_info module -- Information module for Event Subscription Details Email &mdash; DNACenterAnsibleActions  documentation</title>
+  <title>cisco.dnac.rma_workflow_manager module -- Manage device replacement workflows in Cisco Catalyst Center. &mdash; DNACenterAnsibleActions  documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="../_static/ansible-basic-sphinx-ext.css" />
@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cisco.dnac.event_subscription_details_rest_info module -- Information module for Event Subscription Details Rest" href="event_subscription_details_rest_info_module.html" />
-    <link rel="prev" title="cisco.dnac.event_subscription_count_info module -- Information module for Event Subscription Count" href="event_subscription_count_info_module.html" /> 
+    <link rel="next" title="cisco.dnac.role_permissions_info module -- Information module for Role Permissions" href="role_permissions_info_module.html" />
+    <link rel="prev" title="cisco.dnac.reserve_ip_subpool_update module -- Resource module for Reserve Ip Subpool Update" href="reserve_ip_subpool_update_module.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -179,7 +179,7 @@
 <li class="toctree-l4"><a class="reference internal" href="event_snmp_config_info_module.html">cisco.dnac.event_snmp_config_info module -- Information module for Event Snmp Config</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event_subscription_module.html">cisco.dnac.event_subscription module -- Resource module for Event Subscription</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event_subscription_count_info_module.html">cisco.dnac.event_subscription_count_info module -- Information module for Event Subscription Count</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">cisco.dnac.event_subscription_details_email_info module -- Information module for Event Subscription Details Email</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event_subscription_details_email_info_module.html">cisco.dnac.event_subscription_details_email_info module -- Information module for Event Subscription Details Email</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event_subscription_details_rest_info_module.html">cisco.dnac.event_subscription_details_rest_info module -- Information module for Event Subscription Details Rest</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event_subscription_details_syslog_info_module.html">cisco.dnac.event_subscription_details_syslog_info module -- Information module for Event Subscription Details Syslog</a></li>
 <li class="toctree-l4"><a class="reference internal" href="event_subscription_email_module.html">cisco.dnac.event_subscription_email module -- Resource module for Event Subscription Email</a></li>
@@ -370,7 +370,7 @@
 <li class="toctree-l4"><a class="reference internal" href="reserve_ip_subpool_delete_module.html">cisco.dnac.reserve_ip_subpool_delete module -- Resource module for Reserve Ip Subpool Delete</a></li>
 <li class="toctree-l4"><a class="reference internal" href="reserve_ip_subpool_info_module.html">cisco.dnac.reserve_ip_subpool_info module -- Information module for Reserve Ip Subpool</a></li>
 <li class="toctree-l4"><a class="reference internal" href="reserve_ip_subpool_update_module.html">cisco.dnac.reserve_ip_subpool_update module -- Resource module for Reserve Ip Subpool Update</a></li>
-<li class="toctree-l4"><a class="reference internal" href="rma_workflow_manager_module.html">cisco.dnac.rma_workflow_manager module -- Manage device replacement workflows in Cisco Catalyst Center.</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">cisco.dnac.rma_workflow_manager module -- Manage device replacement workflows in Cisco Catalyst Center.</a></li>
 <li class="toctree-l4"><a class="reference internal" href="role_permissions_info_module.html">cisco.dnac.role_permissions_info module -- Information module for Role Permissions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="roles_module.html">cisco.dnac.roles module -- Resource module for Roles</a></li>
 <li class="toctree-l4"><a class="reference internal" href="roles_info_module.html">cisco.dnac.roles_info module -- Information module for Roles</a></li>
@@ -563,9 +563,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Cisco.Dnac</a></li>
-      <li class="breadcrumb-item active">cisco.dnac.event_subscription_details_email_info module -- Information module for Event Subscription Details Email</li>
+      <li class="breadcrumb-item active">cisco.dnac.rma_workflow_manager module -- Manage device replacement workflows in Cisco Catalyst Center.</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/plugins/event_subscription_details_email_info_module.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/plugins/rma_workflow_manager_module.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -573,49 +573,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module"></span><section id="cisco-dnac-event-subscription-details-email-info-module-information-module-for-event-subscription-details-email">
-<h1>cisco.dnac.event_subscription_details_email_info module -- Information module for Event Subscription Details Email<a class="headerlink" href="#cisco-dnac-event-subscription-details-email-info-module-information-module-for-event-subscription-details-email" title="Permalink to this heading"></a></h1>
+  <span class="target" id="ansible-collections-cisco-dnac-rma-workflow-manager-module"></span><section id="cisco-dnac-rma-workflow-manager-module-manage-device-replacement-workflows-in-cisco-catalyst-center">
+<h1>cisco.dnac.rma_workflow_manager module -- Manage device replacement workflows in Cisco Catalyst Center.<a class="headerlink" href="#cisco-dnac-rma-workflow-manager-module-manage-device-replacement-workflows-in-cisco-catalyst-center" title="Permalink to this heading"></a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This module is part of the <a class="reference external" href="https://galaxy.ansible.com/cisco/dnac">cisco.dnac collection</a> (version 6.17.0).</p>
 <p>To install it, use: <code class="code docutils literal notranslate"><span class="pre">ansible-galaxy</span> <span class="pre">collection</span> <span class="pre">install</span> <span class="pre">cisco.dnac</span></code>.
 You need further requirements to be able to use this module,
-see <a class="reference internal" href="#ansible-collections-cisco-dnac-event-subscription-details-email-info-module-requirements"><span class="std std-ref">Requirements</span></a> for details.</p>
-<p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">cisco.dnac.event_subscription_details_email_info</span></code>.</p>
+see <a class="reference internal" href="#ansible-collections-cisco-dnac-rma-workflow-manager-module-requirements"><span class="std std-ref">Requirements</span></a> for details.</p>
+<p>To use it in a playbook, specify: <code class="code docutils literal notranslate"><span class="pre">cisco.dnac.rma_workflow_manager</span></code>.</p>
 </div>
-<p class="ansible-version-added">New in cisco.dnac 3.1.0</p>
+<p class="ansible-version-added">New in cisco.dnac 6.6.0</p>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#synopsis" id="id21">Synopsis</a></p></li>
-<li><p><a class="reference internal" href="#requirements" id="id22">Requirements</a></p></li>
-<li><p><a class="reference internal" href="#parameters" id="id23">Parameters</a></p></li>
-<li><p><a class="reference internal" href="#notes" id="id24">Notes</a></p></li>
-<li><p><a class="reference internal" href="#see-also" id="id25">See Also</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id26">Examples</a></p></li>
-<li><p><a class="reference internal" href="#return-values" id="id27">Return Values</a></p></li>
+<li><p><a class="reference internal" href="#synopsis" id="id61">Synopsis</a></p></li>
+<li><p><a class="reference internal" href="#requirements" id="id62">Requirements</a></p></li>
+<li><p><a class="reference internal" href="#parameters" id="id63">Parameters</a></p></li>
+<li><p><a class="reference internal" href="#notes" id="id64">Notes</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id65">Examples</a></p></li>
+<li><p><a class="reference internal" href="#return-values" id="id66">Return Values</a></p></li>
 </ul>
 </nav>
 <section id="synopsis">
-<h2><a class="toc-backref" href="#id21" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id61" role="doc-backlink">Synopsis</a><a class="headerlink" href="#synopsis" title="Permalink to this heading"></a></h2>
 <ul class="simple">
-<li><p>Get all Event Subscription Details Email.</p></li>
-<li><p>Gets the list of subscription details for specified connectorType.</p></li>
+<li><p>The purpose of this workflow is to provide a streamlined and efficient process for network administrators, to initiate Return Material Authorization (RMA) requests for faulty network devices. This automation aims to simplify the RMA process, reduce manual effort, and enhance overall operational efficiency.</p></li>
+<li><p>Implement an RMA (Return Material Authorization) workflow within Cisco Catalyst Center, enabling a seamless process for returning and replacing faulty network devices.</p></li>
+<li><p>The RMA workflow facilitates the replacement of routers, switches, and Access Points (APs).</p></li>
+<li><p>Allows administrators to mark devices for replacement and track the entire replacement workflow.</p></li>
+<li><p>For routers and switches, the software image, configuration, and licenses are restored from the failed device to the replacement device, ensuring minimal disruption.</p></li>
+<li><p>For wireless APs, the replacement device is assigned to the same site, provisioned with the primary wireless controller, RF profile, and AP group settings, and placed on the same floor map location in Cisco Catalyst Center as the failed AP.</p></li>
+<li><p>Need to consider the following before doing RMA, - Ensure the software image version of the faulty device is imported into the image repository before initiating the replacement process. - The faulty device must be in an unreachable state to be eligible for RMA. - If the replacement device onboards Cisco Catalyst Center through Plug and Play (PnP), ensure the faulty device is assigned to a user-defined site. - The replacement device must not be in a provisioning state during the initiation of the RMA workflow. - The AP RMA feature supports only like-to-like replacements, meaning the replacement AP must have the same model number and Product ID (PID) as the faulty AP. - The replacement AP must have joined the same Cisco Wireless Controller as the faulty AP. - Cisco Mobility Express APs acting as wireless controllers are not eligible for replacement through this RMA workflow. - Ensure the software image version of the faulty AP is imported into the image repository before initiating the replacement process. - The faulty device must be assigned to a user-defined site if the replacement device onboards Cisco Catalyst Center through Plug and Play (PnP). - The replacement AP must not be in a provisioning state during the initiation of the RMA workflow.</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This module has a corresponding <a class="reference external" href="https://docs.ansible.com/ansible/latest/plugins/action.html#action-plugins" title="(in Ansible v10)"><span class="xref std std-ref">action plugin</span></a>.</p>
-</div>
 </section>
 <section id="requirements">
-<span id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-requirements"></span><h2><a class="toc-backref" href="#id22" role="doc-backlink">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<span id="ansible-collections-cisco-dnac-rma-workflow-manager-module-requirements"></span><h2><a class="toc-backref" href="#id62" role="doc-backlink">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
 <p>The below requirements are needed on the host that executes this module.</p>
 <ul class="simple">
 <li><p>dnacentersdk &gt;= 2.7.1</p></li>
-<li><p>python &gt;= 3.5</p></li>
+<li><p>python &gt;= 3.10</p></li>
 </ul>
 </section>
 <section id="parameters">
-<h2><a class="toc-backref" href="#id23" role="doc-backlink">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id63" role="doc-backlink">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h2>
 <table class="ansible-option-table docutils align-default" style="width: 100%">
 <thead>
 <tr class="row-odd"><th class="head"><p>Parameter</p></th>
@@ -624,127 +624,270 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-event-su
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-dnac_debug"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-dnac-debug"><strong>dnac_debug</strong></p>
-<a class="ansibleOptionLink" href="#parameter-dnac_debug" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<div class="ansibleOptionAnchor" id="parameter-ccc_poll_interval"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-ccc-poll-interval"><strong>ccc_poll_interval</strong></p>
+<a class="ansibleOptionLink" href="#parameter-ccc_poll_interval" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Flag for Cisco DNA Center SDK to enable debugging.</p>
+<td><div class="ansible-option-cell"><p>The interval, in seconds, for polling Cisco Catalyst Center.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id1"><span class="problematic" id="id2">:ansible-option-default:`2`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-config"><strong>config</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span> / <span class="ansible-option-required">required</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>A list of faulty and replacement device details for initiating the RMA workflow.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/faulty_device_ip_address"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-config-faulty-device-ip-address"><strong>faulty_device_ip_address</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/faulty_device_ip_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>The IP address of the faulty device.</dt><dd><p>Example: 204.192.3.40</p>
+</dd>
+</dl>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/faulty_device_name"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-config-faulty-device-name"><strong>faulty_device_name</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/faulty_device_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>The name or hostname of the faulty device.</dt><dd><p>Example: SJ-EN-9300.cisco.local</p>
+</dd>
+</dl>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/faulty_device_serial_number"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-config-faulty-device-serial-number"><strong>faulty_device_serial_number</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/faulty_device_serial_number" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>The serial number of the faulty device.</dt><dd><p>Example: FJC2327U0S2</p>
+</dd>
+</dl>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/replacement_device_ip_address"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-config-replacement-device-ip-address"><strong>replacement_device_ip_address</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/replacement_device_ip_address" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>The IP address of the replacement device.</dt><dd><p>Example: 204.1.2.5</p>
+</dd>
+</dl>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/replacement_device_name"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-config-replacement-device-name"><strong>replacement_device_name</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/replacement_device_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>The name or hostname of the replacement device.</dt><dd><p>Example: SJ-EN-9300.cisco.local</p>
+</dd>
+</dl>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/replacement_device_serial_number"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-config-replacement-device-serial-number"><strong>replacement_device_serial_number</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/replacement_device_serial_number" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>The serial number of the replacement device.</dt><dd><p>Example: FCW2225C020</p>
+</dd>
+</dl>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config_verify"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-config-verify"><strong>config_verify</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config_verify" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Set to True to verify the Cisco Catalyst Center configuration after applying the playbook config.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><a href="#id1"><span class="problematic" id="id2">:ansible-option-choices-entry-default:`false`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><a href="#id3"><span class="problematic" id="id4">:ansible-option-choices-entry:`true`</span></a></p></li>
+<li><p><a href="#id3"><span class="problematic" id="id4">:ansible-option-choices-entry-default:`false`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id5"><span class="problematic" id="id6">:ansible-option-choices-entry:`true`</span></a></p></li>
 </ul>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-dnac_host"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-dnac-host"><strong>dnac_host</strong></p>
-<a class="ansibleOptionLink" href="#parameter-dnac_host" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<div class="ansibleOptionAnchor" id="parameter-dnac_api_task_timeout"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-api-task-timeout"><strong>dnac_api_task_timeout</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_api_task_timeout" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The Cisco DNA Center hostname.</p>
+<td><div class="ansible-option-cell"><p>Defines the timeout in seconds for API calls to retrieve task details. If the task details are not received within this period, the process will end, and a timeout notification will be logged.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id7"><span class="problematic" id="id8">:ansible-option-default:`1200`</span></a></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-dnac_password"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-dnac-password"><strong>dnac_password</strong></p>
-<a class="ansibleOptionLink" href="#parameter-dnac_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-dnac_debug"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-debug"><strong>dnac_debug</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_debug" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The Cisco DNA Center password to authenticate.</p>
+<td><div class="ansible-option-cell"><p>Indicates whether debugging is enabled in the Cisco Catalyst Center SDK.</p>
+<p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
+<ul class="simple">
+<li><p><a href="#id9"><span class="problematic" id="id10">:ansible-option-choices-entry-default:`false`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id11"><span class="problematic" id="id12">:ansible-option-choices-entry:`true`</span></a></p></li>
+</ul>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-dnac_port"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-dnac-port"><strong>dnac_port</strong></p>
-<a class="ansibleOptionLink" href="#parameter-dnac_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+<div class="ansibleOptionAnchor" id="parameter-dnac_host"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-host"><strong>dnac_host</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_host" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The Cisco DNA Center port.</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id5"><span class="problematic" id="id6">:ansible-option-default:`443`</span></a></p>
+<td><div class="ansible-option-cell"><p>The hostname of the Cisco Catalyst Center.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_log"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-log"><strong>dnac_log</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_log" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Flag to enable/disable playbook execution logging.</p>
+<p>When true and dnac_log_file_path is provided, - Create the log file at the execution location with the specified name.</p>
+<p>When true and dnac_log_file_path is not provided, - Create the log file at the execution location with the name 'dnac.log'.</p>
+<p>When false, - Logging is disabled.</p>
+<p>If the log file doesn't exist, - It is created in append or write mode based on the &quot;dnac_log_append&quot; flag.</p>
+<p>If the log file exists, - It is overwritten or appended based on the &quot;dnac_log_append&quot; flag.</p>
+<p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
+<ul class="simple">
+<li><p><a href="#id13"><span class="problematic" id="id14">:ansible-option-choices-entry-default:`false`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id15"><span class="problematic" id="id16">:ansible-option-choices-entry:`true`</span></a></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_log_append"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-log-append"><strong>dnac_log_append</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_log_append" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Determines the mode of the file. Set to True for 'append' mode. Set to False for 'write' mode.</p>
+<p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
+<ul class="simple">
+<li><p><a href="#id17"><span class="problematic" id="id18">:ansible-option-choices-entry:`false`</span></a></p></li>
+<li><p><a href="#id19"><span class="problematic" id="id20">:ansible-option-choices-entry-default:`true`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_log_file_path"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-log-file-path"><strong>dnac_log_file_path</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_log_file_path" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Governs logging. Logs are recorded if dnac_log is True.</p>
+<p>If path is not specified, - When 'dnac_log_append' is True, 'dnac.log' is generated in the current Ansible directory; logs are appended. - When 'dnac_log_append' is False, 'dnac.log' is generated; logs are overwritten.</p>
+<p>If path is specified, - When 'dnac_log_append' is True, the file opens in append mode. - When 'dnac_log_append' is False, the file opens in write (w) mode. - In shared file scenarios, without append mode, content is overwritten after each module execution. - For a shared log file, set append to False for the 1st module (to overwrite); for subsequent modules, set append to True.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id21"><span class="problematic" id="id22">:ansible-option-default:`&quot;dnac.log&quot;`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_log_level"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-log-level"><strong>dnac_log_level</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_log_level" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Sets the threshold for log level. Messages with a level equal to or higher than this will be logged. Levels are listed in order of severity [CRITICAL, ERROR, WARNING, INFO, DEBUG].</p>
+<p>CRITICAL indicates serious errors halting the program. Displays only CRITICAL messages.</p>
+<p>ERROR indicates problems preventing a function. Displays ERROR and CRITICAL messages.</p>
+<p>WARNING indicates potential future issues. Displays WARNING, ERROR, CRITICAL messages.</p>
+<p>INFO tracks normal operation. Displays INFO, WARNING, ERROR, CRITICAL messages.</p>
+<p>DEBUG provides detailed diagnostic info. Displays all log messages.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id23"><span class="problematic" id="id24">:ansible-option-default:`&quot;WARNING&quot;`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_password"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-password"><strong>dnac_password</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_password" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The password for authentication at the Cisco Catalyst Center.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_port"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-port"><strong>dnac_port</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_port" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Specifies the port number associated with the Cisco Catalyst Center.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id25"><span class="problematic" id="id26">:ansible-option-default:`&quot;443&quot;`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_task_poll_interval"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-task-poll-interval"><strong>dnac_task_poll_interval</strong></p>
+<a class="ansibleOptionLink" href="#parameter-dnac_task_poll_interval" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Specifies the interval in seconds between successive calls to the API to retrieve task details.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id27"><span class="problematic" id="id28">:ansible-option-default:`2`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-dnac_username"></div>
-<div class="ansibleOptionAnchor" id="parameter-user"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-user"><span id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-dnac-username"></span><strong>dnac_username</strong></p>
+<div class="ansibleOptionAnchor" id="parameter-user"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-user"><span id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-username"></span><strong>dnac_username</strong></p>
 <a class="ansibleOptionLink" href="#parameter-dnac_username" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-aliases">aliases: user</span></p>
 <p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>The Cisco DNA Center username to authenticate.</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id7"><span class="problematic" id="id8">:ansible-option-default:`&quot;admin&quot;`</span></a></p>
+<td><div class="ansible-option-cell"><p>The username for authentication at the Cisco Catalyst Center.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id29"><span class="problematic" id="id30">:ansible-option-default:`&quot;admin&quot;`</span></a></p>
 </div></td>
 </tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-dnac_verify"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-dnac-verify"><strong>dnac_verify</strong></p>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_verify"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-verify"><strong>dnac_verify</strong></p>
 <a class="ansibleOptionLink" href="#parameter-dnac_verify" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
 </div></td>
 <td><div class="ansible-option-cell"><p>Flag to enable or disable SSL certificate verification.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><a href="#id9"><span class="problematic" id="id10">:ansible-option-choices-entry:`false`</span></a></p></li>
-<li><p><a href="#id11"><span class="problematic" id="id12">:ansible-option-choices-entry-default:`true`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id31"><span class="problematic" id="id32">:ansible-option-choices-entry:`false`</span></a></p></li>
+<li><p><a href="#id33"><span class="problematic" id="id34">:ansible-option-choices-entry-default:`true`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 </ul>
 </div></td>
 </tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-dnac_version"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-dnac-version"><strong>dnac_version</strong></p>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-dnac_version"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-dnac-version"><strong>dnac_version</strong></p>
 <a class="ansibleOptionLink" href="#parameter-dnac_version" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Informs the SDK which version of Cisco DNA Center to use.</p>
-<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id13"><span class="problematic" id="id14">:ansible-option-default:`&quot;2.3.7.6&quot;`</span></a></p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-headers"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-headers"><strong>headers</strong></p>
-<a class="ansibleOptionLink" href="#parameter-headers" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Additional headers.</p>
+<td><div class="ansible-option-cell"><p>Specifies the version of the Cisco Catalyst Center that the SDK should use.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id35"><span class="problematic" id="id36">:ansible-option-default:`&quot;2.2.3.3&quot;`</span></a></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-instanceId"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-instanceid"><strong>instanceId</strong></p>
-<a class="ansibleOptionLink" href="#parameter-instanceId" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-resync_retry_count"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-resync-retry-count"><strong>resync_retry_count</strong></p>
+<a class="ansibleOptionLink" href="#parameter-resync_retry_count" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>InstanceId query parameter. Instance Id of the specific configuration.</p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-limit"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-limit"><strong>limit</strong></p>
-<a class="ansibleOptionLink" href="#parameter-limit" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">float</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Limit query parameter. The number of Email Subscription detail's to limit in the resultset whose default value 10.</p>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-name"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-name"><strong>name</strong></p>
-<a class="ansibleOptionLink" href="#parameter-name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Name query parameter. Name of the specific configuration.</p>
+<td><div class="ansible-option-cell"><p>The number of times to retry resynchronization.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id37"><span class="problematic" id="id38">:ansible-option-default:`1000`</span></a></p>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-offset"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-offset"><strong>offset</strong></p>
-<a class="ansibleOptionLink" href="#parameter-offset" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">float</span></p>
+<div class="ansibleOptionAnchor" id="parameter-resync_retry_interval"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-resync-retry-interval"><strong>resync_retry_interval</strong></p>
+<a class="ansibleOptionLink" href="#parameter-resync_retry_interval" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Offset query parameter. The number of Email Subscription detail's to offset in the resultset whose default value 0.</p>
-</div></td>
-</tr>
-<tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-order"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-order"><strong>order</strong></p>
-<a class="ansibleOptionLink" href="#parameter-order" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>Order query parameter.</p>
-</div></td>
-</tr>
-<tr class="row-odd"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-sortBy"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-sortby"><strong>sortBy</strong></p>
-<a class="ansibleOptionLink" href="#parameter-sortBy" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
-</div></td>
-<td><div class="ansible-option-cell"><p>SortBy query parameter. SortBy field name.</p>
+<td><div class="ansible-option-cell"><p>The interval, in seconds, between resynchronization retries.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id39"><span class="problematic" id="id40">:ansible-option-default:`30`</span></a></p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-validate_response_schema"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-parameter-validate-response-schema"><strong>validate_response_schema</strong></p>
-<a class="ansibleOptionLink" href="#parameter-validate_response_schema" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+<div class="ansibleOptionAnchor" id="parameter-state"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-state"><strong>state</strong></p>
+<a class="ansibleOptionLink" href="#parameter-state" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>Flag for Cisco DNA Center SDK to enable the validation of request bodies against a JSON schema.</p>
+<td><div class="ansible-option-cell"><p>The desired state of the device replacement workflow.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><a href="#id15"><span class="problematic" id="id16">:ansible-option-choices-entry:`false`</span></a></p></li>
-<li><p><a href="#id17"><span class="problematic" id="id18">:ansible-option-choices-entry-default:`true`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id41"><span class="problematic" id="id42">:ansible-option-choices-entry-default:`&quot;merged&quot;`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id43"><span class="problematic" id="id44">:ansible-option-choices-entry:`&quot;deleted&quot;`</span></a></p></li>
+<li><p><a href="#id45"><span class="problematic" id="id46">:ansible-option-choices-entry:`&quot;replaced&quot;`</span></a></p></li>
+</ul>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-timeout_interval"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-timeout-interval"><strong>timeout_interval</strong></p>
+<a class="ansibleOptionLink" href="#parameter-timeout_interval" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>The timeout interval, in seconds, for operations.</p>
+<p class="ansible-option-line"><span class="ansible-option-default-bold">Default:</span> <a href="#id47"><span class="problematic" id="id48">:ansible-option-default:`100`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-validate_response_schema"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-parameter-validate-response-schema"><strong>validate_response_schema</strong></p>
+<a class="ansibleOptionLink" href="#parameter-validate_response_schema" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">boolean</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Flag for Cisco Catalyst Center SDK to enable the validation of request bodies against a JSON schema.</p>
+<p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
+<ul class="simple">
+<li><p><a href="#id49"><span class="problematic" id="id50">:ansible-option-choices-entry:`false`</span></a></p></li>
+<li><p><a href="#id51"><span class="problematic" id="id52">:ansible-option-choices-entry-default:`true`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -752,52 +895,100 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-event-su
 </table>
 </section>
 <section id="notes">
-<h2><a class="toc-backref" href="#id24" role="doc-backlink">Notes</a><a class="headerlink" href="#notes" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id64" role="doc-backlink">Notes</a><a class="headerlink" href="#notes" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>SDK Method used are event_management.EventManagement.get_email_subscription_details,</p></li>
-<li><p>Paths used are get /dna/intent/api/v1/event/subscription-details/email,</p></li>
-<li><p>Supports <code class="docutils literal notranslate"><span class="pre">check_mode</span></code></p></li>
-<li><p>The plugin runs on the control node and does not use any ansible connection plugins, but instead the embedded connection manager from Cisco DNAC SDK</p></li>
-<li><p>The parameters starting with dnac_ are used by the Cisco DNAC Python SDK to establish the connection</p></li>
+<li><p>SDK Method used is - devices.get_device_detail - device_replacement.mark_device_for_replacement - device_replacement.deploy_device_replacement_workflow - device_replacement.unmark_device_for_replacement</p></li>
+<li><p>Path used is - post /dna/intent/api/v1/device-replacement/workflow - put  /dna/intent/api/v1/device-replacement/ - post /dna/intent/api/v1/device-replacement/</p></li>
+<li><p>limitations</p></li>
+<li><p>RMA supports the replacement of similar devices only. For instance, a Cisco Catalyst 3650 switch can only be replaced with another Cisco Catalyst 3650 switch. The platform IDs of the faulty and replacement devices must match. The model number of a Cisco device can be fetched using the `show version` command.</p></li>
+<li><p>RMA supports the replacement of all switches, routers, and Cisco SD-Access devices, except for the following, - Chassis-based Nexus 7700 Series Switches - Devices with embedded wireless controllers - Cisco Wireless Controllers</p></li>
+<li><p>RMA supports devices with an external SCEP broker PKI certificate. The PKI certificate is created and authenticated for the replacement device during the RMA workflow. The PKI certificate of the replaced faulty device must be manually deleted from the certificate server.</p></li>
+<li><p>The RMA workflow supports device replacement only if the following conditions are met, - Faulty and replacement devices must have the same extension cards. - The faulty device must be managed by Catalyst Center with a static IP. (RMA is not supported for devices managed by Catalyst Center with a DHCP IP.) - The number of ports in both devices must not vary due to the extension cards. - The replacement device must be connected to the same port to which the faulty device was connected.</p></li>
+<li><p>Cisco Catalyst Center does not support legacy license deployment.</p></li>
+<li><p>If the software image installed on the faulty device is earlier than Cisco IOS XE 16.8, the same legacy network license must be manually installed on the replacement device.</p></li>
+<li><p>The RMA workflow deregisters the faulty device from Cisco SSM and registers the replacement device with Cisco SSM.</p></li>
+<li><p>Cisco Catalyst Center supports PnP onboarding of the replacement device in a fabric network, except for the following, - The faulty device is connected to an uplink device using multiple interfaces. - LAN automation using an overlapping pool.</p></li>
+<li><p>If the replacement device onboards through PnP-DHCP functionality, ensure the device receives the same IP address after every reload and that the DHCP lease timeout is longer than two hours.</p></li>
+<li><p>Does not support <code class="docutils literal notranslate"><span class="pre">check_mode</span></code></p></li>
+<li><p>The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK</p></li>
+<li><p>The parameters starting with dnac_ are used by the Cisco Catalyst Center Python SDK to establish the connection</p></li>
 </ul>
 </div>
 </section>
-<section id="see-also">
-<h2><a class="toc-backref" href="#id25" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<dl class="simple">
-<dt><a class="reference external" href="https://developer.cisco.com/docs/dna-center/#!get-email-subscription-details">Cisco DNA Center documentation for Event Management GetEmailSubscriptionDetails</a></dt><dd><p>Complete reference of the GetEmailSubscriptionDetails API.</p>
-</dd>
-</dl>
-</div>
-</section>
 <section id="examples">
-<h2><a class="toc-backref" href="#id26" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
-<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Get all Event Subscription Details Email</span>
-<span class="w">  </span><span class="nt">cisco.dnac.event_subscription_details_email_info</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">dnac_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span><span class="nv">dnac_host</span><span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">dnac_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span><span class="nv">dnac_username</span><span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">dnac_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span><span class="nv">dnac_password</span><span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">dnac_verify</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span><span class="nv">dnac_verify</span><span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">dnac_port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span><span class="nv">dnac_port</span><span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">dnac_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span><span class="nv">dnac_version</span><span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">dnac_debug</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span><span class="nv">dnac_debug</span><span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">headers</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span><span class="nv">my_headers</span> <span class="o">|</span> <span class="nf">from_json</span><span class="cp">}}</span><span class="s">&quot;</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">instanceId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">offset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-<span class="w">    </span><span class="nt">limit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
-<span class="w">    </span><span class="nt">sortBy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-<span class="w">    </span><span class="nt">order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<h2><a class="toc-backref" href="#id65" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<div class="highlight-yaml+jinja notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RMA workflow for faulty device replacement using device names</span>
+<span class="w">  </span><span class="nt">cisco.dnac.rma_workflow_manager</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dnac_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_host</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_username</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_verify</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_verify</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_port</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_version</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_debug</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_debug</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">dnac_log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+<span class="w">    </span><span class="nt">config_verify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">resync_retry_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">resync_retry_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">    </span><span class="nt">ccc_poll_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">    </span><span class="nt">timeout_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replaced</span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">faulty_device_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SJ-EN-9300.cisco.local&quot;</span>
+<span class="w">        </span><span class="nt">replacement_device_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SJ-EN-9300.cisco-1.local&quot;</span>
+<span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RMA workflow for faulty device replacement using IP addresses</span>
+<span class="w">  </span><span class="nt">cisco.dnac.rma_workflow_manager</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dnac_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_host</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_username</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_verify</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_verify</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_port</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_version</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_debug</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_debug</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">dnac_log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+<span class="w">    </span><span class="nt">config_verify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">resync_retry_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">resync_retry_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">    </span><span class="nt">ccc_poll_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">    </span><span class="nt">timeout_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replaced</span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">faulty_device_ip_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;204.192.3.40&quot;</span>
+<span class="w">        </span><span class="nt">replacement_device_ip_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;204.1.2.5&quot;</span>
+<span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RMA workflow for faulty device replacement using serial numbers</span>
+<span class="w">  </span><span class="nt">cisco.dnac.rma_workflow_manager</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">dnac_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_host</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_username</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_verify</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_verify</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_port</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_version</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_debug</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_debug</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">    </span><span class="nt">dnac_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">dnac_log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+<span class="w">    </span><span class="nt">config_verify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">resync_retry_count</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">resync_retry_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<span class="w">    </span><span class="nt">ccc_poll_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">    </span><span class="nt">timeout_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">100</span>
+<span class="w">    </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">replaced</span>
+<span class="w">    </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">faulty_device_serial_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;FJC2327U0S2&quot;</span>
+<span class="w">        </span><span class="nt">replacement_device_serial_number</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;FCW2225C020&quot;</span>
 <span class="w">  </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">result</span>
 </pre></div>
 </div>
 </section>
 <section id="return-values">
-<h2><a class="toc-backref" href="#id27" role="doc-backlink">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#id66" role="doc-backlink">Return Values</a><a class="headerlink" href="#return-values" title="Permalink to this heading"></a></h2>
 <p>Common return values are documented <a class="reference external" href="https://docs.ansible.com/ansible/latest/reference_appendices/common_return_values.html#common-return-values" title="(in Ansible v10)"><span class="xref std std-ref">here</span></a>, the following are the fields unique to this module:</p>
 <table class="ansible-option-table docutils align-default" style="width: 100%">
 <thead>
@@ -807,12 +998,39 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-event-su
 </thead>
 <tbody>
 <tr class="row-even"><td><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="return-dnac_response"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-event-subscription-details-email-info-module-return-dnac-response"><strong>dnac_response</strong></p>
-<a class="ansibleOptionLink" href="#return-dnac_response" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=dictionary</span></p>
+<div class="ansibleOptionAnchor" id="return-response_1"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-return-response-1"><strong>response_1</strong></p>
+<a class="ansibleOptionLink" href="#return-response_1" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
-<td><div class="ansible-option-cell"><p>A dictionary or list with the response returned by the Cisco DNAC Python SDK</p>
+<td><div class="ansible-option-cell"><p>Object with API execution details as returned by the Cisco Catalyst Center Python SDK.</p>
 <p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> always</p>
-<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <a href="#id19"><span class="problematic" id="id20">:ansible-rv-sample-value:`&quot;[\\n  {\\n    \\&quot;instanceId\\&quot;: \\&quot;string\\&quot;,\\n    \\&quot;name\\&quot;: \\&quot;string\\&quot;,\\n    \\&quot;description\\&quot;: \\&quot;string\\&quot;,\\n    \\&quot;connectorType\\&quot;: \\&quot;string\\&quot;,\\n    \\&quot;fromEmailAddress\\&quot;: \\&quot;string\\&quot;,\\n    \\&quot;toEmailAddresses\\&quot;: [\\n      \\&quot;string\\&quot;\\n    ],\\n    \\&quot;subject\\&quot;: \\&quot;string\\&quot;\\n  }\\n]\\n&quot;`</span></a></p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <a href="#id53"><span class="problematic" id="id54">:ansible-rv-sample-value:`{&quot;response&quot;: {&quot;taskId&quot;: &quot;string&quot;, &quot;url&quot;: &quot;string&quot;}, &quot;version&quot;: &quot;string&quot;}`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-response_2"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-return-response-2"><strong>response_2</strong></p>
+<a class="ansibleOptionLink" href="#return-response_2" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Object with API execution details as returned by the Cisco Catalyst Center Python SDK.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> always</p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <a href="#id55"><span class="problematic" id="id56">:ansible-rv-sample-value:`{&quot;response&quot;: {&quot;taskId&quot;: &quot;string&quot;, &quot;url&quot;: &quot;string&quot;}, &quot;version&quot;: &quot;string&quot;}`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-response_3"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-return-response-3"><strong>response_3</strong></p>
+<a class="ansibleOptionLink" href="#return-response_3" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Object with API execution details as returned by the Cisco Catalyst Center Python SDK.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> always</p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <a href="#id57"><span class="problematic" id="id58">:ansible-rv-sample-value:`{&quot;response&quot;: {&quot;taskId&quot;: &quot;string&quot;, &quot;url&quot;: &quot;string&quot;}, &quot;version&quot;: &quot;string&quot;}`</span></a></p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="return-response_4"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-rma-workflow-manager-module-return-response-4"><strong>response_4</strong></p>
+<a class="ansibleOptionLink" href="#return-response_4" title="Permalink to this return value"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-cell"><p>Object with API execution details as returned by the Cisco Catalyst Center Python SDK.</p>
+<p class="ansible-option-line"><span class="ansible-option-returned-bold">Returned:</span> always</p>
+<p class="ansible-option-line ansible-option-sample"><span class="ansible-option-sample-bold">Sample:</span> <a href="#id59"><span class="problematic" id="id60">:ansible-rv-sample-value:`{&quot;response&quot;: {&quot;taskId&quot;: &quot;string&quot;, &quot;url&quot;: &quot;string&quot;}, &quot;version&quot;: &quot;string&quot;}`</span></a></p>
 </div></td>
 </tr>
 </tbody>
@@ -820,7 +1038,9 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-event-su
 <section id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>Rafael Campos (&#64;racampos)</p></li>
+<li><p>Trupti A Shetty (&#64;TruptiAShetty)</p></li>
+<li><p>A Mohamed Rafeek (&#64;mohamedrafeek)</p></li>
+<li><p>Madhan Sankaranarayanan (&#64;madhansansel)</p></li>
 </ul>
 </section>
 <section id="collection-links">
@@ -836,8 +1056,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-event-su
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="event_subscription_count_info_module.html" class="btn btn-neutral float-left" title="cisco.dnac.event_subscription_count_info module -- Information module for Event Subscription Count" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="event_subscription_details_rest_info_module.html" class="btn btn-neutral float-right" title="cisco.dnac.event_subscription_details_rest_info module -- Information module for Event Subscription Details Rest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="reserve_ip_subpool_update_module.html" class="btn btn-neutral float-left" title="cisco.dnac.reserve_ip_subpool_update module -- Resource module for Reserve Ip Subpool Update" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="role_permissions_info_module.html" class="btn btn-neutral float-right" title="cisco.dnac.role_permissions_info module -- Information module for Role Permissions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
