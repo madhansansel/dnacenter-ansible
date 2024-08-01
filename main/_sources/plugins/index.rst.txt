@@ -63,6 +63,7 @@ Modules
 ~~~~~~~
 
 * :ref:`accesspoint_configuration_details_by_task_id_info module <ansible_collections.cisco.dnac.accesspoint_configuration_details_by_task_id_info_module>` -- Information module for Accesspoint Configuration Details By Task Id
+* :ref:`accesspoint_workflow_manager module <ansible_collections.cisco.dnac.accesspoint_workflow_manager_module>` -- Automates bulk AP configuration changes.
 * :ref:`app_policy_default_info module <ansible_collections.cisco.dnac.app_policy_default_info_module>` -- Information module for App Policy Default
 * :ref:`app_policy_info module <ansible_collections.cisco.dnac.app_policy_info_module>` -- Information module for App Policy
 * :ref:`app_policy_intent_create module <ansible_collections.cisco.dnac.app_policy_intent_create_module>` -- Resource module for App Policy Intent Create
@@ -556,6 +557,7 @@ Modules
     :hidden:
 
     accesspoint_configuration_details_by_task_id_info_module
+    accesspoint_workflow_manager_module
     app_policy_default_info_module
     app_policy_info_module
     app_policy_intent_create_module
