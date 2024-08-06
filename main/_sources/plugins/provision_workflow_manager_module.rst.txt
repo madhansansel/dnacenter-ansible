@@ -1289,6 +1289,21 @@ Examples
               managed_ap_locations:
                 - Global/USA/RTP/BLD11/BLD11_FLOOR1
 
+    - name: Unprovision a device from a site
+      cisco.dnac.provision_workflow_manager:
+        dnac_host: "{{dnac_host}}"
+        dnac_username: "{{dnac_username}}"
+        dnac_password: "{{dnac_password}}"
+        dnac_verify: "{{dnac_verify}}"
+        dnac_port: "{{dnac_port}}"
+        dnac_version: "{{dnac_version}}"
+        dnac_debug: "{{dnac_debug}}"
+        dnac_log: True
+        state: deleted
+        config_verify: True
+        config:
+            - management_ip_address: 204.1.2.2
+
 
 
 
