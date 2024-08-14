@@ -3047,7 +3047,7 @@ Parameters
 
       The password for the user account, which must adhere to specified complexity requirements.
 
-      Must contain at least one special character, one capital letter, one lowercase letter, and a minimum length of 15 characters.
+      Must contain at least one special character, one capital letter, one lowercase letter, and a minimum length of 8 characters.
 
       Required for creating a new user account.
 
@@ -3128,6 +3128,8 @@ Parameters
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
       The 'username' associated with the user account.
+
+      Required for user create, update and delete operations.
 
 
       .. raw:: html
@@ -3903,7 +3905,7 @@ Examples
         config_verify: True
         dnac_api_task_timeout: 1000
         dnac_task_poll_interval: 1
-        state: merged
+        state: deleted
         config:
           user_details:
             username: "ajithandrewj"
@@ -4058,7 +4060,7 @@ Examples
         config_verify: True
         dnac_api_task_timeout: 1000
         dnac_task_poll_interval: 1
-        state: merged
+        state: deleted
         config:
           role_details:
             - rolename: "role_name"
