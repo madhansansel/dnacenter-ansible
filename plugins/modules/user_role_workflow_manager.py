@@ -1167,17 +1167,20 @@ class UserandRole(DnacBase):
             - The function finds the function definition and parameters, then validates the provided_params.
             - It returns an error message for missing or extra parameters or "No Error" if all is correct.
         """
+        self.log("Starting version_route with parameters - version: {0}, family: {1}, function_key: {2}".format(version, family, function_key), "DEBUG")
         version_dict = None
         function_parameters = None
         missing_params = []
         extra_params = []
         payload = {}
 
+        self.log("Attempting to fetch function definition...", "DEBUG")
         if function_key in self.versions.get("2.3.5.3 - 2.3.7.6 functions", {}).get(family, {}):
             version_dict = self.versions["2.3.5.3 - 2.3.7.6 functions"][family][function_key]
         elif function_key in self.versions.get(version, {}).get(family, {}):
             version_dict = self.versions[version][family][function_key]
 
+        self.log("Attempting to fetch function parameters...", "DEBUG")
         if function_key in self.versions_functions_params.get("2.3.5.3 - 2.3.7.6 function params", {}).get(family, {}):
             function_parameters = self.versions_functions_params['2.3.5.3 - 2.3.7.6 function params'][family][function_key]
         elif function_key in self.versions_functions_params.get(version, {}).get(family, {}):
@@ -1185,9 +1188,11 @@ class UserandRole(DnacBase):
 
         if not version_dict and not function_parameters:
             error_message = "The specified version '{0}' does not have the '{1}' functionality".format(version, function_key)
+            self.log(error_message, "ERROR")
             return None, None, {"error": error_message}
 
         if function_parameters is not None and provided_params is not None:
+            self.log("Validating provided parameters against function parameters...", "DEBUG")
             for param_key, param_value in function_parameters.items():
                 if param_value == "required" and param_key not in provided_params:
                     missing_params.append(param_key)
@@ -1200,15 +1205,19 @@ class UserandRole(DnacBase):
 
             if missing_params:
                 error_message = "Missing required parameters: {0}".format(', '.join(missing_params))
+                self.log(error_message, "ERROR")
                 return version_dict, payload, {"error": error_message}
 
             if extra_params:
                 error_message = "In version '{0}' the parameter(s) in the playbook: '{1}' are not part of the '{2}' function parameters".format(
                     version, ', '.join(extra_params), version_dict)
+                self.log(error_message, "ERROR")
                 return version_dict, payload, {"error_message": error_message}
         else:
+            self.log("No function parameters to validate or no provided parameters given.", "INFO")
             return version_dict, function_parameters, {}
 
+        self.log("Validation successful. Returning results.", "DEBUG")
         return version_dict, payload, {}
 
     def get_want(self, config):
