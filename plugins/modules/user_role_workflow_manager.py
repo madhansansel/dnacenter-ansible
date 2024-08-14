@@ -1148,7 +1148,7 @@ class UserandRole(DnacBase):
 
     def version_route(self, version, family, function_key, provided_params=None):
         """
-        Retrieves function parameters and validates the provided provided_params for the specified version,
+        Retrieves function parameters and validates the provided_params for the specified version,
         family, and function key.
 
         Parameters:
