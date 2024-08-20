@@ -1187,8 +1187,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-user-rol
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Provides the same choice for all sub-parameters.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><a href="#id215"><span class="problematic" id="id216">:ansible-option-choices-entry:`&quot;deny&quot;`</span></a></p></li>
-<li><p><a href="#id217"><span class="problematic" id="id218">:ansible-option-choices-entry-default:`&quot;read&quot;`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id215"><span class="problematic" id="id216">:ansible-option-choices-entry-default:`&quot;deny&quot;`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id217"><span class="problematic" id="id218">:ansible-option-choices-entry:`&quot;read&quot;`</span></a></p></li>
 <li><p><a href="#id219"><span class="problematic" id="id220">:ansible-option-choices-entry:`&quot;write&quot;`</span></a></p></li>
 </ul>
 </div></td>
@@ -1391,8 +1391,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-user-rol
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Allow Cisco support team to remotely troubleshoot any network devices managed by Cisco DNA Center.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
-<li><p><a href="#id297"><span class="problematic" id="id298">:ansible-option-choices-entry:`&quot;deny&quot;`</span></a></p></li>
-<li><p><a href="#id299"><span class="problematic" id="id300">:ansible-option-choices-entry-default:`&quot;read&quot;`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id297"><span class="problematic" id="id298">:ansible-option-choices-entry-default:`&quot;deny&quot;`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
+<li><p><a href="#id299"><span class="problematic" id="id300">:ansible-option-choices-entry:`&quot;read&quot;`</span></a></p></li>
 <li><p><a href="#id301"><span class="problematic" id="id302">:ansible-option-choices-entry:`&quot;write&quot;`</span></a></p></li>
 </ul>
 </div></td>
@@ -1405,8 +1405,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-user-rol
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><a href="#id303"><span class="problematic" id="id304">:ansible-option-choices-entry:`&quot;deny&quot;`</span></a></p></li>
-<li><p><a href="#id305"><span class="problematic" id="id306">:ansible-option-choices-entry-default:`&quot;read&quot;`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
-<li><p><a href="#id307"><span class="problematic" id="id308">:ansible-option-choices-entry:`&quot;write&quot;`</span></a></p></li>
+<li><p><a href="#id305"><span class="problematic" id="id306">:ansible-option-choices-entry:`&quot;read&quot;`</span></a></p></li>
+<li><p><a href="#id307"><span class="problematic" id="id308">:ansible-option-choices-entry-default:`&quot;write&quot;`</span></a> <span class="ansible-option-choices-default-mark">← (default)</span></p></li>
 </ul>
 </div></td>
 </tr>
@@ -1776,7 +1776,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-user-rol
 <span class="w">              </span><span class="nt">monitoring_settings</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;read&quot;</span>
 <span class="w">              </span><span class="nt">troubleshooting_tools</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;deny&quot;</span>
 <span class="w">          </span><span class="nt">network_analytics</span><span class="p">:</span>
-<span class="w">            </span><span class="nt">data_access</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;write&quot;</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">data_access</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;write&quot;</span>
 <span class="w">          </span><span class="nt">network_design</span><span class="p">:</span>
 <span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">advanced_network_settings</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;deny&quot;</span>
 <span class="w">              </span><span class="nt">image_repository</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;deny&quot;</span>

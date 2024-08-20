@@ -2065,8 +2065,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`"deny"`
-      - :ansible-option-choices-entry-default:`"read"` :ansible-option-choices-default-mark:`← (default)`
+      - :ansible-option-choices-entry-default:`"deny"` :ansible-option-choices-default-mark:`← (default)`
+      - :ansible-option-choices-entry:`"read"`
       - :ansible-option-choices-entry:`"write"`
 
 
@@ -2781,8 +2781,8 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry:`"deny"`
-      - :ansible-option-choices-entry-default:`"read"` :ansible-option-choices-default-mark:`← (default)`
+      - :ansible-option-choices-entry-default:`"deny"` :ansible-option-choices-default-mark:`← (default)`
+      - :ansible-option-choices-entry:`"read"`
       - :ansible-option-choices-entry:`"write"`
 
 
@@ -2825,8 +2825,8 @@ Parameters
       :ansible-option-choices:`Choices:`
 
       - :ansible-option-choices-entry:`"deny"`
-      - :ansible-option-choices-entry-default:`"read"` :ansible-option-choices-default-mark:`← (default)`
-      - :ansible-option-choices-entry:`"write"`
+      - :ansible-option-choices-entry:`"read"`
+      - :ansible-option-choices-entry-default:`"write"` :ansible-option-choices-default-mark:`← (default)`
 
 
       .. raw:: html
@@ -3931,7 +3931,7 @@ Examples
                   monitoring_settings: "read"
                   troubleshooting_tools: "deny"
               network_analytics:
-                data_access: "write"
+                - data_access: "write"
               network_design:
                 - advanced_network_settings: "deny"
                   image_repository: "deny"
