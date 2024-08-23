@@ -3941,6 +3941,7 @@ Examples
                   virtual_network: "read"
               network_provision:
                 - compliance: "deny"
+                  eox: "read"
                   image_update: "write"
                   inventory_management:
                     - device_configuration: "write"
@@ -3973,6 +3974,7 @@ Examples
                 - audit_log: "read"
                   event_viewer: "deny"
                   network_reasoner: "write"
+                  remote_device_support: "read"
                   scheduler: "read"
                   search: "write"
 
