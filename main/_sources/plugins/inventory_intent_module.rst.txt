@@ -1347,6 +1347,82 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-config/resync_device_count"></div>
+
+      .. _ansible_collections.cisco.dnac.inventory_intent_module__parameter-config/resync_device_count:
+
+      .. rst-class:: ansible-option-title
+
+      **resync_device_count**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-config/resync_device_count" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`integer`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Specifies the number of devices to be resynced in the inventory. Ensure that this count does not exceed 200, as attempting to resync more than 200 devices may cause the 'sync\_devices\_using\_forcesync' API to enter an infinite loop.
+
+
+      .. rst-class:: ansible-option-line
+
+      :ansible-option-default-bold:`Default:` :ansible-option-default:`200`
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-config/resync_max_timeout"></div>
+
+      .. _ansible_collections.cisco.dnac.inventory_intent_module__parameter-config/resync_max_timeout:
+
+      .. rst-class:: ansible-option-title
+
+      **resync_max_timeout**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-config/resync_max_timeout" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`integer`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      Sets the maximum timeout, in seconds, for the resync process of devices in the inventory to prevent an infinite loop. The default value is set to 600 seconds.
+
+
+      .. rst-class:: ansible-option-line
+
+      :ansible-option-default-bold:`Default:` :ansible-option-default:`600`
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/role"></div>
 
       .. _ansible_collections.cisco.dnac.inventory_intent_module__parameter-config/role:
