@@ -10,8 +10,6 @@ on:
       - ready_for_review
       - reopened
       - unlocked
-  pull_request_review:
-    types: [submitted]
 jobs:
   automerge-job:
     runs-on: ubuntu-latest
