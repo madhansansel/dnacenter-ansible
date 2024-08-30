@@ -1371,7 +1371,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Specifies the number of devices to be resynced in the inventory. Ensure that this count does not exceed 200, as attempting to resync more than 200 devices may cause the 'sync\_devices\_using\_forcesync' API to enter an infinite loop.
+      Specifies the maximum number of devices to be resynced in the inventory. Ensure this count does not exceed 200, as attempting to resync more than 200 devices may cause the 'sync\_devices\_using\_forcesync' API to enter an infinite loop.
 
 
       .. rst-class:: ansible-option-line
@@ -1409,7 +1409,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Sets the maximum timeout, in seconds, for the resync process of devices in the inventory to prevent an infinite loop. The default value is set to 600 seconds.
+      Sets the maximum timeout for the device resync process in the inventory, in seconds. The default is 600 seconds, which helps prevent infinite loops.
 
 
       .. rst-class:: ansible-option-line
