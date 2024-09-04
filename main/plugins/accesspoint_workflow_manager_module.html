@@ -1008,14 +1008,20 @@ to identify the specific access point: mac_address, hostname, or management_ip_a
 <div class="ansibleOptionAnchor" id="parameter-config/rf_profile"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-accesspoint-workflow-manager-module-parameter-config-rf-profile"><strong>rf_profile</strong></p>
 <a class="ansibleOptionLink" href="#parameter-config/rf_profile" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Radio Frequency (RF) profile of the Access Point. For example, &quot;HIGH&quot;.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>Specifies the Radio Frequency (RF) profile name for the Access Point. It can be one of the standard profiles</dt><dd><p>&quot;HIGH&quot;, &quot;LOW&quot;, &quot;TYPICAL&quot;, or a custom profile that has been created. For example, &quot;HIGH&quot;.</p>
+</dd>
+</dl>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-config/secondary_controller_name"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-accesspoint-workflow-manager-module-parameter-config-secondary-controller-name"><strong>secondary_controller_name</strong></p>
 <a class="ansibleOptionLink" href="#parameter-config/secondary_controller_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Name or identifier of the secondary wireless LAN controller (WLC) managing the Access Point (AP). For example, &quot;Inherit from site/Clear&quot;.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>Name or identifier of the secondary wireless LAN controller (WLC) managing the Access Point (AP).</dt><dd><p>For example, &quot;Inherit from site / Clear&quot;.</p>
+</dd>
+</dl>
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -1064,7 +1070,10 @@ to identify the specific access point: mac_address, hostname, or management_ip_a
 <div class="ansibleOptionAnchor" id="parameter-config/tertiary_controller_name"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-accesspoint-workflow-manager-module-parameter-config-tertiary-controller-name"><strong>tertiary_controller_name</strong></p>
 <a class="ansibleOptionLink" href="#parameter-config/tertiary_controller_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Name or identifier of the tertiary wireless LAN controller (WLC) managing the Access Point (AP). For example, &quot;Clear&quot;.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>Name or identifier of the tertiary wireless LAN controller (WLC) managing the Access Point (AP).</dt><dd><p>For example, &quot;Inherit from site / Clear&quot;.</p>
+</dd>
+</dl>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -1673,7 +1682,7 @@ For example, Auto.</p>
 <span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output_list</span>
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Provisioning and Re-provisiong Access Point Site details</span>
-<span class="w">      </span><span class="nt">cisco.dnac.accesspoint_movement</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">cisco.dnac.accesspoint_workflow_manager</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">dnac_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_host</span> <span class="cp">}}</span><span class="s">&quot;</span>
 <span class="w">        </span><span class="nt">dnac_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_username</span> <span class="cp">}}</span><span class="s">&quot;</span>
 <span class="w">        </span><span class="nt">dnac_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
@@ -1693,6 +1702,70 @@ For example, Auto.</p>
 <span class="w">                  </span><span class="nt">floor</span><span class="p">:</span>
 <span class="w">                    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;FLOOR1&quot;</span>
 <span class="w">                    </span><span class="nt">parent_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Global/USA/New</span><span class="nv"> </span><span class="s">York/BLDNYC&quot;</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output_list</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Updating Access Point Update / Controller Name</span>
+<span class="w">      </span><span class="nt">cisco.dnac.accesspoint_workflow_manager</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">dnac_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_host</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_username</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_verify</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_verify</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_port</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_version</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_debug</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_debug</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">        </span><span class="nt">dnac_log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+<span class="w">        </span><span class="nt">config_verify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">merged</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mac_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a4:88:73:d4:d6:60</span>
+<span class="w">            </span><span class="nt">ap_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Cisco_Test_AP_T003&quot;</span>
+<span class="w">            </span><span class="nt">admin_status</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Enabled&quot;</span>
+<span class="w">            </span><span class="nt">led_status</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Enabled&quot;</span>
+<span class="w">            </span><span class="nt">led_brightness_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">            </span><span class="nt">ap_mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Local&quot;</span>
+<span class="w">            </span><span class="nt">is_assigned_site_as_location</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Enabled&quot;</span>
+<span class="w">            </span><span class="nt">failover_priority</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Low&quot;</span>
+<span class="w">            </span><span class="nt">primary_controller_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NY-EWLC-1&quot;</span>
+<span class="w">            </span><span class="nt">primary_ip_address</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;204.192.6.200&quot;</span>
+<span class="w">            </span><span class="nt">secondary_controller_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NY-EWLC-20&quot;</span>
+<span class="w">            </span><span class="nt">secondary_ip_address</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fe80::202:b3ff:fe1e:8324&quot;</span>
+<span class="w">            </span><span class="nt">tertiary_controller_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;SJ-EWLC-20&quot;</span>
+<span class="w">            </span><span class="nt">tertiary_ip_address</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fe80::202:b3ff:fe1e:8325&quot;</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output_list</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Updating Access Point Update / remove tertiary_controller_name</span>
+<span class="w">      </span><span class="nt">cisco.dnac.accesspoint_workflow_manager</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">dnac_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_host</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_username</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_verify</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_verify</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_port</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_version</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_debug</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_debug</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">        </span><span class="nt">dnac_log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+<span class="w">        </span><span class="nt">config_verify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">merged</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mac_address</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a4:88:73:d4:d6:60</span>
+<span class="w">            </span><span class="nt">ap_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Cisco_Test_AP_T003&quot;</span>
+<span class="w">            </span><span class="nt">admin_status</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Enabled&quot;</span>
+<span class="w">            </span><span class="nt">led_status</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Enabled&quot;</span>
+<span class="w">            </span><span class="nt">led_brightness_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">            </span><span class="nt">ap_mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Local&quot;</span>
+<span class="w">            </span><span class="nt">is_assigned_site_as_location</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Enabled&quot;</span>
+<span class="w">            </span><span class="nt">failover_priority</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Low&quot;</span>
+<span class="w">            </span><span class="nt">primary_controller_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NY-EWLC-10&quot;</span>
+<span class="w">            </span><span class="nt">primary_ip_address</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fe80::202:b3ff:fe1e:8329&quot;</span>
+<span class="w">            </span><span class="nt">secondary_controller_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;NY-EWLC-20&quot;</span>
+<span class="w">            </span><span class="nt">secondary_ip_address</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fe80::202:b3ff:fe1e:8324&quot;</span>
+<span class="w">            </span><span class="nt">tertiary_controller_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Inherit</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">site</span><span class="nv"> </span><span class="s">/</span><span class="nv"> </span><span class="s">Clear&quot;</span>
 <span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output_list</span>
 
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Updating Access Point Site / Configuration details</span>

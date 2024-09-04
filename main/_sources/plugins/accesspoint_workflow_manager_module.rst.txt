@@ -1889,7 +1889,9 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Radio Frequency (RF) profile of the Access Point. For example, "HIGH".
+      Specifies the Radio Frequency (RF) profile name for the Access Point. It can be one of the standard profiles
+          "HIGH", "LOW", "TYPICAL", or a custom profile that has been created. For example, "HIGH".
+          
 
 
       .. raw:: html
@@ -1923,7 +1925,9 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Name or identifier of the secondary wireless LAN controller (WLC) managing the Access Point (AP). For example, "Inherit from site/Clear".
+      Name or identifier of the secondary wireless LAN controller (WLC) managing the Access Point (AP).
+          For example, "Inherit from site / Clear".
+          
 
 
       .. raw:: html
@@ -2164,7 +2168,9 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Name or identifier of the tertiary wireless LAN controller (WLC) managing the Access Point (AP). For example, "Clear".
+      Name or identifier of the tertiary wireless LAN controller (WLC) managing the Access Point (AP).
+          For example, "Inherit from site / Clear".
+          
 
 
       .. raw:: html
@@ -4027,7 +4033,7 @@ Examples
           register: output_list
 
         - name: Provisioning and Re-provisiong Access Point Site details
-          cisco.dnac.accesspoint_movement:
+          cisco.dnac.accesspoint_workflow_manager:
             dnac_host: "{{ dnac_host }}"
             dnac_username: "{{ dnac_username }}"
             dnac_password: "{{ dnac_password }}"
@@ -4047,6 +4053,70 @@ Examples
                       floor:
                         name: "FLOOR1"
                         parent_name: "Global/USA/New York/BLDNYC"
+          register: output_list
+
+        - name: Updating Access Point Update / Controller Name
+          cisco.dnac.accesspoint_workflow_manager:
+            dnac_host: "{{ dnac_host }}"
+            dnac_username: "{{ dnac_username }}"
+            dnac_password: "{{ dnac_password }}"
+            dnac_verify: "{{ dnac_verify }}"
+            dnac_port: "{{ dnac_port }}"
+            dnac_version: "{{ dnac_version }}"
+            dnac_debug: "{{ dnac_debug }}"
+            dnac_log: True
+            dnac_log_level: DEBUG
+            config_verify: True
+            state: merged
+            config:
+              - mac_address: a4:88:73:d4:d6:60
+                ap_name: "Cisco_Test_AP_T003"
+                admin_status: "Enabled"
+                led_status: "Enabled"
+                led_brightness_level: 1
+                ap_mode: "Local"
+                is_assigned_site_as_location: "Enabled"
+                failover_priority: "Low"
+                primary_controller_name: "NY-EWLC-1"
+                primary_ip_address:
+                  address: "204.192.6.200"
+                secondary_controller_name: "NY-EWLC-20"
+                secondary_ip_address:
+                  address: "fe80::202:b3ff:fe1e:8324"
+                tertiary_controller_name: "SJ-EWLC-20"
+                tertiary_ip_address:
+                  address: "fe80::202:b3ff:fe1e:8325"
+          register: output_list
+
+        - name: Updating Access Point Update / remove tertiary_controller_name
+          cisco.dnac.accesspoint_workflow_manager:
+            dnac_host: "{{ dnac_host }}"
+            dnac_username: "{{ dnac_username }}"
+            dnac_password: "{{ dnac_password }}"
+            dnac_verify: "{{ dnac_verify }}"
+            dnac_port: "{{ dnac_port }}"
+            dnac_version: "{{ dnac_version }}"
+            dnac_debug: "{{ dnac_debug }}"
+            dnac_log: True
+            dnac_log_level: DEBUG
+            config_verify: True
+            state: merged
+            config:
+              - mac_address: a4:88:73:d4:d6:60
+                ap_name: "Cisco_Test_AP_T003"
+                admin_status: "Enabled"
+                led_status: "Enabled"
+                led_brightness_level: 1
+                ap_mode: "Local"
+                is_assigned_site_as_location: "Enabled"
+                failover_priority: "Low"
+                primary_controller_name: "NY-EWLC-10"
+                primary_ip_address:
+                  address: "fe80::202:b3ff:fe1e:8329"
+                secondary_controller_name: "NY-EWLC-20"
+                secondary_ip_address:
+                  address: "fe80::202:b3ff:fe1e:8324"
+                tertiary_controller_name: "Inherit from site / Clear"
           register: output_list
 
         - name: Updating Access Point Site / Configuration details
