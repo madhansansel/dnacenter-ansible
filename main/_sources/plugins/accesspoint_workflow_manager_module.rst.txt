@@ -2621,7 +2621,7 @@ Parameters
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
       Mode of power assignment for the tri radio interface. Accepts "Global" or "Custom".
-          In Custom, it accepts values 1 to 5.
+          In Custom, it accepts values 1 to 8.
           
 
 
@@ -3039,7 +3039,7 @@ Parameters
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
       Mode of power assignment for the xor radio interface. Accepts "Global" or "Custom".
-          In Custom, it accepts values 1 to 5.
+          In Custom, it accepts values 1 to 8.
           
 
 
