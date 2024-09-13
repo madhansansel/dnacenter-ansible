@@ -169,7 +169,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Manages IPv4 and IPv6 IP pools in the global level.
+      Manages IPv4 and IPv6 pools in the global level.
 
 
       .. raw:: html
@@ -1882,7 +1882,7 @@ Parameters
 
       .. rst-class:: ansible-option-type-line
 
-      :ansible-option-type:`dictionary`
+      :ansible-option-type:`list` / :ansible-option-elements:`elements=dictionary`
 
       .. raw:: html
 
