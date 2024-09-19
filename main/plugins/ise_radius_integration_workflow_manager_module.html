@@ -1073,8 +1073,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-ise-radi
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>SDK Method used are system_settings.SystemSettings.add_authentication_and_policy_server_access_configuration, system_settings.SystemSettings.edit_authentication_and_policy_server_access_configuration, system_settings.SystemSettings.accept_cisco_ise_server_certificate_for_cisco_ise_server_integration, system_settings.SystemSettings.delete_authentication_and_policy_server_access_configuration,</p></li>
-<li><p>Paths used are post /dna/intent/api/v1/authentication-policy-servers, put /dna/intent/api/v1/authentication-policy-servers/${id}, put /dna/intent/api/v1/integrate-ise/${id}, delete /dna/intent/api/v1/authentication-policy-servers/${id}</p></li>
+<li><p>SDK Method used are system_settings.SystemSettings.add_authentication_and_policy_server_access_configuration, system_settings.SystemSettings.edit_authentication_and_policy_server_access_configuration, system_settings.SystemSettings.accept_cisco_ise_server_certificate_for_cisco_ise_server_integration, system_settings.SystemSettings.delete_authentication_and_policy_server_access_configuration, system_settings.SystemSettings.get_authentication_and_policy_servers, system_settings.SystemSettings.cisco_ise_server_integration_status,</p></li>
+<li><p>Paths used are post /dna/intent/api/v1/authentication-policy-servers, put /dna/intent/api/v1/authentication-policy-servers/${id}, put /dna/intent/api/v1/integrate-ise/${id}, delete /dna/intent/api/v1/authentication-policy-servers/${id} get /dna/intent/api/v1/authentication-policy-servers get /dna/intent/api/v1/ise-integration-status</p></li>
 <li><p>Does not support <code class="docutils literal notranslate"><span class="pre">check_mode</span></code></p></li>
 <li><p>The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK</p></li>
 <li><p>The parameters starting with dnac_ are used by the Cisco Catalyst Center Python SDK to establish the connection</p></li>
