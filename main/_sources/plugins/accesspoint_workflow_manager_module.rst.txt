@@ -272,7 +272,7 @@ Parameters
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
       Specifies the antenna gain value in decibels (dB) for the 2.4GHz radio interface, valid values range
-          from 0 to 40. For example, 4.
+          from 0 to 40. For example, 10.
           
 
 
@@ -341,7 +341,9 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Cable loss in dB for the 2.4GHz radio interface. For example, 75.
+      Cable loss in dB for the 2.4GHz radio interface. Valid values are from 0 to 40.
+          This value must be less than the antenna gain. For example, 2.
+          
 
 
       .. raw:: html
@@ -718,7 +720,9 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Cable loss in dB for the 5GHz radio interface. For example, 80.
+      Cable loss in dB for the 5GHz radio interface. Valid values are from 0 to 40.
+          This value must be less than the antenna gain. For example, 3.
+          
 
 
       .. raw:: html
@@ -1028,7 +1032,7 @@ Parameters
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
       Antenna gain value in decibels (dB) for the 6GHz radio interface, valid values range
-          from 0 to 40. For example, 4.
+          from 0 to 40. For example, 30.
           
 
 
@@ -1097,7 +1101,9 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Cable loss in dB for the 6GHz radio interface. For example, 75.
+      Cable loss in dB for the 6GHz radio interface. Valid values are from 0 to 40.
+          This value must be less than the antenna gain. For example, 10.
+          
 
 
       .. raw:: html
@@ -1594,6 +1600,45 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-cell">
+        <div class="ansibleOptionAnchor" id="parameter-config/hostname"></div>
+
+      .. _ansible_collections.cisco.dnac.accesspoint_workflow_manager_module__parameter-config/hostname:
+
+      .. rst-class:: ansible-option-title
+
+      **hostname**
+
+      .. raw:: html
+
+        <a class="ansibleOptionLink" href="#parameter-config/hostname" title="Permalink to this option"></a>
+
+      .. rst-class:: ansible-option-type-line
+
+      :ansible-option-type:`string` / :ansible-option-required:`required`
+
+      .. raw:: html
+
+        </div>
+
+    - .. raw:: html
+
+        <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
+
+      The Host Name used to identify the device. If provided, it cannot be modified.
+          To identify the specific access point, at least one of the following parameters is required.
+          - mac\_address
+          - hostname
+          - management\_ip\_address
+          
+
+
+      .. raw:: html
+
+        </div>
+
+  * - .. raw:: html
+
+        <div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/is_assigned_site_as_location"></div>
 
       .. _ansible_collections.cisco.dnac.accesspoint_workflow_manager_module__parameter-config/is_assigned_site_as_location:
@@ -1756,9 +1801,11 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      The MAC address used to identify the device. If the MAC address is known,
-          it must be provided and cannot be modified. At least one of the following parameters is required
-          to identify the specific access point: mac\_address or management\_ip\_address.
+      The MAC address used to identify the device. If provided, it cannot be modified.
+          To identify the specific access point, at least one of the following parameters is required.
+          - mac\_address
+          - hostname
+          - management\_ip\_address
           
 
 
@@ -1793,9 +1840,11 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      The Management IP Address used to identify the device. If the Management IP Address is known,
-          it must be provided and cannot be modified. At least one of the following parameters is required
-          to identify the specific access point: mac\_address or management\_ip\_address.
+      The Management IP Address used to identify the device. If provided, it cannot be modified.
+          To identify the specific access point, at least one of the following parameters is required.
+          - mac\_address
+          - hostname
+          - management\_ip\_address
           
 
 
@@ -2424,7 +2473,7 @@ Parameters
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
       Antenna gain value in decibels (dB) for the TRI radio interface, valid values range
-          from 0 to 40. For example, 6.
+          from 0 to 40. For example, 16.
           
 
 
@@ -2493,7 +2542,9 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Cable loss in dB for the TRI radio interface. For example, 75.
+      Cable loss in dB for the TRI radio interface. Valid values are from 0 to 40.
+          This value must be less than the antenna gain. For example, 6.
+          
 
 
       .. raw:: html
@@ -2880,7 +2931,7 @@ Parameters
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
       Antenna gain value in decibels (dB) for the XOR radio interface, valid values range
-          from 0 to 40. For example, 4.
+          from 0 to 40. For example, 14.
           
 
 
@@ -2949,7 +3000,9 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Cable loss in dB for the XOR radio interface. For example, 75.
+      Cable loss in dB for the XOR radio interface. Valid values are from 0 to 40.
+          This value must be less than the antenna gain. For example, 5.
+          
 
 
       .. raw:: html
