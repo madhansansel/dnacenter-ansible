@@ -494,7 +494,7 @@ Modules
 * :ref:`swim_intent module <ansible_collections.cisco.dnac.swim_intent_module>` -- Intent module for SWIM related functions
 * :ref:`swim_trigger_activation module <ansible_collections.cisco.dnac.swim_trigger_activation_module>` -- Resource module for Swim Trigger Activation
 * :ref:`swim_trigger_distribution module <ansible_collections.cisco.dnac.swim_trigger_distribution_module>` -- Resource module for Swim Trigger Distribution
-* :ref:`swim_workflow_manager module <ansible_collections.cisco.dnac.swim_workflow_manager_module>` -- workflow\_manager module for SWIM related functions
+* :ref:`swim_workflow_manager module <ansible_collections.cisco.dnac.swim_workflow_manager_module>` -- Module to manage SWIM (Software Image Management) operations in Cisco Catalyst Center
 * :ref:`syslog_config_create module <ansible_collections.cisco.dnac.syslog_config_create_module>` -- Resource module for Syslog Config Create
 * :ref:`syslog_config_update module <ansible_collections.cisco.dnac.syslog_config_update_module>` -- Resource module for Syslog Config Update
 * :ref:`system_health_count_info module <ansible_collections.cisco.dnac.system_health_count_info_module>` -- Information module for System Health Count
