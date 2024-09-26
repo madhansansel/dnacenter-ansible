@@ -608,7 +608,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-device-c
 <span id="ansible-collections-cisco-dnac-device-configs-backup-workflow-manager-module-requirements"></span><h2><a class="toc-backref" href="#id48" role="doc-backlink">Requirements</a><a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
 <p>The below requirements are needed on the host that executes this module.</p>
 <ul class="simple">
-<li><p>dnacentersdk == 2.6.10</p></li>
+<li><p>dnacentersdk == 2.9.2</p></li>
 <li><p>python &gt;= 3.5</p></li>
 </ul>
 </section>
@@ -898,8 +898,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-device-c
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>SDK Methods used are sites.Sites.get_site sites.Sites.get_membership devices.Devices.get_device_list configuration_archive.ConfigurationsArchive.export_device_configurations file.Files.download_a_file_by_fileid task.Task.get_task_by_id</p></li>
-<li><p>Paths used are get /dna/intent/api/v1/site get /dna/intent/api/v1/membership/${siteId} get /dna/intent/api/v1/network-device post /dna/intent/api/v1/network-device-archive/cleartext get /dna/intent/api/v1/file/${fileId} get /dna/intent/api/v1/task/${taskId}</p></li>
+<li><p>SDK Methods used are sites.Sites.get_site Site_design.Site_design.get_sites sites.Sites.get_membership site_design.Site_design.get_site_assigned_network_devices devices.Devices.get_device_list devices.Devices.get_device_by_id configuration_archive.ConfigurationsArchive.export_device_configurations file.Files.download_a_file_by_fileid</p></li>
+<li><p>Paths used are get /dna/intent/api/v1/site get /dna/intent/api/v1/membership/${siteId} get /dna/intent/api/v1/network-device post /dna/intent/api/v1/network-device-archive/cleartext get /dna/intent/api/v1/file/${fileId} get /dna/intent/api/v1/networkDevices/assignedToSite get /dna/intent/api/v1/sites get /dna/intent/api/v1/network-device/${id}</p></li>
 <li><p>Does not support <code class="docutils literal notranslate"><span class="pre">check_mode</span></code></p></li>
 <li><p>The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK</p></li>
 <li><p>The parameters starting with dnac_ are used by the Cisco Catalyst Center Python SDK to establish the connection</p></li>
@@ -1138,7 +1138,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-device-c
 <section id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>Abinash Mishra (&#64;abimishr) Rugvedi Kapse (&#64;rukapse) Madhan Sankaranarayanan (&#64;madhansansel)</p></li>
+<li><p>Abinash Mishra (&#64;abimishr) Rugvedi Kapse (&#64;rukapse) Madhan Sankaranarayanan (&#64;madhansansel) Sonali Deepthi Kesali (&#64;skesali)</p></li>
 </ul>
 </section>
 <section id="collection-links">

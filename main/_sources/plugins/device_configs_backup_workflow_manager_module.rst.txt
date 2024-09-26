@@ -82,7 +82,7 @@ Requirements
 ------------
 The below requirements are needed on the host that executes this module.
 
-- dnacentersdk == 2.6.10
+- dnacentersdk == 2.9.2
 - python \>= 3.5
 
 
@@ -1219,8 +1219,8 @@ Notes
 -----
 
 .. note::
-   - SDK Methods used are sites.Sites.get\_site sites.Sites.get\_membership devices.Devices.get\_device\_list configuration\_archive.ConfigurationsArchive.export\_device\_configurations file.Files.download\_a\_file\_by\_fileid task.Task.get\_task\_by\_id
-   - Paths used are get /dna/intent/api/v1/site get /dna/intent/api/v1/membership/${siteId} get /dna/intent/api/v1/network-device post /dna/intent/api/v1/network-device-archive/cleartext get /dna/intent/api/v1/file/${fileId} get /dna/intent/api/v1/task/${taskId}
+   - SDK Methods used are sites.Sites.get\_site Site\_design.Site\_design.get\_sites sites.Sites.get\_membership site\_design.Site\_design.get\_site\_assigned\_network\_devices devices.Devices.get\_device\_list devices.Devices.get\_device\_by\_id configuration\_archive.ConfigurationsArchive.export\_device\_configurations file.Files.download\_a\_file\_by\_fileid
+   - Paths used are get /dna/intent/api/v1/site get /dna/intent/api/v1/membership/${siteId} get /dna/intent/api/v1/network-device post /dna/intent/api/v1/network-device-archive/cleartext get /dna/intent/api/v1/file/${fileId} get /dna/intent/api/v1/networkDevices/assignedToSite get /dna/intent/api/v1/sites get /dna/intent/api/v1/network-device/${id}
    - Does not support \ :literal:`check\_mode`\ 
    - The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK
    - The parameters starting with dnac\_ are used by the Cisco Catalyst Center Python SDK to establish the connection
@@ -1552,7 +1552,7 @@ Common return values are documented :ref:`here <common_return_values>`, the foll
 Authors
 ~~~~~~~
 
-- Abinash Mishra (@abimishr) Rugvedi Kapse (@rukapse) Madhan Sankaranarayanan (@madhansansel)
+- Abinash Mishra (@abimishr) Rugvedi Kapse (@rukapse) Madhan Sankaranarayanan (@madhansansel) Sonali Deepthi Kesali (@skesali)
 
 
 
