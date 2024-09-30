@@ -857,8 +857,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-network-
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>SDK Methods used are compliance.Compliance.run_compliance compliance.Compliance.commit_device_configuration task.Task.get_task_by_id task.Task.get_task_tree compliance.Compliance.compliance_details_of_device</p></li>
-<li><p>Paths used are post /dna/intent/api/v1/compliance/ post /dna/intent/api/v1/network-device-config/write-memory get /dna/intent/api/v1/task/{taskId} get /dna/intent/api/v1/task/{taskId}/tree get /dna/intent/api/v1/compliance/${deviceUuid}/detail</p></li>
+<li><p>SDK Methods used are compliance.Compliance.run_compliance compliance.Compliance.commit_device_configuration task.Task.get_task_by_id task.Task.get_task_details_by_id task.Task.get_task_tree task.Task.get_tasks compliance.Compliance.compliance_details_of_device devices.Devices.get_device_list devices.Devices.get_device_by_id site.Site.get_site site.Site.get_membership site_design.Site_design.get_sites site_design.Site_design.get_site_assigned_network_devices</p></li>
+<li><p>Paths used are post /dna/intent/api/v1/compliance/ post /dna/intent/api/v1/network-device-config/write-memory get /dna/intent/api/v1/task/{taskId} get /dna/intent/api/v1/task/{taskId}/tree get /dna/intent/api/v1/compliance/${deviceUuid}/detail get /dna/intent/api/v1/membership/${siteId} get /dna/intent/api/v1/site get /dna/intent/api/v1/networkDevices/assignedToSite get /dna/intent/api/v1/sites get /dna/intent/api/v1/tasks/${id}/detail get /dna/intent/api/v1/tasks get /dna/intent/api/v1/network-device/${id} get /dna/intent/api/v1/network-device</p></li>
 <li><p>Does not support <code class="docutils literal notranslate"><span class="pre">check_mode</span></code></p></li>
 <li><p>The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK</p></li>
 <li><p>The parameters starting with dnac_ are used by the Cisco Catalyst Center Python SDK to establish the connection</p></li>
@@ -1087,7 +1087,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-network-
 <section id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Permalink to this heading"></a></h3>
 <ul class="simple">
-<li><p>Rugvedi Kapse (&#64;rukapse) Madhan Sankaranarayanan (&#64;madhansansel)</p></li>
+<li><p>Rugvedi Kapse (&#64;rukapse) Madhan Sankaranarayanan (&#64;madhansansel) Sonali Deepthi (&#64;skesali)</p></li>
 </ul>
 </section>
 <section id="collection-links">
