@@ -2774,7 +2774,7 @@ Parameters
 
         <div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell">
 
-      Allow Cisco support team to remotely troubleshoot any network devices managed by Cisco DNA Center.
+      Allow Cisco support team to remotely troubleshoot any network devices managed by Cisco Catalyst Center.
 
 
       .. rst-class:: ansible-option-line
