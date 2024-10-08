@@ -214,6 +214,7 @@ Modules
 * :ref:`execute_suggested_actions_commands module <ansible_collections.cisco.dnac.execute_suggested_actions_commands_module>` -- Resource module for Execute Suggested Actions Commands
 * :ref:`fabric_sites_zones_workflow_manager module <ansible_collections.cisco.dnac.fabric_sites_zones_workflow_manager_module>` -- Manage fabric site(s)/zone(s) and update the authentication profile template in Cisco Catalyst Center.
 * :ref:`fabric_transits_workflow_manager module <ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module>` -- Resource module for SDA fabric transits
+* :ref:`fabric_virtual_networks_workflow_manager module <ansible_collections.cisco.dnac.fabric_virtual_networks_workflow_manager_module>` -- Configure fabric VLANs, Virtual Networks, and Anycast Gateways in Cisco Catalyst Center.
 * :ref:`file_import module <ansible_collections.cisco.dnac.file_import_module>` -- Resource module for File Import
 * :ref:`file_info module <ansible_collections.cisco.dnac.file_info_module>` -- Information module for File
 * :ref:`file_namespace_files_info module <ansible_collections.cisco.dnac.file_namespace_files_info_module>` -- Information module for File Namespace Files
@@ -712,6 +713,7 @@ Modules
     execute_suggested_actions_commands_module
     fabric_sites_zones_workflow_manager_module
     fabric_transits_workflow_manager_module
+    fabric_virtual_networks_workflow_manager_module
     file_import_module
     file_info_module
     file_namespace_files_info_module
