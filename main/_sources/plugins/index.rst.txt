@@ -212,6 +212,7 @@ Modules
 * :ref:`event_webhook_update module <ansible_collections.cisco.dnac.event_webhook_update_module>` -- Resource module for Event Webhook Update
 * :ref:`events_and_notifications_workflow_manager module <ansible_collections.cisco.dnac.events_and_notifications_workflow_manager_module>` -- Configure various types of destinations to deliver event notifications from Cisco Catalyst Center Platform.
 * :ref:`execute_suggested_actions_commands module <ansible_collections.cisco.dnac.execute_suggested_actions_commands_module>` -- Resource module for Execute Suggested Actions Commands
+* :ref:`fabric_devices_workflow_manager module <ansible_collections.cisco.dnac.fabric_devices_workflow_manager_module>` -- Manage SDA fabric devices in Cisco Catalyst Center.
 * :ref:`fabric_sites_zones_workflow_manager module <ansible_collections.cisco.dnac.fabric_sites_zones_workflow_manager_module>` -- Manage fabric site(s)/zone(s) and update the authentication profile template in Cisco Catalyst Center.
 * :ref:`fabric_transits_workflow_manager module <ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module>` -- Resource module for SDA fabric transits
 * :ref:`file_import module <ansible_collections.cisco.dnac.file_import_module>` -- Resource module for File Import
@@ -711,6 +712,7 @@ Modules
     event_webhook_update_module
     events_and_notifications_workflow_manager_module
     execute_suggested_actions_commands_module
+    fabric_devices_workflow_manager_module
     fabric_sites_zones_workflow_manager_module
     fabric_transits_workflow_manager_module
     file_import_module
