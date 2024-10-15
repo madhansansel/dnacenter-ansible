@@ -800,7 +800,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-accesspo
 <a class="ansibleOptionLink" href="#parameter-config/5ghz_radio/radio_role_assignment" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
-<dt>Role assignment mode for the 5GHz radio interface. Accepts &quot;Auto&quot;, &quot;Client-serving&quot;,</dt><dd><p>or &quot;Monitor&quot;. For example, &quot;Auto&quot;.</p>
+<dt>Role assignment mode for the 5GHz radio interface. Accepts &quot;Auto&quot;, &quot;Client-serving&quot;,</dt><dd><p>or &quot;Monitor&quot;. For example, &quot;Auto&quot;. This field not required for xor series access point slot 1</p>
 </dd>
 </dl>
 </div></td>
@@ -957,6 +957,40 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-accesspo
 <dt>Clean Air Spectrum Intelligence (SI) feature status for the 6GHz band. Indicates whether. For example, &quot;Enabled&quot;.</dt><dd><p>Clean Air Spectrum Intelligence is enabled or disabled.</p>
 </dd>
 </dl>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/factory_reset_aps"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-accesspoint-workflow-manager-module-parameter-config-factory-reset-aps"><strong>factory_reset_aps</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/factory_reset_aps" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl class="simple">
+<dt>Factory reset one or more access points (APs) identified by their MAC addresses, hostnames, or management IP addresses.</dt><dd><p>At least one of the following parameters is required:
+- mac_addresses
+- hostnames
+- management_ip_addresses</p>
+</dd>
+</dl>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/factory_reset_aps/hostnames"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-accesspoint-workflow-manager-module-parameter-config-factory-reset-aps-hostnames"><strong>hostnames</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/factory_reset_aps/hostnames" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>A list of hostnames used to identify the access points for factory reset.</p>
+</div></td>
+</tr>
+<tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/factory_reset_aps/mac_addresses"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-accesspoint-workflow-manager-module-parameter-config-factory-reset-aps-mac-addresses"><strong>mac_addresses</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/factory_reset_aps/mac_addresses" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>A list of MAC addresses used to identify the access points for factory reset.</p>
+</div></td>
+</tr>
+<tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
+<div class="ansibleOptionAnchor" id="parameter-config/factory_reset_aps/management_ip_addresses"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-accesspoint-workflow-manager-module-parameter-config-factory-reset-aps-management-ip-addresses"><strong>management_ip_addresses</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/factory_reset_aps/management_ip_addresses" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">list</span> / <span class="ansible-option-elements">elements=string</span></p>
+</div></td>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>A list of management IP addresses used to identify the access points for factory reset.</p>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -2064,6 +2098,26 @@ For example, &quot;Auto&quot;.</p>
 <span class="w">              </span><span class="nt">hostnames</span><span class="p">:</span>
 <span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cisco_Test_9166_T3&quot;</span>
 <span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cisco_Test_9120_T1&quot;</span>
+<span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output_list</span>
+
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Factory reset single or multiple access point</span>
+<span class="w">      </span><span class="nt">cisco.dnac.accesspoint_workflow_manager</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">dnac_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_host</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_username</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_password</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_verify</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_verify</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_port</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_port</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_version</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_debug</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;</span><span class="cp">{{</span> <span class="nv">dnac_debug</span> <span class="cp">}}</span><span class="s">&quot;</span>
+<span class="w">        </span><span class="nt">dnac_log</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">        </span><span class="nt">dnac_log_level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DEBUG</span>
+<span class="w">        </span><span class="nt">config_verify</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">        </span><span class="nt">state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">merged</span>
+<span class="w">        </span><span class="nt">config</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">factory_reset_aps</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">mac_addresses</span><span class="p">:</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;6c:d6:e3:75:5a:e0&quot;</span>
+<span class="w">                </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;e4:38:7e:42:bc:00&quot;</span>
 <span class="w">      </span><span class="nt">register</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">output_list</span>
 </pre></div>
 </div>
