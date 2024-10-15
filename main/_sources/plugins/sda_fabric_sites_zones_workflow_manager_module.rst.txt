@@ -1233,7 +1233,7 @@ Examples
 
     
     - name: Create a fabric site for SDA with the specified name.
-      cisco.dnac.fabric_sites_zones_workflow_manager:
+      cisco.dnac.sda_fabric_sites_zones_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1251,7 +1251,7 @@ Examples
               is_pub_sub_enabled: False
 
     - name: Update a fabric site for SDA with the specified name.
-      cisco.dnac.fabric_sites_zones_workflow_manager:
+      cisco.dnac.sda_fabric_sites_zones_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1268,7 +1268,7 @@ Examples
               authentication_profile: "Open Authentication"
 
     - name: Update a fabric zone for SDA with the specified name.
-      cisco.dnac.fabric_sites_zones_workflow_manager:
+      cisco.dnac.sda_fabric_sites_zones_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1286,7 +1286,7 @@ Examples
               authentication_profile: "Closed Authentication"
 
     - name: Update fabric zone for sda with given name.
-      cisco.dnac.fabric_sites_zones_workflow_manager:
+      cisco.dnac.sda_fabric_sites_zones_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1304,7 +1304,7 @@ Examples
               authentication_profile: "Open Authentication"
 
     - name: Update/customise authentication profile template for fabric site/zone.
-      cisco.dnac.fabric_sites_zones_workflow_manager:
+      cisco.dnac.sda_fabric_sites_zones_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1328,7 +1328,7 @@ Examples
                 number_of_hosts: "Single"
 
     - name: Deleting/removing fabric site from sda from Cisco Catalyst Center
-      cisco.dnac.fabric_sites_zones_workflow_manager:
+      cisco.dnac.sda_fabric_sites_zones_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1344,7 +1344,7 @@ Examples
               site_name: "Global/Test_SDA/Bld1"
 
     - name: Deleting/removing fabric zone from sda from Cisco Catalyst Center
-      cisco.dnac.fabric_sites_zones_workflow_manager:
+      cisco.dnac.sda_fabric_sites_zones_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"

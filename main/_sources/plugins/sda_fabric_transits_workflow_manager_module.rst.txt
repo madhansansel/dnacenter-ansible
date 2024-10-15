@@ -1196,7 +1196,7 @@ Examples
 
     
     - name: Create SDA fabric transit of transit_type IP_BASED_TRANSIT
-      cisco.dnac.fabric_transits_workflow_manager:
+      cisco.dnac.sda_fabric_transits_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1217,7 +1217,7 @@ Examples
             autonomous_system_number: 1234
 
     - name: Create SDA fabric transit of transit_type SDA_LISP_BGP_TRANSIT
-      cisco.dnac.fabric_transits_workflow_manager:
+      cisco.dnac.sda_fabric_transits_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1239,7 +1239,7 @@ Examples
             - string
 
     - name: Create SDA fabric transit of transit_type SDA_LISP_PUB_SUB_TRANSIT
-      cisco.dnac.fabric_transits_workflow_manager:
+      cisco.dnac.sda_fabric_transits_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1264,7 +1264,7 @@ Examples
             - string
 
     - name: Update SDA fabric transit of transit_type SDA_LISP_BGP_TRANSIT
-      cisco.dnac.fabric_transits_workflow_manager:
+      cisco.dnac.sda_fabric_transits_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1286,7 +1286,7 @@ Examples
             - string
 
     - name: Update the multicast over transit
-      cisco.dnac.fabric_transits_workflow_manager:
+      cisco.dnac.sda_fabric_transits_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1306,7 +1306,7 @@ Examples
             is_multicast_over_transit_enabled: true
 
     - name: Update the control plane network devices
-      cisco.dnac.fabric_transits_workflow_manager:
+      cisco.dnac.sda_fabric_transits_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
@@ -1329,7 +1329,7 @@ Examples
             - string
 
     - name: Delete SDA fabric transit
-      cisco.dnac.fabric_transits_workflow_manager:
+      cisco.dnac.sda_fabric_transits_workflow_manager:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
         dnac_password: "{{dnac_password}}"
