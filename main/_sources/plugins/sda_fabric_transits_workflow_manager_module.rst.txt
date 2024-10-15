@@ -26,7 +26,7 @@
 
 .. Anchors
 
-.. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module:
+.. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module:
 
 .. Anchors: short name for ansible.builtin
 
@@ -36,8 +36,8 @@
 
 .. Title
 
-cisco.dnac.fabric_transits_workflow_manager module -- Resource module for SDA fabric transits
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+cisco.dnac.sda_fabric_transits_workflow_manager module -- Resource module for SDA fabric transits
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. Collection note
 
@@ -46,9 +46,9 @@ cisco.dnac.fabric_transits_workflow_manager module -- Resource module for SDA fa
 
     To install it, use: :code:`ansible-galaxy collection install cisco.dnac`.
     You need further requirements to be able to use this module,
-    see :ref:`Requirements <ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module_requirements>` for details.
+    see :ref:`Requirements <ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module_requirements>` for details.
 
-    To use it in a playbook, specify: :code:`cisco.dnac.fabric_transits_workflow_manager`.
+    To use it in a playbook, specify: :code:`cisco.dnac.sda_fabric_transits_workflow_manager`.
 
 .. version_added
 
@@ -79,7 +79,7 @@ Synopsis
 
 .. Requirements
 
-.. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module_requirements:
+.. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module_requirements:
 
 Requirements
 ------------
@@ -113,7 +113,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config:
 
       .. rst-class:: ansible-option-title
 
@@ -149,7 +149,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits:
 
       .. rst-class:: ansible-option-title
 
@@ -183,7 +183,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits/ip_transit_settings"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/ip_transit_settings:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/ip_transit_settings:
 
       .. rst-class:: ansible-option-title
 
@@ -221,7 +221,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits/ip_transit_settings/autonomous_system_number"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/ip_transit_settings/autonomous_system_number:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/ip_transit_settings/autonomous_system_number:
 
       .. rst-class:: ansible-option-title
 
@@ -261,7 +261,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits/ip_transit_settings/routing_protocol_name"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/ip_transit_settings/routing_protocol_name:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/ip_transit_settings/routing_protocol_name:
 
       .. rst-class:: ansible-option-title
 
@@ -303,7 +303,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits/name"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/name:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/name:
 
       .. rst-class:: ansible-option-title
 
@@ -341,7 +341,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits/sda_transit_settings"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/sda_transit_settings:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/sda_transit_settings:
 
       .. rst-class:: ansible-option-title
 
@@ -377,7 +377,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits/sda_transit_settings/control_plane_network_device_ips"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/sda_transit_settings/control_plane_network_device_ips:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/sda_transit_settings/control_plane_network_device_ips:
 
       .. rst-class:: ansible-option-title
 
@@ -423,7 +423,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits/sda_transit_settings/is_multicast_over_transit_enabled"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/sda_transit_settings/is_multicast_over_transit_enabled:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/sda_transit_settings/is_multicast_over_transit_enabled:
 
       .. rst-class:: ansible-option-title
 
@@ -470,7 +470,7 @@ Parameters
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config/sda_fabric_transits/transit_type"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/transit_type:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config/sda_fabric_transits/transit_type:
 
       .. rst-class:: ansible-option-title
 
@@ -515,7 +515,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-config_verify"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-config_verify:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-config_verify:
 
       .. rst-class:: ansible-option-title
 
@@ -557,7 +557,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_api_task_timeout"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_api_task_timeout:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_api_task_timeout:
 
       .. rst-class:: ansible-option-title
 
@@ -595,7 +595,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_debug"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_debug:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_debug:
 
       .. rst-class:: ansible-option-title
 
@@ -637,7 +637,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_host"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_host:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_host:
 
       .. rst-class:: ansible-option-title
 
@@ -671,7 +671,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_log"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_log:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_log:
 
       .. rst-class:: ansible-option-title
 
@@ -723,7 +723,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_log_append"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_log_append:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_log_append:
 
       .. rst-class:: ansible-option-title
 
@@ -765,7 +765,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_log_file_path"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_log_file_path:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_log_file_path:
 
       .. rst-class:: ansible-option-title
 
@@ -807,7 +807,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_log_level"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_log_level:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_log_level:
 
       .. rst-class:: ansible-option-title
 
@@ -855,7 +855,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_password"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_password:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_password:
 
       .. rst-class:: ansible-option-title
 
@@ -889,7 +889,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_port"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_port:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_port:
 
       .. rst-class:: ansible-option-title
 
@@ -927,7 +927,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_task_poll_interval"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_task_poll_interval:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_task_poll_interval:
 
       .. rst-class:: ansible-option-title
 
@@ -966,8 +966,8 @@ Parameters
         <div class="ansibleOptionAnchor" id="parameter-dnac_username"></div>
         <div class="ansibleOptionAnchor" id="parameter-user"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_username:
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-user:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_username:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-user:
 
       .. rst-class:: ansible-option-title
 
@@ -1009,7 +1009,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_verify"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_verify:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_verify:
 
       .. rst-class:: ansible-option-title
 
@@ -1051,7 +1051,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-dnac_version"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-dnac_version:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-dnac_version:
 
       .. rst-class:: ansible-option-title
 
@@ -1089,7 +1089,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-state"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-state:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-state:
 
       .. rst-class:: ansible-option-title
 
@@ -1131,7 +1131,7 @@ Parameters
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="parameter-validate_response_schema"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__parameter-validate_response_schema:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__parameter-validate_response_schema:
 
       .. rst-class:: ansible-option-title
 
@@ -1373,7 +1373,7 @@ Common return values are documented :ref:`here <common_return_values>`, the foll
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="return-response_1"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__return-response_1:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__return-response_1:
 
       .. rst-class:: ansible-option-title
 
@@ -1418,7 +1418,7 @@ Common return values are documented :ref:`here <common_return_values>`, the foll
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="return-response_2"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__return-response_2:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__return-response_2:
 
       .. rst-class:: ansible-option-title
 
@@ -1463,7 +1463,7 @@ Common return values are documented :ref:`here <common_return_values>`, the foll
         <div class="ansible-option-cell">
         <div class="ansibleOptionAnchor" id="return-response_3"></div>
 
-      .. _ansible_collections.cisco.dnac.fabric_transits_workflow_manager_module__return-response_3:
+      .. _ansible_collections.cisco.dnac.sda_fabric_transits_workflow_manager_module__return-response_3:
 
       .. rst-class:: ansible-option-title
 
