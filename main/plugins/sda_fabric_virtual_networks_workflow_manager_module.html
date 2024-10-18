@@ -681,8 +681,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-sda-fabr
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-config/anycast_gateways/fabric_site_locations/site_name"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-sda-fabric-virtual-networks-workflow-manager-module-parameter-config-anycast-gateways-fabric-site-locations-site-name"><strong>site_name</strong></p>
-<a class="ansibleOptionLink" href="#parameter-config/anycast_gateways/fabric_site_locations/site_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-config/anycast_gateways/fabric_site_locations/site_name_hierarchy"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-sda-fabric-virtual-networks-workflow-manager-module-parameter-config-anycast-gateways-fabric-site-locations-site-name-hierarchy"><strong>site_name_hierarchy</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/anycast_gateways/fabric_site_locations/site_name_hierarchy" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>The hierarchical name of the site where the anycast gateway is deployed.</p>
 </div></td>
@@ -868,8 +868,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-sda-fabr
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-config/fabric_vlan/fabric_site_locations/site_name"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-sda-fabric-virtual-networks-workflow-manager-module-parameter-config-fabric-vlan-fabric-site-locations-site-name"><strong>site_name</strong></p>
-<a class="ansibleOptionLink" href="#parameter-config/fabric_vlan/fabric_site_locations/site_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<div class="ansibleOptionAnchor" id="parameter-config/fabric_vlan/fabric_site_locations/site_name_hierarchy"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-sda-fabric-virtual-networks-workflow-manager-module-parameter-config-fabric-vlan-fabric-site-locations-site-name-hierarchy"><strong>site_name_hierarchy</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/fabric_vlan/fabric_site_locations/site_name_hierarchy" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>This name uniquely identifies the site for operations such as creating/updating/deleting any fabric VLAN. This parameter is required, and updates to this field is not allowed.</p>
 </div></td>
@@ -883,7 +883,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-sda-fabr
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
 <div class="ansibleOptionAnchor" id="parameter-config/fabric_vlan/vlan_id"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-sda-fabric-virtual-networks-workflow-manager-module-parameter-config-fabric-vlan-vlan-id"><strong>vlan_id</strong></p>
-<a class="ansibleOptionLink" href="#parameter-config/fabric_vlan/vlan_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span> / <span class="ansible-option-required">required</span></p>
+<a class="ansibleOptionLink" href="#parameter-config/fabric_vlan/vlan_id" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">integer</span> / <span class="ansible-option-required">required</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>ID for the layer2 VLAN network. Allowed VLAN range is 2-4093 except for reserved VLANs 1002-1005, and 2046. If deploying on a fabric zone, this vlan_id must match the vlan_id of the corresponding layer2 virtual network on the fabric site. And updation of this field is not allowed.</p>
 </div></td>
@@ -925,8 +925,8 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-sda-fabr
 </div></td>
 </tr>
 <tr class="row-odd"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-<div class="ansibleOptionAnchor" id="parameter-config/virtual_networks/fabric_site_locations/site_name"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-sda-fabric-virtual-networks-workflow-manager-module-parameter-config-virtual-networks-fabric-site-locations-site-name"><strong>site_name</strong></p>
-<a class="ansibleOptionLink" href="#parameter-config/virtual_networks/fabric_site_locations/site_name" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
+<div class="ansibleOptionAnchor" id="parameter-config/virtual_networks/fabric_site_locations/site_name_hierarchy"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-sda-fabric-virtual-networks-workflow-manager-module-parameter-config-virtual-networks-fabric-site-locations-site-name-hierarchy"><strong>site_name_hierarchy</strong></p>
+<a class="ansibleOptionLink" href="#parameter-config/virtual_networks/fabric_site_locations/site_name_hierarchy" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">string</span></p>
 </div></td>
 <td><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>This name uniquely identifies the site for operations such as creating/updating/deleting any layer3 virtual network.</p>
 </div></td>
@@ -1117,6 +1117,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-sda-fabr
 <li><p>To ensure the module operates correctly for scaled sets, which involve creating, updating, or deleting Layer2 fabric VLANs and Layer3 virtual networks, as well as configuring anycast gateways, valid input in the playbook is required. If any failures are encountered, the module will halt execution without proceeding to further operations.</p></li>
 <li><p>To delete the Fabric VLAN on the fabric site, if any fabric zones exist within that site, the Fabric VLAN must be deleted from the fabric zones first. Only after all Fabric VLANs are deleted from the fabric zones will the parent fabric site with VLAN be available for deletion.</p></li>
 <li><p>For Layer 3 virtual networks, all Anycast Gateways associated with the given virtual network must be deleted first before the deletion operation for the virtual network is enabled.</p></li>
+<li><p>All newly created Layer3 Virtual Networks must either be assigned to one or more Fabric Sites, or they all must not be assigned to any Fabric Sites.</p></li>
 <li><p>SDK Method used are ccc_virtual_network.sda.get_site ccc_virtual_network.sda.get_fabric_sites ccc_virtual_network.sda.get_fabric_zones ccc_virtual_network.sda.get_layer2_virtual_networks ccc_virtual_network.sda.add_layer2_virtual_networks ccc_virtual_network.sda.update_layer2_virtual_networks ccc_virtual_network.sda.delete_layer2_virtual_network_by_id ccc_virtual_network.sda.get_layer3_virtual_networks ccc_virtual_network.sda.add_layer3_virtual_networks ccc_virtual_network.sda.update_layer3_virtual_networks ccc_virtual_network.sda.delete_layer3_virtual_network_by_id ccc_virtual_network.sda.get_reserve_ip_subpool ccc_virtual_network.sda.get_anycast_gateways ccc_virtual_network.sda.add_anycast_gateways ccc_virtual_network.sda.update_anycast_gateways ccc_virtual_network.sda.delete_anycast_gateway_by_id</p></li>
 <li><p>Does not support <code class="docutils literal notranslate"><span class="pre">check_mode</span></code></p></li>
 <li><p>The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK</p></li>

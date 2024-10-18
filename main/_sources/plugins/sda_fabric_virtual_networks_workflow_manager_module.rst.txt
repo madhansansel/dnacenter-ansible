@@ -334,17 +334,17 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-config/anycast_gateways/fabric_site_locations/site_name"></div>
+        <div class="ansibleOptionAnchor" id="parameter-config/anycast_gateways/fabric_site_locations/site_name_hierarchy"></div>
 
-      .. _ansible_collections.cisco.dnac.sda_fabric_virtual_networks_workflow_manager_module__parameter-config/anycast_gateways/fabric_site_locations/site_name:
+      .. _ansible_collections.cisco.dnac.sda_fabric_virtual_networks_workflow_manager_module__parameter-config/anycast_gateways/fabric_site_locations/site_name_hierarchy:
 
       .. rst-class:: ansible-option-title
 
-      **site_name**
+      **site_name_hierarchy**
 
       .. raw:: html
 
-        <a class="ansibleOptionLink" href="#parameter-config/anycast_gateways/fabric_site_locations/site_name" title="Permalink to this option"></a>
+        <a class="ansibleOptionLink" href="#parameter-config/anycast_gateways/fabric_site_locations/site_name_hierarchy" title="Permalink to this option"></a>
 
       .. rst-class:: ansible-option-type-line
 
@@ -1114,17 +1114,17 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-config/fabric_vlan/fabric_site_locations/site_name"></div>
+        <div class="ansibleOptionAnchor" id="parameter-config/fabric_vlan/fabric_site_locations/site_name_hierarchy"></div>
 
-      .. _ansible_collections.cisco.dnac.sda_fabric_virtual_networks_workflow_manager_module__parameter-config/fabric_vlan/fabric_site_locations/site_name:
+      .. _ansible_collections.cisco.dnac.sda_fabric_virtual_networks_workflow_manager_module__parameter-config/fabric_vlan/fabric_site_locations/site_name_hierarchy:
 
       .. rst-class:: ansible-option-title
 
-      **site_name**
+      **site_name_hierarchy**
 
       .. raw:: html
 
-        <a class="ansibleOptionLink" href="#parameter-config/fabric_vlan/fabric_site_locations/site_name" title="Permalink to this option"></a>
+        <a class="ansibleOptionLink" href="#parameter-config/fabric_vlan/fabric_site_locations/site_name_hierarchy" title="Permalink to this option"></a>
 
       .. rst-class:: ansible-option-type-line
 
@@ -1197,7 +1197,7 @@ Parameters
 
       .. rst-class:: ansible-option-type-line
 
-      :ansible-option-type:`string` / :ansible-option-required:`required`
+      :ansible-option-type:`integer` / :ansible-option-required:`required`
 
       .. raw:: html
 
@@ -1392,17 +1392,17 @@ Parameters
   * - .. raw:: html
 
         <div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
-        <div class="ansibleOptionAnchor" id="parameter-config/virtual_networks/fabric_site_locations/site_name"></div>
+        <div class="ansibleOptionAnchor" id="parameter-config/virtual_networks/fabric_site_locations/site_name_hierarchy"></div>
 
-      .. _ansible_collections.cisco.dnac.sda_fabric_virtual_networks_workflow_manager_module__parameter-config/virtual_networks/fabric_site_locations/site_name:
+      .. _ansible_collections.cisco.dnac.sda_fabric_virtual_networks_workflow_manager_module__parameter-config/virtual_networks/fabric_site_locations/site_name_hierarchy:
 
       .. rst-class:: ansible-option-title
 
-      **site_name**
+      **site_name_hierarchy**
 
       .. raw:: html
 
-        <a class="ansibleOptionLink" href="#parameter-config/virtual_networks/fabric_site_locations/site_name" title="Permalink to this option"></a>
+        <a class="ansibleOptionLink" href="#parameter-config/virtual_networks/fabric_site_locations/site_name_hierarchy" title="Permalink to this option"></a>
 
       .. rst-class:: ansible-option-type-line
 
@@ -2131,6 +2131,7 @@ Notes
    - To ensure the module operates correctly for scaled sets, which involve creating, updating, or deleting Layer2 fabric VLANs and Layer3 virtual networks, as well as configuring anycast gateways, valid input in the playbook is required. If any failures are encountered, the module will halt execution without proceeding to further operations.
    - To delete the Fabric VLAN on the fabric site, if any fabric zones exist within that site, the Fabric VLAN must be deleted from the fabric zones first. Only after all Fabric VLANs are deleted from the fabric zones will the parent fabric site with VLAN be available for deletion.
    - For Layer 3 virtual networks, all Anycast Gateways associated with the given virtual network must be deleted first before the deletion operation for the virtual network is enabled.
+   - All newly created Layer3 Virtual Networks must either be assigned to one or more Fabric Sites, or they all must not be assigned to any Fabric Sites.
    - SDK Method used are ccc\_virtual\_network.sda.get\_site ccc\_virtual\_network.sda.get\_fabric\_sites ccc\_virtual\_network.sda.get\_fabric\_zones ccc\_virtual\_network.sda.get\_layer2\_virtual\_networks ccc\_virtual\_network.sda.add\_layer2\_virtual\_networks ccc\_virtual\_network.sda.update\_layer2\_virtual\_networks ccc\_virtual\_network.sda.delete\_layer2\_virtual\_network\_by\_id ccc\_virtual\_network.sda.get\_layer3\_virtual\_networks ccc\_virtual\_network.sda.add\_layer3\_virtual\_networks ccc\_virtual\_network.sda.update\_layer3\_virtual\_networks ccc\_virtual\_network.sda.delete\_layer3\_virtual\_network\_by\_id ccc\_virtual\_network.sda.get\_reserve\_ip\_subpool ccc\_virtual\_network.sda.get\_anycast\_gateways ccc\_virtual\_network.sda.add\_anycast\_gateways ccc\_virtual\_network.sda.update\_anycast\_gateways ccc\_virtual\_network.sda.delete\_anycast\_gateway\_by\_id
    - Does not support \ :literal:`check\_mode`\ 
    - The plugin runs on the control node and does not use any ansible connection plugins instead embedded connection manager from Cisco Catalyst Center SDK

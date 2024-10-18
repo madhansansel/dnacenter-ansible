@@ -1245,8 +1245,8 @@ Examples
         dnac_log: False
         state: merged
         config:
-          - fabric sites:
-              site_name: "Global/Test_SDA/Bld1"
+          - fabric_sites:
+            - site_name: "Global/Test_SDA/Bld1"
               authentication_profile: "Closed Authentication"
               is_pub_sub_enabled: False
 
@@ -1263,8 +1263,8 @@ Examples
         dnac_log: False
         state: merged
         config:
-          - fabric sites:
-              site_name: "Global/Test_SDA/Bld1"
+          - fabric_sites:
+            - site_name: "Global/Test_SDA/Bld1"
               authentication_profile: "Open Authentication"
 
     - name: Update a fabric zone for SDA with the specified name.
@@ -1280,8 +1280,8 @@ Examples
         dnac_log: False
         state: merged
         config:
-          - fabric sites:
-              site_name: "Global/Test_SDA/Bld1/Floor1"
+          - fabric_sites:
+            - site_name: "Global/Test_SDA/Bld1/Floor1"
               fabric_type: "fabric_zone"
               authentication_profile: "Closed Authentication"
 
@@ -1298,8 +1298,8 @@ Examples
         dnac_log: False
         state: merged
         config:
-          - fabric sites:
-              site_name: "Global/Test_SDA/Bld1/Floor1"
+          - fabric_sites:
+            - site_name: "Global/Test_SDA/Bld1/Floor1"
               fabric_type: "fabric_zone"
               authentication_profile: "Open Authentication"
 
@@ -1317,7 +1317,7 @@ Examples
         state: merged
         config:
           - fabric_sites:
-              site_name: "Global/Test_SDA/Bld1"
+            - site_name: "Global/Test_SDA/Bld1"
               fabric_type: "fabric_zone"
               authentication_profile: "Open Authentication"
               is_pub_sub_enabled: False
@@ -1341,7 +1341,7 @@ Examples
         state: deleted
         config:
           - fabric_sites:
-              site_name: "Global/Test_SDA/Bld1"
+            - site_name: "Global/Test_SDA/Bld1"
 
     - name: Deleting/removing fabric zone from sda from Cisco Catalyst Center
       cisco.dnac.sda_fabric_sites_zones_workflow_manager:
@@ -1357,7 +1357,7 @@ Examples
         state: deleted
         config:
           - fabric_sites:
-              site_name: "Global/Test_SDA/Bld1/Floor1"
+            - site_name: "Global/Test_SDA/Bld1/Floor1"
               fabric_type: "fabric_zone"
 
 
