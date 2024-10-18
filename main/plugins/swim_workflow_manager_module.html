@@ -641,7 +641,18 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-swim-wor
 <div class="ansibleOptionAnchor" id="parameter-config/image_activation_details"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-swim-workflow-manager-module-parameter-config-image-activation-details"><strong>image_activation_details</strong></p>
 <a class="ansibleOptionLink" href="#parameter-config/image_activation_details" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Details for SWIM image activation. Device on which the image needs to activated can be speciifed using any of the following parameters - deviceSerialNumber, deviceIPAddress, deviceHostname or deviceMacAddress.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl>
+<dt>Parameters for specifying the target device(s) for SWIM image activation. The device can be identified using one of the following options:</dt><dd><ul class="simple">
+<li><p>device_serial_number</p></li>
+<li><p>device_ip_address</p></li>
+<li><p>device_hostname</p></li>
+<li><p>device_mac_address</p></li>
+<li><p>site_name (if specified, the image will be activated on all devices within the site)</p></li>
+</ul>
+<p>At least one of these parameters must be provided. If 'site_name' is provided, additional filters
+such as 'device_role', 'device_family_name', and 'device_series_name' can be used to further narrow down the devices within the site.</p>
+</dd>
+</dl>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
@@ -755,7 +766,18 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-swim-wor
 <div class="ansibleOptionAnchor" id="parameter-config/image_distribution_details"></div><p class="ansible-option-title" id="ansible-collections-cisco-dnac-swim-workflow-manager-module-parameter-config-image-distribution-details"><strong>image_distribution_details</strong></p>
 <a class="ansibleOptionLink" href="#parameter-config/image_distribution_details" title="Permalink to this option"></a><p class="ansible-option-type-line"><span class="ansible-option-type">dictionary</span></p>
 </div></td>
-<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><p>Details for SWIM image distribution. Device on which the image needs to distributed can be speciifed using any of the following parameters - deviceSerialNumber, deviceIPAddress, deviceHostname or deviceMacAddress.</p>
+<td><div class="ansible-option-indent-desc"></div><div class="ansible-option-cell"><dl>
+<dt>Parameters for specifying the target device(s) for SWIM image distribution. The device can be identified using one of the following options:</dt><dd><ul class="simple">
+<li><p>device_serial_number</p></li>
+<li><p>device_ip_address</p></li>
+<li><p>device_hostname</p></li>
+<li><p>device_mac_address</p></li>
+<li><p>site_name (if specified, the image will be distributed to all devices within the site)</p></li>
+</ul>
+<p>At least one of these parameters must be provided. If 'site_name' is provided, additional filters
+such as 'device_role', 'device_family_name', and 'device_series_name' can be used to further narrow down the devices within the site.</p>
+</dd>
+</dl>
 </div></td>
 </tr>
 <tr class="row-even"><td><div class="ansible-option-indent"></div><div class="ansible-option-indent"></div><div class="ansible-option-cell">
