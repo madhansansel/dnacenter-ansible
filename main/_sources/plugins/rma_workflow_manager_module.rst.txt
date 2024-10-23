@@ -1082,7 +1082,8 @@ Parameters
 
         <div class="ansible-option-cell">
 
-      The desired state of the device replacement workflow.
+      The 'replaced' state is used to indicate the replacement of faulty network devices with
+          replacement network device in the workflow.
           
 
 
@@ -1090,9 +1091,7 @@ Parameters
 
       :ansible-option-choices:`Choices:`
 
-      - :ansible-option-choices-entry-default:`"merged"` :ansible-option-choices-default-mark:`← (default)`
-      - :ansible-option-choices-entry:`"deleted"`
-      - :ansible-option-choices-entry:`"replaced"`
+      - :ansible-option-choices-entry-default:`"replaced"` :ansible-option-choices-default-mark:`← (default)`
 
 
       .. raw:: html
