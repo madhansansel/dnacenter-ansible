@@ -1484,6 +1484,8 @@ Parameters
 
       Available roles, - CONTROL\_PLANE\_NODE - Manages the mapping of endpoint IP addresses to their location within the network using LISP, enabling mobility. - EDGE\_NODE - Connects endpoints to the SDA network, handling policy enforcement, segmentation, and communication with the control plane. - BORDER\_NODE - Acts as the gateway between the fabric and external networks, managing traffic entering or exiting the SDA environment. - WIRELESS\_CONTROLLER\_NODE - Manages and controls wireless access points and devices within the network.
 
+      For 'WIRELESS\_CONTROLLER\_NODE', the check for the provisioning status will be added in 2.3.7.6 SDK.
+
 
       .. rst-class:: ansible-option-line
 

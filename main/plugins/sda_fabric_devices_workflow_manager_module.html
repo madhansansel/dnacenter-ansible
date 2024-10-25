@@ -977,6 +977,7 @@ see <a class="reference internal" href="#ansible-collections-cisco-dnac-sda-fabr
 <p>The device roles cannot be updated once assigned.</p>
 <p>At least one device must be a CONTROL_PLANE_NODE to assign roles to other devices.</p>
 <p>Available roles, - CONTROL_PLANE_NODE - Manages the mapping of endpoint IP addresses to their location within the network using LISP, enabling mobility. - EDGE_NODE - Connects endpoints to the SDA network, handling policy enforcement, segmentation, and communication with the control plane. - BORDER_NODE - Acts as the gateway between the fabric and external networks, managing traffic entering or exiting the SDA environment. - WIRELESS_CONTROLLER_NODE - Manages and controls wireless access points and devices within the network.</p>
+<p>For 'WIRELESS_CONTROLLER_NODE', the check for the provisioning status will be added in 2.3.7.6 SDK.</p>
 <p class="ansible-option-line"><span class="ansible-option-choices">Choices:</span></p>
 <ul class="simple">
 <li><p><a href="#id25"><span class="problematic" id="id26">:ansible-option-choices-entry:`&quot;CONTROL\_PLANE\_NODE&quot;`</span></a></p></li>
