@@ -1271,8 +1271,8 @@ class FabricDevices(DnacBase):
         Returns:
             fabric_site_id (str): The ID of the fabric site.
         Description:
-            Call the API 'get_site' by setting the 'site_name_hierarchy' field with the
-            given site name.
+            Call the API 'get_fabric_sites' by setting the 'site_id' field with the
+            given site id.
             If the status is set to failed, return None. Else, return the fabric site ID.
         """
 
@@ -1327,6 +1327,73 @@ class FabricDevices(DnacBase):
             return self.check_return_status()
 
         return fabric_site_id
+
+    def get_fabric_zone_id_from_name(self, zone_id, site_name):
+        """
+        Get the fabric zone ID from the given site hierarchy name.
+
+        Parameters:
+            zone_id (str): The ID of the zone.
+            site_name (str): The name of the site.
+        Returns:
+            fabric_zone_id (str): The ID of the fabric zone.
+        Description:
+            Call the API 'get_fabric_zones' by setting the 'site_name_hierarchy' field with the
+            given site name.
+            If the status is set to failed, return None. Else, return the fabric site ID.
+        """
+
+        self.log(
+            "Attempting to retrieve fabric site details for site ID '{site_id}' and site name '{site_name}'."
+            .format(site_id=zone_id, site_name=site_name), "DEBUG"
+        )
+        fabric_zone_id = None
+        try:
+            fabric_zone_exists = self.dnac._exec(
+                family="sda",
+                function="get_fabric_zones",
+                params={"site_id": zone_id},
+            )
+            self.log(
+                "Response received from 'get_fabric_zones': {response}"
+                .format(response=fabric_zone_exists), "DEBUG"
+            )
+
+            # If the status is 'failed', then the zone is not a fabric
+            if not isinstance(fabric_zone_exists, dict):
+                self.msg = "Error in getting fabric zone details - Response is not a dictionary"
+                self.log(self.msg, "CRITICAL")
+                self.status = "failed"
+                return self.check_return_status()
+
+            # if the SDK returns no response, then the virtual network doesnot exist
+            fabric_zone_exists = fabric_zone_exists.get("response")
+            if not fabric_zone_exists:
+                self.log(
+                    "The site hierarchy 'fabric_zone' {site_name} is not a valid one or it not a 'Fabric' zone."
+                    .format(site_name=site_name), "ERROR"
+                )
+                return fabric_zone_id
+
+            self.log(
+                "The site hierarchy 'fabric_site' {fabric_name} is a valid fabric site."
+                .format(fabric_name=site_name), "DEBUG"
+            )
+            fabric_zone_id = fabric_zone_exists[0].get("id")
+            self.log(
+                "Fabric zone ID retrieved successfully: {fabric_zone_id}"
+                .format(fabric_zone_id=fabric_zone_id), "DEBUG"
+            )
+        except Exception as msg:
+            self.msg = (
+                "Exception occured while running the API 'get_fabric_zones': {msg}"
+                .format(msg=msg)
+            )
+            self.log(self.msg, "CRITICAL")
+            self.status = "failed"
+            return self.check_return_status()
+
+        return fabric_zone_id
 
     def check_device_is_provisioned(self, fabric_device_ip, device_id, site_id, site_name):
         """
@@ -2017,15 +2084,25 @@ class FabricDevices(DnacBase):
         self.log("Fetching fabric site ID for site '{site_id}'.".format(site_id=site_id), "INFO")
         fabric_site_id = self.get_fabric_site_id_from_name(site_id, fabric_name)
         if not fabric_site_id:
-            self.msg = (
-                "The provided 'fabric_name' '{fabric_name}' is not valid a fabric site."
-                .format(fabric_name=fabric_name)
-            )
-            self.log(self.msg, "ERROR")
-            self.status = "failed"
-            return self
+            fabric_site_id = self.get_fabric_zone_id_from_name(site_id, fabric_name)
+            if not fabric_site_id:
+                self.msg = (
+                    "The provided 'fabric_name' '{fabric_name}' is not valid a fabric site."
+                    .format(fabric_name=fabric_name)
+                )
+                self.log(self.msg, "ERROR")
+                self.status = "failed"
+                return self
 
-        self.log("Fabric site ID obtained: {fabric_site_id}.".format(fabric_site_id=fabric_site_id), "DEBUG")
+            self.log(
+                "Fabric zone ID obtained: {fabric_site_id}."
+                .format(fabric_site_id=fabric_site_id), "DEBUG"
+            )
+        else:
+            self.log(
+                "Fabric site ID obtained: {fabric_site_id}."
+                .format(fabric_site_id=fabric_site_id), "DEBUG"
+            )
 
         # device_config contains the list of devices on which the operations should be performed
         device_config = fabric_devices.get("device_config")
