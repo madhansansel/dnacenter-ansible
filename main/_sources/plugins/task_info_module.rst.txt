@@ -36,13 +36,13 @@
 
 .. Title
 
-cisco.dnac.task_info module -- Information module for Task
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+cisco.dnac.task_info module -- Information module for Task Info
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. Collection note
 
 .. note::
-    This module is part of the `cisco.dnac collection <https://galaxy.ansible.com/cisco/dnac>`_ (version 6.22.0).
+    This module is part of the `cisco.dnac collection <https://galaxy.ansible.com/cisco/dnac>`_ (version 6.28.0).
 
     To install it, use: :code:`ansible-galaxy collection install cisco.dnac`.
     You need further requirements to be able to use this module,
@@ -68,10 +68,7 @@ Synopsis
 
 .. Description
 
-- Get all Task.
-- Get Task by id.
-- Returns a task by specified id.
-- Returns tasks based on filter criteria.
+- This module represents an alias of the module task\_v1\_info
 
 .. note::
     This module has a corresponding :ref:`action plugin <action_plugins>`.
@@ -87,7 +84,7 @@ Requirements
 ------------
 The below requirements are needed on the host that executes this module.
 
-- dnacentersdk \>= 2.7.2
+- dnacentersdk \>= 2.4.9
 - python \>= 3.5
 
 
@@ -603,7 +600,7 @@ Parameters
 
       .. rst-class:: ansible-option-type-line
 
-      :ansible-option-type:`integer`
+      :ansible-option-type:`float`
 
       .. raw:: html
 
@@ -613,7 +610,7 @@ Parameters
 
         <div class="ansible-option-cell">
 
-      Limit query parameter.
+      Limit query parameter. The number of records to show for this page;The minimum is 1, and the maximum is 500.
 
 
       .. raw:: html
@@ -637,7 +634,7 @@ Parameters
 
       .. rst-class:: ansible-option-type-line
 
-      :ansible-option-type:`integer`
+      :ansible-option-type:`float`
 
       .. raw:: html
 
@@ -647,7 +644,7 @@ Parameters
 
         <div class="ansible-option-cell">
 
-      Offset query parameter.
+      Offset query parameter. The first record to show for this page; the first record is numbered 1.
 
 
       .. raw:: html
@@ -978,8 +975,9 @@ Notes
 -----
 
 .. note::
-   - SDK Method used are task.Task.get\_task\_by\_id, task.Task.get\_tasks,
+   - SDK Method used are task.Task.get\_task\_by\_id\_v1, task.Task.get\_tasks\_operational\_tasks\_v1,
    - Paths used are get /dna/intent/api/v1/task, get /dna/intent/api/v1/task/{taskId},
+   - It should be noted that this module is an alias of task\_v1\_info
    - Supports \ :literal:`check\_mode`\ 
    - The plugin runs on the control node and does not use any ansible connection plugins, but instead the embedded connection manager from Cisco DNAC SDK
    - The parameters starting with dnac\_ are used by the Cisco DNAC Python SDK to establish the connection
@@ -991,10 +989,10 @@ See Also
 
 .. seealso::
 
-   `Cisco DNA Center documentation for Task GetTaskById <https://developer.cisco.com/docs/dna-center/#!get-task-by-id>`_
-       Complete reference of the GetTaskById API.
-   `Cisco DNA Center documentation for Task GetTasks <https://developer.cisco.com/docs/dna-center/#!get-tasks>`_
-       Complete reference of the GetTasks API.
+   `Cisco DNA Center documentation for Task GetTaskByIdV1 <https://developer.cisco.com/docs/dna-center/#!get-task-by-id>`_
+       Complete reference of the GetTaskByIdV1 API.
+   `Cisco DNA Center documentation for Task GetTasksOperationalTasksV1 <https://developer.cisco.com/docs/dna-center/#!get-tasks-operational-tasks>`_
+       Complete reference of the GetTasksOperationalTasksV1 API.
 
 .. Examples
 
@@ -1004,7 +1002,7 @@ Examples
 .. code-block:: yaml+jinja
 
     
-    - name: Get all Task
+    - name: Get all Task Info
       cisco.dnac.task_info:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
@@ -1030,7 +1028,7 @@ Examples
         order: string
       register: result
 
-    - name: Get Task by id
+    - name: Get Task Info by id
       cisco.dnac.task_info:
         dnac_host: "{{dnac_host}}"
         dnac_username: "{{dnac_username}}"
